@@ -9,8 +9,22 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+
+import '../../Features/login/api/client/login_api_client.dart' as _i545;
+import '../../Features/login/api/dataSource_implementation/login_remote_datasource_imp.dart'
+    as _i678;
+import '../../Features/login/data/dataSource/login_remote_datasource.dart'
+    as _i672;
+import '../../Features/login/data/repositories_implmentation/login_repo_impl.dart'
+    as _i946;
+import '../../Features/login/domain/repositories/login_repo.dart' as _i554;
+import '../../Features/login/domain/usecases/login_usecase.dart' as _i643;
+import '../../Features/login/presentation/viewmodel/login_viewModel.dart'
+    as _i538;
+import 'dio_module/dio_module.dart' as _i484;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -18,7 +32,32 @@ extension GetItInjectableX on _i174.GetIt {
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final dioModule = _$DioModule();
+    gh.factory<String>(() => dioModule.baseUrl, instanceName: 'baseUrl');
+    gh.lazySingleton<_i361.Dio>(
+      () => dioModule.dio(gh<String>(instanceName: 'baseUrl')),
+    );
+    gh.factory<_i545.loginApiClient>(
+      () => _i545.loginApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'baseUrl'),
+      ),
+    );
+    gh.lazySingleton<_i672.loginRemoteDataSource>(
+      () => _i678.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
+    );
+    gh.factory<_i554.loginRepo>(
+      () => _i946.loginRepoImplemnation(gh<_i672.loginRemoteDataSource>()),
+    );
+    gh.factory<_i643.LoginUseCase>(
+      () => _i643.LoginUseCase(gh<_i554.loginRepo>()),
+    );
+    gh.factory<_i538.LoginViewModel>(
+      () => _i538.LoginViewModel(gh<_i643.LoginUseCase>()),
+    );
     return this;
   }
 }
+
+class _$DioModule extends _i484.DioModule {}
