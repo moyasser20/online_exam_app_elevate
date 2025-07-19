@@ -13,6 +13,22 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../Features/forgetPassword/api/client/forget_password_client.dart'
+    as _i117;
+import '../../Features/forgetPassword/api/dataSource_implementation/forget_password_remote_datasource.dart'
+    as _i104;
+import '../../Features/forgetPassword/data/dataSource/forget_password_datasource.dart'
+    as _i959;
+import '../../Features/forgetPassword/data/repositories_implmentation/forget_repo_imp.dart'
+    as _i340;
+import '../../Features/forgetPassword/domain/repositories/forget_password_repo.dart'
+    as _i134;
+import '../../Features/forgetPassword/domain/usecases/forget_password_usecase.dart'
+    as _i587;
+import '../../Features/forgetPassword/domain/usecases/reset_password_usecase.dart'
+    as _i1050;
+import '../../Features/forgetPassword/domain/usecases/verify_code_usecase.dart'
+    as _i2;
 import '../../Features/login/api/client/login_api_client.dart' as _i545;
 import '../../Features/login/api/datasource_implementation/login_remote_datasource_imp.dart'
     as _i261;
@@ -38,14 +54,37 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(gh<String>(instanceName: 'baseUrl')),
     );
+    gh.factory<_i117.ForgetPasswordApiClient>(
+      () => _i117.ForgetPasswordApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'baseurl'),
+      ),
+    );
     gh.factory<_i545.loginApiClient>(
       () => _i545.loginApiClient(
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseUrl'),
       ),
     );
+    gh.factory<_i959.ForgetPasswordDataSource>(
+      () => _i104.ForgetPasswordRemoteDataSourceImp(
+        gh<_i117.ForgetPasswordApiClient>(),
+      ),
+    );
     gh.lazySingleton<_i713.loginRemoteDataSource>(
       () => _i261.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
+    );
+    gh.factory<_i134.ForgetPasswordRepo>(
+      () => _i340.ForgetPasswordRepoImp(gh<_i959.ForgetPasswordDataSource>()),
+    );
+    gh.factory<_i587.ForgetPasswordUseCase>(
+      () => _i587.ForgetPasswordUseCase(gh<_i134.ForgetPasswordRepo>()),
+    );
+    gh.factory<_i1050.ResetPasswordUseCase>(
+      () => _i1050.ResetPasswordUseCase(gh<_i134.ForgetPasswordRepo>()),
+    );
+    gh.factory<_i2.VerifyCodeUseCase>(
+      () => _i2.VerifyCodeUseCase(gh<_i134.ForgetPasswordRepo>()),
     );
     gh.factory<_i554.loginRepo>(
       () => _i946.loginRepoImplemnation(gh<_i713.loginRemoteDataSource>()),
