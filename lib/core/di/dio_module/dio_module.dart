@@ -17,4 +17,3 @@ abstract class DioModule {
   @Named('baseUrl')
   String get baseUrl => ApiConstants.baseUrl;
 }
-

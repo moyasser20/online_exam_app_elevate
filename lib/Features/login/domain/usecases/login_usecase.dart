@@ -5,11 +5,11 @@ import 'package:online_exam_app_elevate/Features/login/domain/repositories/login
 
 @injectable
 class LoginUseCase{
-  final loginRepo repo;
+  final loginRepo _repo;
 
-  LoginUseCase(this.repo);
+  LoginUseCase(this._repo);
 
   Future<LoginResponse> call(loginRequest request){
-    return repo.login(request);
+    return _repo.login(request);
   }
 }

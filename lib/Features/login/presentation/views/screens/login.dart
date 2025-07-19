@@ -3,21 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/login/presentation/viewmodel/login_viewModel.dart';
 import 'package:online_exam_app_elevate/core/di/di.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
+import 'package:online_exam_app_elevate/core/extensions/validations.dart';
 import '../../../../../core/Assets/app_assets.dart';
 import '../../../../../core/Widgets/Custome_Elevated_Button.dart';
 import '../../../../../core/Widgets/custom_text_field.dart';
+import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/login_states.dart';
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<LoginScreen> createState() => _loginScreenState();
 }
 
-class _loginScreenState extends State<loginScreen> {
+class _loginScreenState extends State<LoginScreen> {
   late final LoginViewModel cubit;
 
   @override
@@ -39,13 +41,15 @@ class _loginScreenState extends State<loginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return BlocProvider<LoginViewModel>(
       create: (_) => cubit,
       child: BlocConsumer<LoginViewModel, loginStates>(
         listener: (context, state) {
           if (state is loginSuccessStates) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Login Successful ✅")),
+              const SnackBar(content: Text(AppStrings.LoginSuccessMsg)),
             );
           } else if (state is loginErrorStates) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -67,9 +71,9 @@ class _loginScreenState extends State<loginScreen> {
                 onPressed: () {},
                 icon: Image.asset(AppAssets.ArrowIcon),
               ),
-              title: const Text(
-                "Login",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              title:  Text(
+                AppStrings.LoginElevatedButton,
+                style:theme.textTheme.headlineMedium ,
               ),
             ),
             body: Form(
@@ -83,6 +87,9 @@ class _loginScreenState extends State<loginScreen> {
                       if (value == null || value.isEmpty) {
                         return "Email is required";
                       }
+                      if(!Validations.validateEmail(value)) {
+                        return "This Email is not valid";
+                      }
                       return null;
                     },
                   ).setHorizontalAndVerticalPadding(context, 0.03, 0.03),
@@ -93,6 +100,9 @@ class _loginScreenState extends State<loginScreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
+                      }
+                      if(!Validations.validatePassword(value)){
+                        return "must be at least 6 characters and have {M#12m}";
                       }
                       return null;
                     },
@@ -109,7 +119,7 @@ class _loginScreenState extends State<loginScreen> {
                             },
                           ),
                           const Text(
-                            "Remember me",
+                            AppStrings.RememberMeBox,
                             style: TextStyle(fontSize: 16),
                           ),
                         ],
@@ -117,7 +127,7 @@ class _loginScreenState extends State<loginScreen> {
                       TextButton(
                         onPressed: () {},
                         child: const Text(
-                          "Forget Password?",
+                          AppStrings.ForgetPasswordTextButton,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 15,
@@ -130,7 +140,7 @@ class _loginScreenState extends State<loginScreen> {
                   state is loginloadingStates
                       ? const CircularProgressIndicator()
                       : CustomeElevatedButton(
-                    text: 'Login',
+                    text: AppStrings.LoginElevatedButton,
                     onPressed: cubit.isFormValid
                         ? () {
                       cubit.login(
@@ -146,7 +156,7 @@ class _loginScreenState extends State<loginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have an account?",
+                    AppStrings.DonthaveanaccountText,
                         style: TextStyle(fontSize: 16),
                       ),
                       TextButton(
@@ -154,9 +164,10 @@ class _loginScreenState extends State<loginScreen> {
                           Navigator.pushNamed(context, AppRoutes.SignUp);
                         },
                         child: const Text(
-                          "Sign up",
+                          AppStrings.Signup,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
+                            decorationThickness: 2,
                             fontSize: 18,
                           ),
                         ),

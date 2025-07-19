@@ -7,7 +7,13 @@ abstract class AppTheme{
 
   static ThemeData getTheme(ColorScheme colorScheme) {
     return ThemeData(
-      colorScheme: colorScheme
+      colorScheme: colorScheme,
+      textTheme: const TextTheme(
+        headlineMedium: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 

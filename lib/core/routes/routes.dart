@@ -6,6 +6,6 @@ abstract class Routes {
   static Route generateRoute(RouteSettings settings) {
     final url = Uri.parse(settings.name ?? "/");
 
-    return MaterialPageRoute(builder: (settings) => const loginScreen() );
+    return MaterialPageRoute(builder: (settings) => const LoginScreen() );
   }
 }
