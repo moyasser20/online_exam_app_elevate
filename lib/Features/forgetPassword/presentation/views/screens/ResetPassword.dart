@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
+import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/reset_code_states.dart';
 import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
@@ -17,11 +19,18 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
-  bool isFormValid = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ResetPasswordCubit>().initializeListeners();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<ResetPasswordCubit>();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -33,50 +42,65 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500),
         ),
       ),
-      body: Form(
-        key: _formState,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              AppStrings.ResetPassword,
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              AppStrings.ResetPasswordunderMsg,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 25),
-            CustomeTextFormField(
-              label: "New Password",
-              hint: "Enter your password",
-            ),
-            const SizedBox(height: 30),
-
-            CustomeTextFormField(
-              label: "Confirm Password",
-              hint: "Confirm password",
-            ),
-            const SizedBox(height: 45),
-            CustomeElevatedButton(
-              text: "Continue",
-              onPressed:
-                  isFormValid
+      body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
+        listener: (context, state) {
+          if (state is ResetPasswordSuccessState) {
+            Navigator.pushNamed(context, AppRoutes.login);
+          } else if (state is ResetPasswordErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
+          }
+        },
+        builder: (context, state) {
+          return Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  AppStrings.ResetPassword,
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  AppStrings.ResetPasswordunderMsg,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 25),
+                CustomeTextFormField(
+                  controller: cubit.passwordController,
+                  validator: cubit.validatePassword,
+                  label: "New Password",
+                  hint: "Enter your password",
+                  obscureText: true,
+                ),
+                const SizedBox(height: 30),
+                CustomeTextFormField(
+                  controller: cubit.confirmPasswordController,
+                  validator: cubit.validateConfirmPassword,
+                  label: "Confirm Password",
+                  hint: "Confirm password",
+                  obscureText: true,
+                ),
+                const SizedBox(height: 45),
+                state is ResetPasswordLoadingState
+                    ? const CircularProgressIndicator()
+                    : CustomeElevatedButton(
+                  text: "Continue",
+                  onPressed: cubit.isFormValid
                       ? () {
-                        if (_formState.currentState!.validate()) {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.emailVarification,
-                          );
-                        }
-                      }
+                    if (_formKey.currentState!.validate()) {
+                      cubit.resetPassword();
+                    }
+                  }
                       : null,
-              color: isFormValid ? AppColors.blue : Colors.grey,
-            ),
-          ],
-        ).setHorizontalAndVerticalPadding(context, 0.055, 0.05),
+                  color: cubit.isFormValid ? AppColors.blue : Colors.grey,
+                ),
+              ],
+            ).setHorizontalAndVerticalPadding(context, 0.055, 0.05),
+          );
+        },
       ),
     );
   }
