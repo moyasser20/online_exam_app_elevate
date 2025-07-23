@@ -11,8 +11,25 @@ import '../../../../../core/Widgets/Custome_Elevated_Button.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 
-class EmailVerificationScreen extends StatelessWidget {
+class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
+
+  @override
+  State<EmailVerificationScreen> createState() =>
+      _EmailVerificationScreenState();
+}
+
+class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+  String? email;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final arg = ModalRoute.of(context)?.settings.arguments as String;
+      email = arg;
+      context.read<VerifyCodeCubit>().setEmail(email!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +44,15 @@ class EmailVerificationScreen extends StatelessWidget {
       body: BlocConsumer<VerifyCodeCubit, VerifyCodeStates>(
         listener: (context, state) {
           if (state is VerifyCodeSuccessStates) {
-            Navigator.pushNamed(context, AppRoutes.ResetPasswordScreen);
-          } else if (state is VerifyCodeErrorStates) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+            Navigator.pushNamed(
+              context,
+              AppRoutes.ResetPasswordScreen,
+              arguments: email,
             );
+          } else if (state is VerifyCodeErrorStates) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
@@ -57,12 +78,19 @@ class EmailVerificationScreen extends StatelessWidget {
                     fieldWidth: 57,
                     fieldHeight: 60,
                     borderRadius: BorderRadius.circular(8),
-                    borderColor: state is VerifyCodeErrorStates ? Colors.red : Colors.grey,
-                    focusedBorderColor: state is VerifyCodeErrorStates ? Colors.red : Colors.blue,
+                    borderColor:
+                        state is VerifyCodeErrorStates
+                            ? Colors.red
+                            : Colors.grey,
+                    focusedBorderColor:
+                        state is VerifyCodeErrorStates
+                            ? Colors.red
+                            : Colors.blue,
                     filled: true,
-                    fillColor: state is VerifyCodeErrorStates
-                        ? Colors.red.withOpacity(0.2)
-                        : AppColors.blue.withOpacity(0.2),
+                    fillColor:
+                        state is VerifyCodeErrorStates
+                            ? Colors.red.withOpacity(0.2)
+                            : AppColors.blue.withOpacity(0.2),
                     showFieldAsBox: true,
                     onSubmit: (code) => cubit.updateCode(code),
                     onCodeChanged: (code) => cubit.updateCode(code),
@@ -100,13 +128,14 @@ class EmailVerificationScreen extends StatelessWidget {
                   state is VerifyCodeLoadingStates
                       ? const CircularProgressIndicator()
                       : CustomeElevatedButton(
-                    text: "Next",
-                    onPressed: cubit.enteredCode.length == 6
-                        ? () {
-                      cubit.verify();
-                    }
-                        : null,
-                  )
+                        text: "Next",
+                        onPressed:
+                            cubit.enteredCode.length == 6
+                                ? () {
+                                  cubit.verify(context);
+                                }
+                                : null,
+                      ),
                 ],
               ).setVerticalPadding(context, 0.04),
             ),

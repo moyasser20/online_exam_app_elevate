@@ -100,7 +100,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           if (!mounted) return;
 
           if (state is ForgetPasswordSuccessState) {
-            Navigator.pushNamed(context, AppRoutes.emailVarification);
+            print("Sending email: ${cubit.emailController.text}");
+            Navigator.pushNamed(
+              context,
+              arguments: cubit.emailController.text,
+              AppRoutes.emailVarification,
+            );
+
           } else if (state is ForgetPasswordErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),

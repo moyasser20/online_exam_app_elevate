@@ -1,18 +1,35 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/extensions/validations.dart';
+import '../../../../../core/constants/failure_messages.dart';
+
+import '../../../login/data/models/login_request.dart';
+import '../../../login/domain/usecases/login_usecase.dart';
+import '../../api/client/forget_password_client.dart';
+import '../../data/models/reset_password_request_model.dart';
 import 'states/reset_code_states.dart';
 
 @injectable
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
-  ResetPasswordCubit() : super(ResetPasswordInitialState());
+  ResetPasswordCubit(this._apiClient, this._loginUseCase)
+      : super(ResetPasswordInitialState());
+
+  final ForgetPasswordApiClient _apiClient;
+  final LoginUseCase _loginUseCase;
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  String? email;
+
   bool isFormValid = false;
+
+  void setEmail(String emailAddress) {
+    email = emailAddress;
+  }
 
   void initializeListeners() {
     passwordController.addListener(_validateForm);
@@ -52,17 +69,41 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     return null;
   }
 
-  void resetPassword() {
+  Future<void> resetPassword() async {
     emit(ResetPasswordLoadingState());
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (passwordController.text == confirmPasswordController.text) {
-        emit(ResetPasswordSuccessState());
-      } else {
-        emit(ResetPasswordErrorState("Passwords do not match"));
-      }
-    });
+    try {
+      final newPassword = passwordController.text;
+
+      final request = ResetPasswordRequestModel(
+        email: email ?? '',
+        newPassword: newPassword,
+      );
+
+      await _apiClient.resetPassword(request);
+
+      await _loginUseCase(
+        loginRequest(email: email ?? '', password: newPassword),
+      );
+
+      emit(ResetPasswordSuccessState());
+
+    } on DioError catch (dioError, stackTrace) {
+      print("Resetting password for email: ${email ?? "NULL"}");
+      debugPrint('DioError: ${dioError.toString()}');
+      debugPrint('DioError type: ${dioError.type}');
+      debugPrint('DioError response: ${dioError.response}');
+      debugPrint('DioError data: ${dioError.response?.data}');
+      debugPrint('StackTrace: $stackTrace');
+      emit(ResetPasswordErrorState('Something went wrong: ${dioError.message}'));
+    } catch (e, stackTrace) {
+      debugPrint('ResetPassword Error: $e');
+      debugPrint('StackTrace: $stackTrace');
+      emit(ResetPasswordErrorState('Something went wrong: ${e.toString()}'));
+    }
   }
+
+
 
   @override
   Future<void> close() {

@@ -69,10 +69,10 @@ class _ForgetPasswordApiClient implements ForgetPasswordApiClient {
     final _data = <String, dynamic>{};
     _data.addAll(resetPasswordRequestModel.toJson());
     final _options = _setStreamType<void>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'resetPassword',
+            'auth/resetPassword',
             queryParameters: queryParameters,
             data: _data,
           )

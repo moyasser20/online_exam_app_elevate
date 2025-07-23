@@ -26,6 +26,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     super.initState();
     context.read<ResetPasswordCubit>().initializeListeners();
   }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as String;
+    context.read<ResetPasswordCubit>().setEmail(args);
+  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -56,7 +56,6 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
-    gh.factory<_i439.ResetPasswordCubit>(() => _i439.ResetPasswordCubit());
     gh.factory<String>(() => dioModule.baseUrl, instanceName: 'baseurl');
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(gh<String>(instanceName: 'baseurl')),
@@ -107,6 +106,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i538.LoginViewModel>(
       () => _i538.LoginViewModel(gh<_i643.LoginUseCase>()),
+    );
+    gh.factory<_i439.ResetPasswordCubit>(
+      () => _i439.ResetPasswordCubit(
+        gh<_i117.ForgetPasswordApiClient>(),
+        gh<_i643.LoginUseCase>(),
+      ),
     );
     return this;
   }

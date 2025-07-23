@@ -22,7 +22,7 @@ abstract class ForgetPasswordApiClient {
   @POST(EndPoints.verifyResetCode)
   Future<void> verifyResetcode(@Body() VerifyCodeRequestModel verifResetCode);
 
-  @POST("resetPassword")
+  @PUT(EndPoints.resetPassword)
   Future<void> resetPassword(@Body() ResetPasswordRequestModel resetPasswordRequestModel);
 
 
