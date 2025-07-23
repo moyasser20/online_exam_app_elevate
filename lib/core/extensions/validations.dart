@@ -18,4 +18,16 @@ abstract class Validations {
     return usernameRegExp.hasMatch(username);
   }
 
+  static bool validatePhone(String phone) {
+    final RegExp phoneRegExp = RegExp(r'^01[0125][0-9]{8}$');
+    return phoneRegExp.hasMatch(phone);
+  }
+
+  static bool validateRePassword(String password, String rePassword) {
+    return password == rePassword;
+  }
+
+  static bool validateName(String name) {
+    return name.trim().isNotEmpty;
+  }
 }
