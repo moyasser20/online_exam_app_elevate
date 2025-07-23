@@ -10,7 +10,8 @@ import 'core/theme/app_theme.dart';
 
 void main()
 {
-  configureDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+   configureDependencies();
   runApp(MyApp());
 }
 
