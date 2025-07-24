@@ -102,7 +102,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i643.LoginUseCase(gh<_i554.loginRepo>()),
     );
     gh.factory<_i867.VerifyCodeCubit>(
-      () => _i867.VerifyCodeCubit(gh<_i2.VerifyCodeUseCase>()),
+      () => _i867.VerifyCodeCubit(
+        gh<_i2.VerifyCodeUseCase>(),
+        gh<_i587.ForgetPasswordUseCase>(),
+      ),
     );
     gh.factory<_i538.LoginViewModel>(
       () => _i538.LoginViewModel(gh<_i643.LoginUseCase>()),

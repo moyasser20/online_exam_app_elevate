@@ -6,13 +6,13 @@ import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
 import '../../../../../core/Assets/app_assets.dart';
-import '../../../../../core/Widgets/Custome_Elevated_Button.dart';
-import '../../../../../core/Widgets/custom_text_field.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../widgets/reset_password_form.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+  final String email;
+  const ResetPasswordScreen({super.key, required this.email});
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -26,18 +26,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     super.initState();
     context.read<ResetPasswordCubit>().initializeListeners();
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final args = ModalRoute.of(context)?.settings.arguments as String;
-    context.read<ResetPasswordCubit>().setEmail(args);
+    context.read<ResetPasswordCubit>().setEmail(widget.email);
   }
-
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<ResetPasswordCubit>();
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -60,53 +57,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           }
         },
         builder: (context, state) {
-          return Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  AppStrings.ResetPassword,
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  AppStrings.ResetPasswordunderMsg,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 25),
-                CustomeTextFormField(
-                  controller: cubit.passwordController,
-                  validator: cubit.validatePassword,
-                  label: "New Password",
-                  hint: "Enter your password",
-                  obscureText: true,
-                ),
-                const SizedBox(height: 30),
-                CustomeTextFormField(
-                  controller: cubit.confirmPasswordController,
-                  validator: cubit.validateConfirmPassword,
-                  label: "Confirm Password",
-                  hint: "Confirm password",
-                  obscureText: true,
-                ),
-                const SizedBox(height: 45),
-                state is ResetPasswordLoadingState
-                    ? const CircularProgressIndicator()
-                    : CustomeElevatedButton(
-                  text: "Continue",
-                  onPressed: cubit.isFormValid
-                      ? () {
-                    if (_formKey.currentState!.validate()) {
-                      cubit.resetPassword();
-                    }
-                  }
-                      : null,
-                  color: cubit.isFormValid ? AppColors.blue : Colors.grey,
-                ),
-              ],
-            ).setHorizontalAndVerticalPadding(context, 0.055, 0.05),
-          );
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                AppStrings.ResetPassword,
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                AppStrings.ResetPasswordunderMsg,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 25),
+              ResetPasswordForm(formKey: _formKey),
+            ],
+          ).setHorizontalAndVerticalPadding(context, 0.055, 0.05);
         },
       ),
     );

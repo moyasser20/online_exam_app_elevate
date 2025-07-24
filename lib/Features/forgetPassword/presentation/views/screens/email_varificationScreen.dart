@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/verify_code_states.dart';
 import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
@@ -9,10 +8,11 @@ import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 import '../../../../../core/Assets/app_assets.dart';
 import '../../../../../core/Widgets/Custome_Elevated_Button.dart';
 import '../../../../../core/routes/app_routes.dart';
-import '../../../../../core/theme/app_colors.dart';
+import '../widgets/verification_code_field.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
-  const EmailVerificationScreen({super.key});
+  final String email;
+  const EmailVerificationScreen({super.key, required this.email});
 
   @override
   State<EmailVerificationScreen> createState() =>
@@ -20,15 +20,12 @@ class EmailVerificationScreen extends StatefulWidget {
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-  String? email;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    final arg = ModalRoute.of(context)?.settings.arguments as String;
-      email = arg;
-      context.read<VerifyCodeCubit>().setEmail(email!);
+    if(widget.email != "") {
+      context.read<VerifyCodeCubit>().setEmail(widget.email);
+    }
   }
 
   @override
@@ -47,7 +44,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             Navigator.pushNamed(
               context,
               AppRoutes.ResetPasswordScreen,
-              arguments: email,
+              arguments: widget.email,
             );
           } else if (state is VerifyCodeErrorStates) {
             ScaffoldMessenger.of(
@@ -73,36 +70,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 40),
-                  OtpTextField(
-                    numberOfFields: 6,
-                    fieldWidth: 57,
-                    fieldHeight: 60,
-                    borderRadius: BorderRadius.circular(8),
-                    borderColor:
-                        state is VerifyCodeErrorStates
-                            ? Colors.red
-                            : Colors.grey,
-                    focusedBorderColor:
-                        state is VerifyCodeErrorStates
-                            ? Colors.red
-                            : Colors.blue,
-                    filled: true,
-                    fillColor:
-                        state is VerifyCodeErrorStates
-                            ? Colors.red.withOpacity(0.2)
-                            : AppColors.blue.withOpacity(0.2),
-                    showFieldAsBox: true,
-                    onSubmit: (code) => cubit.updateCode(code),
-                    onCodeChanged: (code) => cubit.updateCode(code),
-                  ),
-                  if (state is VerifyCodeErrorStates)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 12),
-                      child: Text(
-                        AppStrings.CodeErrorMsg,
-                        style: TextStyle(color: Colors.red, fontSize: 14),
-                      ),
-                    ),
+                  const VerificationCodeField(),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -112,30 +80,28 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         style: TextStyle(fontSize: 16),
                       ),
                       TextButton(
-                        onPressed: () {
-                          // TODO: Handle resend here
-                        },
-                        child: const Text(
-                          "Resend",
+                        onPressed: cubit.isResendEnabled ? () => cubit.resendCode() : null,
+                        child: Text(
+                          cubit.isResendEnabled ? "Resend" : "Resend",
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 17,
+                            color: cubit.isResendEnabled ? Colors.blue : Colors.grey,
                           ),
                         ),
-                      ),
-                    ],
+                      )
+                            ],
                   ),
                   state is VerifyCodeLoadingStates
                       ? const CircularProgressIndicator()
                       : CustomeElevatedButton(
-                        text: "Next",
-                        onPressed:
-                            cubit.enteredCode.length == 6
-                                ? () {
-                                  cubit.verify(context);
-                                }
-                                : null,
-                      ),
+                    text: "Next",
+                    onPressed: cubit.enteredCode.length == 6
+                        ? () {
+                      cubit.verify(context);
+                    }
+                        : null,
+                  ),
                 ],
               ).setVerticalPadding(context, 0.04),
             ),

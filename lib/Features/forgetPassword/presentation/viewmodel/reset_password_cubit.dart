@@ -15,13 +15,14 @@ import 'states/reset_code_states.dart';
 @injectable
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   ResetPasswordCubit(this._apiClient, this._loginUseCase)
-      : super(ResetPasswordInitialState());
+    : super(ResetPasswordInitialState());
 
   final ForgetPasswordApiClient _apiClient;
   final LoginUseCase _loginUseCase;
 
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   String? email;
 
@@ -40,8 +41,8 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     final password = passwordController.text;
     final confirmPassword = confirmPasswordController.text;
 
-    final isValid = Validations.validatePassword(password) &&
-        password == confirmPassword;
+    final isValid =
+        Validations.validatePassword(password) && password == confirmPassword;
 
     if (isValid != isFormValid) {
       isFormValid = isValid;
@@ -87,23 +88,10 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       );
 
       emit(ResetPasswordSuccessState());
-
-    } on DioError catch (dioError, stackTrace) {
-      print("Resetting password for email: ${email ?? "NULL"}");
-      debugPrint('DioError: ${dioError.toString()}');
-      debugPrint('DioError type: ${dioError.type}');
-      debugPrint('DioError response: ${dioError.response}');
-      debugPrint('DioError data: ${dioError.response?.data}');
-      debugPrint('StackTrace: $stackTrace');
-      emit(ResetPasswordErrorState('Something went wrong: ${dioError.message}'));
-    } catch (e, stackTrace) {
-      debugPrint('ResetPassword Error: $e');
-      debugPrint('StackTrace: $stackTrace');
+    } catch (e) {
       emit(ResetPasswordErrorState('Something went wrong: ${e.toString()}'));
     }
   }
-
-
 
   @override
   Future<void> close() {

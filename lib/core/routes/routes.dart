@@ -30,22 +30,24 @@ abstract class Routes {
         );
 
       case AppRoutes.emailVarification:
+        final email = settings.arguments as String;
         return MaterialPageRoute(
           builder:
               (context) =>
-                   BlocProvider(create: (_) => getIt<VerifyCodeCubit>(),
-                     child: const EmailVerificationScreen(),
+              BlocProvider(create: (_) => getIt<VerifyCodeCubit>(),
+                child: EmailVerificationScreen(email: email),
 
-                   ),
+              ),
         );
 
       case AppRoutes.ResetPasswordScreen:
+        final email = settings.arguments as String;
         return MaterialPageRoute(
           builder:
               (context) => BlocProvider(
-                create: (_) => getIt<ResetPasswordCubit>(),
-                child: const ResetPasswordScreen(),
-              ),
+            create: (_) => getIt<ResetPasswordCubit>(),
+            child: ResetPasswordScreen(email: email),
+          ),
         );
 
       default:
