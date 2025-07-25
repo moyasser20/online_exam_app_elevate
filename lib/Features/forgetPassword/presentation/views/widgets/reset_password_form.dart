@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
+import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/reset_code_states.dart';
+import 'package:online_exam_app_elevate/core/Widgets/Custome_Elevated_Button.dart';
+import 'package:online_exam_app_elevate/core/Widgets/custom_text_field.dart';
+import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
+import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
+
+class ResetPasswordForm extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
+  const ResetPasswordForm({super.key, required this.formKey});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.watch<ResetPasswordCubit>();
+    final state = context.watch<ResetPasswordCubit>().state;
+
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          CustomeTextFormField(
+            controller: cubit.passwordController,
+            validator: cubit.validatePassword,
+            label: AppStrings.newPasswordLabel,
+            hint: AppStrings.newPasswordHint,
+            obscureText: true,
+          ),
+          const SizedBox(height: 30),
+          CustomeTextFormField(
+            controller: cubit.confirmPasswordController,
+            validator: cubit.validateConfirmPassword,
+            label: AppStrings.ConfirmPasswordLabel,
+            hint: AppStrings.ConfirmPasswordLabel,
+            obscureText: true,
+          ),
+          const SizedBox(height: 45),
+          state is ResetPasswordLoadingState
+              ? const CircularProgressIndicator()
+              : CustomeElevatedButton(
+            text: AppStrings.ContinueButton,
+            onPressed: cubit.isFormValid
+                ? () {
+              if (formKey.currentState!.validate()) {
+                cubit.resetPassword();
+              }
+            }
+                : null,
+            color: cubit.isFormValid ? AppColors.blue : Colors.grey,
+          ),
+        ],
+      ),
+    );
+  }
+}
