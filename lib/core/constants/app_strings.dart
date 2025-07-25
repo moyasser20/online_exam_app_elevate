@@ -6,7 +6,13 @@ abstract class AppStrings {
   static const String ForgetPasswordTextButton = "Forget Password?";
   static const String DonthaveanaccountText = "Don't have an account?";
   static const String Signup = "Sign up";
+  static const String ContinueButton = "Continue";
+  static const String WrongPasswordErrorMsg = "Wrong password, Try Again";
   static const String password = "Password";
+  static const String ConfirmPasswordHint = "Confirm Password";
+  static const String ConfirmPasswordLabel = "Confirm Password";
+  static const String newPasswordLabel = "New Password";
+  static const String newPasswordHint = "Enter your password";
   static const String ForgetPassword = "Forget Password";
   static const String ResetPassword = "Reset Password";
   static const String ResetPasswordunderMsg = "Password must not be empty and must contain 6 characters with upper case letter and one number at least";

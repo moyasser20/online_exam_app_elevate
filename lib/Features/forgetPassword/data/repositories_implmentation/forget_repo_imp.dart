@@ -10,7 +10,7 @@ import 'package:online_exam_app_elevate/core/constants/failure_messages.dart';
 
 @Injectable(as: ForgetPasswordRepo)
 class ForgetPasswordRepoImp implements ForgetPasswordRepo {
-  final ForgetPasswordDataSource remoteDataSource;
+  final ForgetPasswordRemoteDataSource remoteDataSource;
 
   ForgetPasswordRepoImp(this.remoteDataSource);
 

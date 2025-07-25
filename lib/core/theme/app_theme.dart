@@ -13,6 +13,11 @@ abstract class AppTheme{
           fontSize: 20,
           fontWeight: FontWeight.w700,
         ),
+        bodySmall: TextStyle(
+          fontSize: 14,
+          color: AppColors.red
+
+        )
       ),
     );
   }

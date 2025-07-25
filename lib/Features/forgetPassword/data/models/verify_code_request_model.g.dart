@@ -8,7 +8,7 @@ part of 'verify_code_request_model.dart';
 
 VerifyCodeRequestModel _$VerifyCodeRequestModelFromJson(
   Map<String, dynamic> json,
-) => VerifyCodeRequestModel(resetCode: json['resetCode'] as String?);
+) => VerifyCodeRequestModel(resetCode: json['resetCode'] as String);
 
 Map<String, dynamic> _$VerifyCodeRequestModelToJson(
   VerifyCodeRequestModel instance,

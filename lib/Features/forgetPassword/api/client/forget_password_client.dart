@@ -10,7 +10,7 @@ import '../../data/models/reset_password_request_model.dart';
 import '../../data/models/verify_code_request_model.dart';
 part 'forget_password_client.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class ForgetPasswordApiClient {
   @factoryMethod

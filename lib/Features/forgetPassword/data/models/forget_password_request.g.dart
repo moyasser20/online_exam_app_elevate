@@ -8,7 +8,7 @@ part of 'forget_password_request.dart';
 
 ForgetPasswordRequestModel _$ForgetPasswordRequestModelFromJson(
   Map<String, dynamic> json,
-) => ForgetPasswordRequestModel(email: json['email'] as String?);
+) => ForgetPasswordRequestModel(email: json['email'] as String);
 
 Map<String, dynamic> _$ForgetPasswordRequestModelToJson(
   ForgetPasswordRequestModel instance,

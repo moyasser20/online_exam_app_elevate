@@ -5,10 +5,10 @@ part 'verify_code_request_model.g.dart';
 @JsonSerializable()
 class VerifyCodeRequestModel {
   @JsonKey(name: "resetCode")
-  final String? resetCode;
+  final String resetCode;
 
   VerifyCodeRequestModel ({
-    this.resetCode,
+    required this.resetCode,
   });
 
   factory VerifyCodeRequestModel.fromJson(Map<String, dynamic> json) {

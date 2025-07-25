@@ -5,11 +5,14 @@ import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/vie
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/verify_code_states.dart';
 import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
 
+import '../../../../../core/constants/app_Strings.dart';
+
 class VerificationCodeField extends StatelessWidget {
   const VerificationCodeField({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     final state = context.watch<VerifyCodeCubit>().state;
     final cubit = context.read<VerifyCodeCubit>();
 
@@ -31,11 +34,11 @@ class VerificationCodeField extends StatelessWidget {
           onCodeChanged: (code) => cubit.updateCode(code),
         ),
         if (state is VerifyCodeErrorStates)
-          const Padding(
-            padding: EdgeInsets.only(top: 12),
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
             child: Text(
-              "Wrong password, Try Again",
-              style: TextStyle(color: Colors.red, fontSize: 14),
+              AppStrings.WrongPasswordErrorMsg,
+              style: theme.bodySmall?.copyWith(color: Colors.red),
             ),
           ),
       ],

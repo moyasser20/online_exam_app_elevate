@@ -7,8 +7,8 @@ import 'package:online_exam_app_elevate/Features/forgetPassword/data/models/forg
 import 'package:online_exam_app_elevate/Features/forgetPassword/data/models/reset_password_request_model.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/data/models/verify_code_request_model.dart';
 
-@Injectable(as:ForgetPasswordDataSource )
-class ForgetPasswordRemoteDataSourceImp implements ForgetPasswordDataSource {
+@Injectable(as:ForgetPasswordRemoteDataSource)
+class ForgetPasswordRemoteDataSourceImp implements ForgetPasswordRemoteDataSource {
   final ForgetPasswordApiClient _apiClient;
 
   ForgetPasswordRemoteDataSourceImp(this._apiClient);

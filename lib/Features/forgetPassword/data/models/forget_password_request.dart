@@ -5,10 +5,10 @@ part 'forget_password_request.g.dart';
 @JsonSerializable()
 class ForgetPasswordRequestModel {
   @JsonKey(name: "email")
-  final String? email;
+  final String email;
 
   ForgetPasswordRequestModel ({
-    this.email,
+    required this.email,
   });
 
   factory ForgetPasswordRequestModel.fromJson(Map<String, dynamic> json) {

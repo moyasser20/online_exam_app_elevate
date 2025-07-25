@@ -66,7 +66,7 @@ extension GetItInjectableX on _i174.GetIt {
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
     );
-    gh.factory<_i117.ForgetPasswordApiClient>(
+    gh.singleton<_i117.ForgetPasswordApiClient>(
       () => _i117.ForgetPasswordApiClient(
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseurl'),
@@ -75,7 +75,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i713.loginRemoteDataSource>(
       () => _i261.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
     );
-    gh.factory<_i959.ForgetPasswordDataSource>(
+    gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
         gh<_i117.ForgetPasswordApiClient>(),
       ),
@@ -84,7 +84,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i946.loginRepoImplemnation(gh<_i713.loginRemoteDataSource>()),
     );
     gh.factory<_i134.ForgetPasswordRepo>(
-      () => _i340.ForgetPasswordRepoImp(gh<_i959.ForgetPasswordDataSource>()),
+      () => _i340.ForgetPasswordRepoImp(
+        gh<_i959.ForgetPasswordRemoteDataSource>(),
+      ),
     );
     gh.factory<_i587.ForgetPasswordUseCase>(
       () => _i587.ForgetPasswordUseCase(gh<_i134.ForgetPasswordRepo>()),

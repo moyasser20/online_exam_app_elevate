@@ -4,6 +4,7 @@ import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/vie
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/reset_code_states.dart';
 import 'package:online_exam_app_elevate/core/Widgets/Custome_Elevated_Button.dart';
 import 'package:online_exam_app_elevate/core/Widgets/custom_text_field.dart';
+import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
 
 class ResetPasswordForm extends StatelessWidget {
@@ -22,23 +23,23 @@ class ResetPasswordForm extends StatelessWidget {
           CustomeTextFormField(
             controller: cubit.passwordController,
             validator: cubit.validatePassword,
-            label: "New Password",
-            hint: "Enter your password",
+            label: AppStrings.newPasswordLabel,
+            hint: AppStrings.newPasswordHint,
             obscureText: true,
           ),
           const SizedBox(height: 30),
           CustomeTextFormField(
             controller: cubit.confirmPasswordController,
             validator: cubit.validateConfirmPassword,
-            label: "Confirm Password",
-            hint: "Confirm password",
+            label: AppStrings.ConfirmPasswordLabel,
+            hint: AppStrings.ConfirmPasswordLabel,
             obscureText: true,
           ),
           const SizedBox(height: 45),
           state is ResetPasswordLoadingState
               ? const CircularProgressIndicator()
               : CustomeElevatedButton(
-            text: "Continue",
+            text: AppStrings.ContinueButton,
             onPressed: cubit.isFormValid
                 ? () {
               if (formKey.currentState!.validate()) {
