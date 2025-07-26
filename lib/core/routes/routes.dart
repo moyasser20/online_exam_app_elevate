@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart';
 import 'package:online_exam_app_elevate/Features/login/presentation/views/screens/login.dart';
+import '../../Features/signup/presentation/views/screens/signUp.dart';
+import 'app_routes.dart';
 import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
 
 import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
@@ -19,6 +21,9 @@ abstract class Routes {
     switch (url.path) {
       case AppRoutes.login:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
+
+      case AppRoutes.signUp:
+        return MaterialPageRoute(builder: (_) => const SignupScreen());
 
       case AppRoutes.forgetPassword:
         return MaterialPageRoute(

@@ -5,7 +5,7 @@ import 'package:online_exam_app_elevate/core/di/di.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 import 'package:online_exam_app_elevate/core/extensions/validations.dart';
 import '../../../../../core/Assets/app_assets.dart';
-import '../../../../../core/Widgets/Custome_Elevated_Button.dart';
+import '../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../core/Widgets/custom_text_field.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/routes/app_routes.dart';
@@ -79,7 +79,7 @@ class _loginScreenState extends State<LoginScreen> {
             body: Form(
               child: Column(
                 children: [
-                  CustomeTextFormField(
+                  CustomTextFormField(
                     label: "Email",
                     hint: "Enter Your Email",
                     controller: cubit.emailController,
@@ -93,7 +93,7 @@ class _loginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ).setHorizontalAndVerticalPadding(context, 0.03, 0.03),
-                  CustomeTextFormField(
+                  CustomTextFormField(
                     label: "Password",
                     hint: "Enter Your Password",
                     controller: cubit.passwordController,
@@ -141,7 +141,7 @@ class _loginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 50),
                   state is loginloadingStates
                       ? const CircularProgressIndicator()
-                      : CustomeElevatedButton(
+                      : CustomElevatedButton(
                     text: AppStrings.LoginElevatedButton,
                     onPressed: cubit.isFormValid
                         ? () {
@@ -163,7 +163,7 @@ class _loginScreenState extends State<LoginScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.SignUp);
+                          Navigator.pushNamed(context, AppRoutes.signUp);
                         },
                         child: const Text(
                           AppStrings.Signup,

@@ -6,7 +6,7 @@ import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
 import '../../../../../core/Assets/app_assets.dart';
-import '../../../../../core/Widgets/Custome_Elevated_Button.dart';
+import '../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../widgets/verification_code_field.dart';
 
@@ -94,7 +94,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   ),
                   state is VerifyCodeLoadingStates
                       ? const CircularProgressIndicator()
-                      : CustomeElevatedButton(
+                      : CustomElevatedButton(
                     text: "Next",
                     onPressed: cubit.enteredCode.length == 6
                         ? () {

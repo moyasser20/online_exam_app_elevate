@@ -2,7 +2,7 @@
 import 'package:online_exam_app_elevate/Features/login/data/models/login_response.dart';
 import 'package:online_exam_app_elevate/Features/login/data/models/login_request.dart';
 
-abstract class loginRepo{
+abstract class LoginRepo{
 
   Future<LoginResponse> login(loginRequest request);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
-class CustomeTextFormField extends StatefulWidget {
+class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
@@ -13,7 +13,7 @@ class CustomeTextFormField extends StatefulWidget {
   final bool enabled;
   final bool readonly;
 
-  const CustomeTextFormField({
+  const CustomTextFormField({
     super.key,
     this.controller,
     this.validator,
@@ -28,10 +28,10 @@ class CustomeTextFormField extends StatefulWidget {
   });
 
   @override
-  State<CustomeTextFormField> createState() => _CustomeTextFormFieldState();
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
-class _CustomeTextFormFieldState extends State<CustomeTextFormField> {
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isTextObscured;
 
   @override
