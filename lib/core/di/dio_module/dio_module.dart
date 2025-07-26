@@ -5,7 +5,7 @@ import '../../constants/api_constants/constants.dart';
 @module
 abstract class DioModule {
   @lazySingleton
-  Dio dio(@Named('baseUrl') String baseUrl) => Dio(
+  Dio dio(@Named('baseurl') String baseUrl) => Dio(
     BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 15),
@@ -14,6 +14,6 @@ abstract class DioModule {
     ),
   );
 
-  @Named('baseUrl')
+  @Named('baseurl')
   String get baseUrl => ApiConstants.baseUrl;
 }

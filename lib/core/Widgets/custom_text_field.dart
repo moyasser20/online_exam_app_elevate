@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../theme/app_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -8,8 +7,8 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
   final String? label;
   final String? hint;
-  final String? suffixText; // only shows suffix, no tap handler
-  final bool isPassword;
+  final String? suffixText;
+  final bool obscureText; // renamed from isPassword
   final TextInputType keyboardType;
   final bool enabled;
   final bool readonly;
@@ -22,7 +21,7 @@ class CustomTextFormField extends StatefulWidget {
     this.label,
     this.hint,
     this.suffixText,
-    this.isPassword = false,
+    this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.enabled = true,
     this.readonly = false,
@@ -33,7 +32,13 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool obscureText = true;
+  late bool isTextObscured;
+
+  @override
+  void initState() {
+    super.initState();
+    isTextObscured = widget.obscureText;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.controller,
       enabled: widget.enabled,
       readOnly: widget.readonly,
-      obscureText: widget.isPassword ? obscureText : false,
+      obscureText: isTextObscured,
       keyboardType: widget.keyboardType,
       validator: widget.validator,
       onChanged: widget.onChanged,
@@ -56,6 +61,19 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintStyle: TextStyle(
           color: AppColors.grey.withOpacity(0.4),
         ),
+        suffixIcon: widget.obscureText
+            ? IconButton(
+          icon: Icon(
+            isTextObscured ? Icons.visibility_off : Icons.visibility,
+            color: AppColors.grey,
+          ),
+          onPressed: () {
+            setState(() {
+              isTextObscured = !isTextObscured;
+            });
+          },
+        )
+            : null,
         suffix: widget.suffixText != null
             ? Text(
           widget.suffixText!,

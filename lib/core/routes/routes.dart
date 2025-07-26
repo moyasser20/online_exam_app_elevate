@@ -1,21 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart';
 import 'package:online_exam_app_elevate/Features/login/presentation/views/screens/login.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
+import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
+
+import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
+import '../../Features/forgetPassword/presentation/views/screens/ResetPassword.dart';
+import '../../Features/forgetPassword/presentation/views/screens/email_varificationScreen.dart';
+import '../../Features/forgetPassword/presentation/views/screens/forgertPasswordScreen.dart';
+import '../../Features/forgetPassword/presentation/viewmodel/forget_password_viewmodel.dart';
+
+import '../di/di.dart';
 
 abstract class Routes {
-  static Route generateRoute(RouteSettings settings) {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
     final url = Uri.parse(settings.name ?? "/");
 
     switch (url.path) {
       case AppRoutes.login:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
 
       case AppRoutes.signUp:
         return MaterialPageRoute(builder: (_) => const SignupScreen());
 
+      case AppRoutes.forgetPassword:
+        return MaterialPageRoute(
+          builder:
+              (context) => BlocProvider(
+                create: (_) => getIt<ForgetPasswordCubit>(),
+                child: const ForgetPasswordScreen(),
+              ),
+        );
+
+      case AppRoutes.emailVarification:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder:
+              (context) =>
+              BlocProvider(create: (_) => getIt<VerifyCodeCubit>(),
+                child: EmailVerificationScreen(email: email),
+
+              ),
+        );
+
+      case AppRoutes.ResetPasswordScreen:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder:
+              (context) => BlocProvider(
+            create: (_) => getIt<ResetPasswordCubit>(),
+            child: ResetPasswordScreen(email: email),
+          ),
+        );
+
       default:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
     }
   }
 }
