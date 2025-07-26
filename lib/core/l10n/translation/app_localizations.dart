@@ -103,6 +103,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Online Exam App'**
   String get appName;
+
+  /// No description provided for @loginSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Successful ✅'**
+  String get loginSuccessMsg;
+
+  /// No description provided for @loginElevatedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get loginElevatedButton;
+
+  /// No description provided for @rememberMeBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get rememberMeBox;
+
+  /// No description provided for @forgetPasswordTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password?'**
+  String get forgetPasswordTextButton;
+
+  /// No description provided for @doNotHaveAnAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get doNotHaveAnAccountText;
+
+  /// No description provided for @signup.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get signup;
+
+  /// No description provided for @signupSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup Successful ✅'**
+  String get signupSuccessMsg;
+
+  /// No description provided for @signupElevatedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup'**
+  String get signupElevatedButton;
+
+  /// No description provided for @haveAccText.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get haveAccText;
+
+  /// No description provided for @loginTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Login?'**
+  String get loginTextButton;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @wrongPasswordErrorMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong password, Try Again'**
+  String get wrongPasswordErrorMsg;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @confirmPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordHint;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @newPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPasswordLabel;
+
+  /// No description provided for @newPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get newPasswordHint;
+
+  /// No description provided for @forgetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password'**
+  String get forgetPassword;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @resetPasswordUnderMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must not be empty and must contain 6 characters with upper case letter and one number at least'**
+  String get resetPasswordUnderMsg;
+
+  /// No description provided for @requiredEmailErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get requiredEmailErrorMessage;
+
+  /// No description provided for @emailVerificationScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Email verification'**
+  String get emailVerificationScreen;
+
+  /// No description provided for @emailVerificationScreenUnderMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your code that was sent to your\nemail address'**
+  String get emailVerificationScreenUnderMsg;
+
+  /// No description provided for @validationEmailErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This Email is not valid'**
+  String get validationEmailErrorMessage;
+
+  /// No description provided for @codeErrorMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid code'**
+  String get codeErrorMsg;
+
+  /// No description provided for @codeReceiveMsgError.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive code?'**
+  String get codeReceiveMsgError;
+
+  /// No description provided for @forgetPasswordUnderText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email associated to\nyour account'**
+  String get forgetPasswordUnderText;
 }
 
 class _AppLocalizationsDelegate

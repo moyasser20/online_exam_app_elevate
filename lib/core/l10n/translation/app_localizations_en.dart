@@ -10,31 +10,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'Online Exam App';
-  String get LoginSuccessMsg => "Login Successful ✅";
-  String get LoginElevatedButton => "Login";
-  String get RememberMeBox => "Remember me";
-  String get ForgetPasswordTextButton => "Forget Password?";
-  String get DonthaveanaccountText => "Don't have an account?";
-  String get Signup => "Sign up";
-  String get signupSuccessMsg => "Signup Successful ✅";
-  String get signupElevatedButton => "Signup";
-  String get haveAccText => "Already have an account?";
-  String get loginTextButton => "Login?";
-  String get ContinueButton => "Continue";
-  String get WrongPasswordErrorMsg => "Wrong password, Try Again";
-  String get password => "Password";
-  String get ConfirmPasswordHint => "Confirm Password";
-  String get ConfirmPasswordLabel => "Confirm Password";
-  String get newPasswordLabel => "New Password";
-  String get newPasswordHint => "Enter your password";
-  String get ForgetPassword => "Forget Password";
-  String get ResetPassword => "Reset Password";
-  String get ResetPasswordunderMsg => "Password must not be empty and must contain 6 characters with upper case letter and one number at least";
-  String get requiredEmailErrorMessage => "Email is required";
-  String get EmailVarficationScreen => "Email verification";
-  String get EmailVarficationScreenUnderMsg => "Please enter your code that was sent to your\nemail address";
-  String get validationEmailErrorMessage => "This Email is not valid";
-  String get CodeErrorMsg => "Invalid code";
-  String get CodeReciveMsgError => "Didn't receive code?";
-  String get ForgetPasswordunderText => "Please enter your email associated to\nyour account";
+
+  @override
+  String get loginSuccessMsg => 'Login Successful ✅';
+
+  @override
+  String get loginElevatedButton => 'Login';
+
+  @override
+  String get rememberMeBox => 'Remember me';
+
+  @override
+  String get forgetPasswordTextButton => 'Forget Password?';
+
+  @override
+  String get doNotHaveAnAccountText => 'Don\'t have an account?';
+
+  @override
+  String get signup => 'Sign up';
+
+  @override
+  String get signupSuccessMsg => 'Signup Successful ✅';
+
+  @override
+  String get signupElevatedButton => 'Signup';
+
+  @override
+  String get haveAccText => 'Already have an account?';
+
+  @override
+  String get loginTextButton => 'Login?';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get wrongPasswordErrorMsg => 'Wrong password, Try Again';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get confirmPasswordHint => 'Confirm Password';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get newPasswordLabel => 'New Password';
+
+  @override
+  String get newPasswordHint => 'Enter your password';
+
+  @override
+  String get forgetPassword => 'Forget Password';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get resetPasswordUnderMsg =>
+      'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
+
+  @override
+  String get requiredEmailErrorMessage => 'Email is required';
+
+  @override
+  String get emailVerificationScreen => 'Email verification';
+
+  @override
+  String get emailVerificationScreenUnderMsg =>
+      'Please enter your code that was sent to your\nemail address';
+
+  @override
+  String get validationEmailErrorMessage => 'This Email is not valid';
+
+  @override
+  String get codeErrorMsg => 'Invalid code';
+
+  @override
+  String get codeReceiveMsgError => 'Didn\'t receive code?';
+
+  @override
+  String get forgetPasswordUnderText =>
+      'Please enter your email associated to\nyour account';
 }
