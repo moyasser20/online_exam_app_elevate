@@ -7,11 +7,11 @@ import '../models/signup_response.dart';
 
 part 'signup_api_client.g.dart';
 
-@injectable
+@singleton
 @RestApi()
-abstract class signupApiClient {
+abstract class SignupApiClient {
   @factoryMethod
-  factory signupApiClient(Dio dio, {@Named('baseUrl') String? baseUrl}) = _signupApiClient;
+  factory SignupApiClient(Dio dio, {@Named('baseUrl') String? baseUrl}) = _SignupApiClient;
 
   @POST(EndPoints.signup)
   Future<SignupResponse> signUp(@Body() SignupRequest request);

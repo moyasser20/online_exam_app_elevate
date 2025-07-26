@@ -5,7 +5,7 @@ import 'package:online_exam_app_elevate/Features/login/domain/repositories/login
 
 @injectable
 class LoginUseCase{
-  final loginRepo _repo;
+  final LoginRepo _repo;
 
   LoginUseCase(this._repo);
 

@@ -7,7 +7,7 @@ import '../client/signup_api_client.dart';
 
 @LazySingleton(as: SignupRemoteDatasource)
 class SignupRemoteDataSourceImpl implements SignupRemoteDatasource {
-  final signupApiClient _apiClient;
+  final SignupApiClient _apiClient;
 
   SignupRemoteDataSourceImpl(this._apiClient);
 

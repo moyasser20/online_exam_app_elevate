@@ -8,8 +8,8 @@ part of 'signup_api_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
-class _signupApiClient implements signupApiClient {
-  _signupApiClient(this._dio, {this.baseUrl, this.errorLogger});
+class _SignupApiClient implements SignupApiClient {
+  _SignupApiClient(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 

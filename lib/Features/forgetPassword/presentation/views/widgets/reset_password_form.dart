@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/reset_code_states.dart';
-import 'package:online_exam_app_elevate/core/Widgets/Custome_Elevated_Button.dart';
+import 'package:online_exam_app_elevate/core/Widgets/Custom_Elevated_Button.dart';
 import 'package:online_exam_app_elevate/core/Widgets/custom_text_field.dart';
 import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
@@ -20,7 +20,7 @@ class ResetPasswordForm extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
-          CustomeTextFormField(
+          CustomTextFormField(
             controller: cubit.passwordController,
             validator: cubit.validatePassword,
             label: AppStrings.newPasswordLabel,
@@ -28,7 +28,7 @@ class ResetPasswordForm extends StatelessWidget {
             obscureText: true,
           ),
           const SizedBox(height: 30),
-          CustomeTextFormField(
+          CustomTextFormField(
             controller: cubit.confirmPasswordController,
             validator: cubit.validateConfirmPassword,
             label: AppStrings.ConfirmPasswordLabel,
@@ -38,7 +38,7 @@ class ResetPasswordForm extends StatelessWidget {
           const SizedBox(height: 45),
           state is ResetPasswordLoadingState
               ? const CircularProgressIndicator()
-              : CustomeElevatedButton(
+              : CustomElevatedButton(
             text: AppStrings.ContinueButton,
             onPressed: cubit.isFormValid
                 ? () {

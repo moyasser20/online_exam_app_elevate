@@ -89,167 +89,169 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             body: Form(
-              child: Column(
-                children: [
-                  CustomTextFormField(
-                    label: "User Name",
-                    hint: "Enter User Name",
-                    controller: cubit.userNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "User name is required";
-                      }
-                      if(!Validations.validateUsername(value)){
-                        return "This user name is not valid";
-                      }
-                      return null;
-                    },
-                  ).setHorizontalAndVerticalPadding(context, 0.05, 0.005),
-                  Row(
-                    children: [
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: CustomTextFormField(
-                          label: 'First Name',
-                          hint: "Enter first name",
-                          controller: cubit.firstNameController,
-                          validator: (value) {
-                            if(value == null ||!Validations.validateName(value)){
-                              return "Enter First name";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: CustomTextFormField(
-                          label: 'Last Name',
-                          hint: "Enter Last name",
-                          controller: cubit.lastNameController,
-                          validator: (value) {
-                            if(value == null ||!Validations.validateName(value)){
-                              return "Enter Last name";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                    ],
-                  ).setHorizontalAndVerticalPadding(context, 0.003, 0.03),
-                  CustomTextFormField(
-                    label: "Email",
-                    hint: "Enter your Email",
-                    controller: cubit.emailController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Email is required";
-                      }
-                      if(!Validations.validateEmail(value)) {
-                        return "This Email is not valid";
-                      }
-                      return null;
-                    },
-                  ).setHorizontalAndVerticalPadding(context, 0.05, 0.005),
-                  Row(
-                    children: [
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: CustomTextFormField(
-                          label: 'Password',
-                          hint: "Enter Password",
-                          controller: cubit.passwordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Password is required";
-                            }
-                            if(!Validations.validatePassword(value)){
-                              return "must be at least 6 characters and have {M#12m}";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: CustomTextFormField(
-                          label: 'Confirm Password',
-                          hint: "Confirm Password",
-                          controller: cubit.rePasswordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Password is required";
-                            }
-                            if(!Validations.validateRePassword(cubit.passwordController.text,value)){
-                              return "Password not matched";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                    ],
-                  ).setHorizontalAndVerticalPadding(context, 0.003, 0.03),
-                  CustomTextFormField(
-                    label: "Phone Number",
-                    hint: "Enter phone number",
-                    controller: cubit.phoneController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Phone number is required";
-                      }
-                      if(!Validations.validatePhone(value)){
-                        return "Enter a valid number";
-                      }
-                      return null;
-                    },
-                  ).setHorizontalAndVerticalPadding(context, 0.05, 0.005),
-                  const SizedBox(height: 50),
-                  state is SignupLoadingStates
-                      ? const CircularProgressIndicator()
-                      : CustomElevatedButton(
-                    text: AppStrings.signupElevatedButton,
-                    onPressed: cubit.isFormValid
-                        ? () {
-                      cubit.signup(
-                        cubit.emailController.text,
-                        cubit.passwordController.text,
-                        cubit.rePasswordController.text,
-                        cubit.phoneController.text,
-                        cubit.userNameController.text,
-                        cubit.firstNameController.text,
-                        cubit.lastNameController.text,
-                      );
-                    }
-                        : null,
-                    color: cubit.isFormValid ? AppColors.blue : Colors.grey,
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        AppStrings.haveAccText,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.login);
-                        },
-                        child: const Text(
-                          AppStrings.loginTextButton,
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: 16,
-                            decorationThickness: 2,
-                            height: 2,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomTextFormField(
+                      label: "User Name",
+                      hint: "Enter User Name",
+                      controller: cubit.userNameController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "User name is required";
+                        }
+                        if(!Validations.validateUsername(value)){
+                          return "This user name is not valid";
+                        }
+                        return null;
+                      },
+                    ).setHorizontalAndVerticalPadding(context, 0.05, 0.005),
+                    Row(
+                      children: [
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CustomTextFormField(
+                            label: 'First Name',
+                            hint: "Enter first name",
+                            controller: cubit.firstNameController,
+                            validator: (value) {
+                              if(value == null ||!Validations.validateName(value)){
+                                return "Enter First name";
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CustomTextFormField(
+                            label: 'Last Name',
+                            hint: "Enter Last name",
+                            controller: cubit.lastNameController,
+                            validator: (value) {
+                              if(value == null ||!Validations.validateName(value)){
+                                return "Enter Last name";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                      ],
+                    ).setHorizontalAndVerticalPadding(context, 0.003, 0.03),
+                    CustomTextFormField(
+                      label: "Email",
+                      hint: "Enter your Email",
+                      controller: cubit.emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email is required";
+                        }
+                        if(!Validations.validateEmail(value)) {
+                          return "This Email is not valid";
+                        }
+                        return null;
+                      },
+                    ).setHorizontalAndVerticalPadding(context, 0.05, 0.005),
+                    Row(
+                      children: [
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CustomTextFormField(
+                            label: 'Password',
+                            hint: "Enter Password",
+                            controller: cubit.passwordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Password is required";
+                              }
+                              if(!Validations.validatePassword(value)){
+                                return "must be at least 6 characters and have {M#12m}";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CustomTextFormField(
+                            label: 'Confirm Password',
+                            hint: "Confirm Password",
+                            controller: cubit.rePasswordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Password is required";
+                              }
+                              if(!Validations.validateRePassword(cubit.passwordController.text,value)){
+                                return "Password not matched";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                      ],
+                    ).setHorizontalAndVerticalPadding(context, 0.003, 0.03),
+                    CustomTextFormField(
+                      label: "Phone Number",
+                      hint: "Enter phone number",
+                      controller: cubit.phoneController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Phone number is required";
+                        }
+                        if(!Validations.validatePhone(value)){
+                          return "Enter a valid number";
+                        }
+                        return null;
+                      },
+                    ).setHorizontalAndVerticalPadding(context, 0.05, 0.005),
+                    const SizedBox(height: 50),
+                    state is SignupLoadingStates
+                        ? const CircularProgressIndicator()
+                        : CustomElevatedButton(
+                      text: AppStrings.signupElevatedButton,
+                      onPressed: cubit.isFormValid
+                          ? () {
+                        cubit.signup(
+                          cubit.emailController.text,
+                          cubit.passwordController.text,
+                          cubit.rePasswordController.text,
+                          cubit.phoneController.text,
+                          cubit.userNameController.text,
+                          cubit.firstNameController.text,
+                          cubit.lastNameController.text,
+                        );
+                      }
+                          : null,
+                      color: cubit.isFormValid ? AppColors.blue : Colors.grey,
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          AppStrings.haveAccText,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.login);
+                          },
+                          child: const Text(
+                            AppStrings.loginTextButton,
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: 16,
+                              decorationThickness: 2,
+                              height: 2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
