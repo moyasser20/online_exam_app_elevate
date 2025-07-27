@@ -149,6 +149,7 @@ class _loginScreenState extends State<LoginScreen> {
                         cubit.emailController.text,
                         cubit.passwordController.text,
                       );
+                      Navigator.of(context).pushNamed(AppRoutes.layout);
                     }
                         : null,
                     color: cubit.isFormValid ? AppColors.blue : Colors.grey,

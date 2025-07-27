@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart';
 import 'package:online_exam_app_elevate/Features/login/presentation/views/screens/login.dart';
+import '../../Features/exams/exam_questions/presenation/screens/exam_score_screen.dart';
+import '../../Features/exams/exam_questions/presenation/screens/question_screen.dart';
+import '../../Features/exams/exam_subject/presentation/views/screens/exam_details_screen.dart';
+import '../../Features/exams/exam_subject/presentation/views/screens/exams_screen.dart';
+import '../../Features/layout/layout_screen.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
 import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
@@ -54,6 +59,20 @@ abstract class Routes {
             child: ResetPasswordScreen(email: email),
           ),
         );
+
+      case AppRoutes.questionsScreen:
+        return MaterialPageRoute(builder: (context) => const QuestionScreen());
+
+      case AppRoutes.examScoreScreen:
+        return MaterialPageRoute(builder: (context) => const ExamScoreScreen(correctAnswer: 10, totalQuestion: 10,));
+
+
+      case AppRoutes.layout:
+        return MaterialPageRoute(builder: (context) => const LayoutScreen());
+      case AppRoutes.exams:
+        return MaterialPageRoute(builder: (context) => const ExamsScreen());
+      case AppRoutes.examsDetails:
+        return MaterialPageRoute(builder: (context) => const ExamDetailsScreen());
 
       default:
         return MaterialPageRoute(builder: (context) => const LoginScreen());

@@ -89,7 +89,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i991.SignupApiClient>(
       () => _i991.SignupApiClient(
         gh<_i361.Dio>(),
-        baseUrl: gh<String>(instanceName: 'baseurl'),
+        baseUrl: gh<String>(instanceName: 'baseUrl'),
       ),
     );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
