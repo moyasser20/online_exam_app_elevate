@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app_elevate/Features/layout/explore/presentation/viewmodel/get_all_subject_viewmodel.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/presentation/views/screens/profile_Screen.dart';
 import 'package:online_exam_app_elevate/Features/layout/result/presentation/views/screens/result_screen.dart';
+import 'package:online_exam_app_elevate/core/di/di.dart';
 
 import '../../core/Assets/app_assets.dart';
 import '../../core/theme/app_colors.dart';
@@ -16,9 +19,12 @@ class LayoutScreen extends StatefulWidget {
 class _LayoutScreenState extends State<LayoutScreen> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-    ExploreScreen(),
+    BlocProvider(
+      create: (_) => getIt<GetAllSubjectViewModel>()..getAllSubject(),
+      child: ExploreScreen(),
+    ),
     ResultScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

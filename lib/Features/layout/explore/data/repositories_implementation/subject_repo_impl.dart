@@ -1,8 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app_elevate/Features/exams/data/datasource/subject_remote_datasource.dart';
-import 'package:online_exam_app_elevate/Features/exams/data/models/subject_model.dart';
-import 'package:online_exam_app_elevate/Features/exams/domain/entity/subjects_entity.dart';
-import 'package:online_exam_app_elevate/Features/exams/domain/repositories/subject_repo.dart';
+
+import '../../domain/entity/subjects_entity.dart';
+import '../../domain/repositories/subject_repo.dart';
+import '../datasource/subject_remote_datasource.dart';
+import '../models/subject_model.dart';
 
 @LazySingleton(as: SubjectRepo)
 class SubjectsRepoImpl implements SubjectRepo {

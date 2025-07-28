@@ -1,4 +1,5 @@
-import 'package:online_exam_app_elevate/Features/exams/domain/entity/subjects_entity.dart';
+
+import '../../domain/entity/subjects_entity.dart';
 
 abstract class GetAllSubjectStates {}
 

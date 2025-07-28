@@ -1,7 +1,8 @@
 
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app_elevate/Features/exams/domain/entity/subjects_entity.dart';
-import 'package:online_exam_app_elevate/Features/exams/domain/repositories/subject_repo.dart';
+
+import '../entity/subjects_entity.dart';
+import '../repositories/subject_repo.dart';
 
 @injectable
 class GetAllSubjectUseCases{

@@ -11,7 +11,7 @@ part 'signup_api_client.g.dart';
 @RestApi()
 abstract class SignupApiClient {
   @factoryMethod
-  factory SignupApiClient(Dio dio, {@Named('baseUrl') String? baseUrl}) = _SignupApiClient;
+  factory SignupApiClient(Dio dio, {@Named('baseurl') String? baseUrl}) = _SignupApiClient;
 
   @POST(EndPoints.signup)
   Future<SignupResponse> signUp(@Body() SignupRequest request);
