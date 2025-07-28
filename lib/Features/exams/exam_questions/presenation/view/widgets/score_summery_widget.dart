@@ -3,7 +3,8 @@ import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 
-import '../../../../../core/theme/app_colors.dart';
+import '../../../../../../core/theme/app_colors.dart';
+
 import 'build_score_circular_avatar.dart';
 
 class ScoreSummary extends StatelessWidget {

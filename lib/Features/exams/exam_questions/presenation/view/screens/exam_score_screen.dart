@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
-import '../../../../../core/Assets/app_assets.dart';
-import '../../../../../core/Widgets/Custom_Elevated_Button.dart';
-import '../../../../../core/routes/app_routes.dart';
-import '../../../../../core/theme/app_colors.dart';
+import '../../../../../../core/Assets/app_assets.dart';
+import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
+import '../../../../../../core/routes/app_routes.dart';
+import '../../../../../../core/theme/app_colors.dart';
 import '../widgets/score_summery_widget.dart';
 
 class ExamScoreScreen extends StatelessWidget {

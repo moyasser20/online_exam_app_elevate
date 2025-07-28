@@ -13,6 +13,16 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../Features/exams/api/client/exam_api_client.dart' as _i249;
+import '../../Features/exams/api/datasource_implementation/subject_remote_datasource_implementation.dart'
+    as _i719;
+import '../../Features/exams/data/datasource/subject_remote_datasource.dart'
+    as _i657;
+import '../../Features/exams/data/repositories_implementation/subject_repo_impl.dart'
+    as _i618;
+import '../../Features/exams/domain/repositories/subject_repo.dart' as _i30;
+import '../../Features/exams/domain/usecases/get_all_subject_usecase.dart'
+    as _i1042;
 import '../../Features/forgetPassword/api/client/forget_password_client.dart'
     as _i117;
 import '../../Features/forgetPassword/api/dataSource_implementation/forget_password_remote_datasource.dart'
@@ -68,9 +78,19 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
+    gh.lazySingleton<_i973.TokenStorage>(() => _i973.TokenStorage());
     gh.factory<String>(() => dioModule.baseUrl, instanceName: 'baseurl');
     gh.lazySingleton<_i361.Dio>(
-      () => dioModule.dio(gh<String>(instanceName: 'baseurl')),
+      () => dioModule.dio(
+        gh<String>(instanceName: 'baseurl'),
+        gh<_i973.TokenStorage>(),
+      ),
+    );
+    gh.factory<_i249.ExamApiClient>(
+      () => _i249.ExamApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'baseurl'),
+      ),
     );
     gh.factory<_i545.loginApiClient>(
       () => _i545.loginApiClient(
@@ -84,6 +104,9 @@ extension GetItInjectableX on _i174.GetIt {
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
     );
+    gh.lazySingleton<_i657.SubjectRemoteDataSource>(
+      () => _i719.SubjectsRemoteDataSourceImpl(gh<_i249.ExamApiClient>()),
+    );
     gh.lazySingleton<_i713.loginRemoteDataSource>(
       () => _i261.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
     );
@@ -92,6 +115,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseUrl'),
       ),
+    );
+    gh.lazySingleton<_i30.SubjectRepo>(
+      () => _i618.SubjectsRepoImpl(gh<_i657.SubjectRemoteDataSource>()),
     );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
@@ -111,6 +137,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i340.ForgetPasswordRepoImp(
         gh<_i959.ForgetPasswordRemoteDataSource>(),
       ),
+    );
+    gh.factory<_i1042.GetAllSubjectUseCases>(
+      () => _i1042.GetAllSubjectUseCases(gh<_i30.SubjectRepo>()),
     );
     gh.factory<_i587.ForgetPasswordUseCase>(
       () => _i587.ForgetPasswordUseCase(gh<_i134.ForgetPasswordRepo>()),
