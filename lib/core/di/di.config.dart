@@ -113,7 +113,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i991.SignupApiClient>(
       () => _i991.SignupApiClient(
         gh<_i361.Dio>(),
-        baseUrl: gh<String>(instanceName: 'baseUrl'),
+        baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
     );
     gh.lazySingleton<_i30.SubjectRepo>(
