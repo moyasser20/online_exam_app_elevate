@@ -26,6 +26,11 @@ class LoginViewModel extends Cubit<loginStates> {
     emit(loginIntialStates());
   }
 
+  Future<String?> getToken() async {
+    return await _tokenStorage.getToken();
+  }
+
+
   void validateForm() {
     final email = emailController.text;
     final password = passwordController.text;

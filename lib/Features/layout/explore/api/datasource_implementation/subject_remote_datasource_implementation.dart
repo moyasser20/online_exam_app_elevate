@@ -14,7 +14,10 @@ class SubjectsRemoteDataSourceImpl implements SubjectRemoteDataSource {
   SubjectsRemoteDataSourceImpl(this.examApiClient);
 
   @override
-  Future<List<SubjectModel>> getAllSubject() => examApiClient.getAllSubjects();
+  Future<List<SubjectModel>> getAllSubject() async {
+    final response = await examApiClient.getAllSubjects();
+    return response.subjects;
+  }
 
 
 

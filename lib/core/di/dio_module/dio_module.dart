@@ -29,7 +29,7 @@ abstract class DioModule {
             print('Token to be attached: $token');
 
             if (token != null && token.isNotEmpty) {
-              options.headers['Authorization'] = 'Bearer $token';
+              options.headers['token'] = token;
             } else {
               print('No token found or token is empty.');
             }
@@ -41,6 +41,7 @@ abstract class DioModule {
         },
       ),
     );
+
 
     return dio;
   }

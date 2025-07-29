@@ -46,11 +46,21 @@ class _loginScreenState extends State<LoginScreen> {
     return BlocProvider<LoginViewModel>(
       create: (_) => cubit,
       child: BlocConsumer<LoginViewModel, loginStates>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is loginSuccessStates) {
+            final token = await context.read<LoginViewModel>().getToken();
+            //print('Token after login: $token');
+
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text(AppStrings.LoginSuccessMsg)),
+              const SnackBar(
+                content: Text(AppStrings.LoginSuccessMsg),
+                duration: Duration(seconds: 1),
+              ),
             );
+
+            await Future.delayed(const Duration(seconds: 1));
+            Navigator.of(context).pushReplacementNamed(AppRoutes.layout);
+
           } else if (state is loginErrorStates) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -71,9 +81,9 @@ class _loginScreenState extends State<LoginScreen> {
                 onPressed: () {},
                 icon: Image.asset(AppAssets.ArrowIcon),
               ),
-              title:  Text(
+              title: Text(
                 AppStrings.LoginElevatedButton,
-                style:theme.textTheme.headlineMedium ,
+                style: theme.textTheme.headlineMedium,
               ),
             ),
             body: Form(
@@ -87,7 +97,7 @@ class _loginScreenState extends State<LoginScreen> {
                       if (value == null || value.isEmpty) {
                         return "Email is required";
                       }
-                      if(!Validations.validateEmail(value)) {
+                      if (!Validations.validateEmail(value)) {
                         return "This Email is not valid";
                       }
                       return null;
@@ -101,7 +111,7 @@ class _loginScreenState extends State<LoginScreen> {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
                       }
-                      if(!Validations.validatePassword(value)){
+                      if (!Validations.validatePassword(value)) {
                         return "must be at least 6 characters and have {M#12m}";
                       }
                       return null;
@@ -126,7 +136,9 @@ class _loginScreenState extends State<LoginScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(AppRoutes.forgetPassword);
+                          Navigator.of(
+                            context,
+                          ).pushReplacementNamed(AppRoutes.forgetPassword);
                         },
                         child: const Text(
                           AppStrings.ForgetPasswordTextButton,
@@ -142,24 +154,25 @@ class _loginScreenState extends State<LoginScreen> {
                   state is loginloadingStates
                       ? const CircularProgressIndicator()
                       : CustomElevatedButton(
-                    text: AppStrings.LoginElevatedButton,
-                    onPressed: cubit.isFormValid
-                        ? () {
-                      cubit.login(
-                        cubit.emailController.text,
-                        cubit.passwordController.text,
-                      );
-                      Navigator.of(context).pushNamed(AppRoutes.layout);
-                    }
-                        : null,
-                    color: cubit.isFormValid ? AppColors.blue : Colors.grey,
-                  ),
+                        text: AppStrings.LoginElevatedButton,
+                        onPressed:
+                            cubit.isFormValid
+                                ? () {
+                                  cubit.login(
+                                    cubit.emailController.text,
+                                    cubit.passwordController.text,
+                                  );
+                                  // Navigator.of(context).pushNamed(AppRoutes.layout);
+                                }
+                                : null,
+                        color: cubit.isFormValid ? AppColors.blue : Colors.grey,
+                      ),
                   const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                    AppStrings.DonthaveanaccountText,
+                        AppStrings.DonthaveanaccountText,
                         style: TextStyle(fontSize: 16),
                       ),
                       TextButton(
@@ -176,7 +189,7 @@ class _loginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

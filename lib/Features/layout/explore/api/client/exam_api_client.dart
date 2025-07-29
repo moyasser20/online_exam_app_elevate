@@ -4,7 +4,7 @@ import 'package:retrofit/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
-import '../../data/models/subject_model.dart';
+import '../../data/models/subjects_response_model.dart';
 
 part 'exam_api_client.g.dart';
 
@@ -17,5 +17,5 @@ abstract class ExamApiClient {
 
   @GET('/subjects')
   @Extra({'auth': true})
-  Future<List<SubjectModel>> getAllSubjects();
+  Future<SubjectsResponseModel> getAllSubjects();
 }

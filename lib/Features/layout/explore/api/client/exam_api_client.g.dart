@@ -18,12 +18,12 @@ class _ExamApiClient implements ExamApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<SubjectModel>> getAllSubjects() async {
+  Future<SubjectsResponseModel> getAllSubjects() async {
     final _extra = <String, dynamic>{'auth': true};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<SubjectModel>>(
+    final _options = _setStreamType<SubjectsResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -33,15 +33,10 @@ class _ExamApiClient implements ExamApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<SubjectModel> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SubjectsResponseModel _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) => SubjectModel.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = SubjectsResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
