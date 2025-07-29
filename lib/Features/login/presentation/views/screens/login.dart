@@ -29,6 +29,7 @@ class _loginScreenState extends State<LoginScreen> {
 
     cubit.emailController.addListener(cubit.validateForm);
     cubit.passwordController.addListener(cubit.validateForm);
+    cubit.loadRememberedData();
   }
 
   @override

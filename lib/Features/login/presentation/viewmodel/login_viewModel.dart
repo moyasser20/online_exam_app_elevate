@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:online_exam_app_elevate/core/storage/remember_me_storage.dart';
 import 'package:online_exam_app_elevate/core/storage/token_storage.dart';
 
 import '../../../../core/extensions/validations.dart';
@@ -15,6 +16,8 @@ class LoginViewModel extends Cubit<loginStates> {
   final LoginUseCase loginUseCase;
   final TokenStorage _tokenStorage;
 
+  final rememberStorage  = RememberMeStorage();
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -25,6 +28,25 @@ class LoginViewModel extends Cubit<loginStates> {
     rememberMe = value;
     emit(loginIntialStates());
   }
+
+
+  Future<void> loadRememberedData() async {
+    final data = await rememberStorage.loadRememberData();
+    rememberMe = data['rememberMe'] ?? false;
+    emailController.text = data['email'] ?? '';
+    passwordController.text = data['password'] ?? '';
+    validateForm();
+    emit(loginIntialStates());
+  }
+
+  Future<void> saveRememberData() async {
+    await rememberStorage.saveRememberMe(
+      rememberMe,
+      emailController.text,
+      passwordController.text,
+    );
+  }
+
 
   Future<String?> getToken() async {
     return await _tokenStorage.getToken();
@@ -48,6 +70,8 @@ class LoginViewModel extends Cubit<loginStates> {
       final request = loginRequest(email: email, password: password);
       final response = await loginUseCase(request);
       await _tokenStorage.saveToken(response.token ?? '');
+
+      await saveRememberData();
       emit(loginSuccessStates());
     } catch (e) {
       emit(loginErrorStates(e.toString()));
