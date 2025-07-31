@@ -68,7 +68,8 @@ abstract class Routes {
       case AppRoutes.layout:
         return MaterialPageRoute(builder: (context) => const LayoutScreen());
       case AppRoutes.exams:
-        return MaterialPageRoute(builder: (context) => const ExamsScreen());
+        final subjectId = settings.arguments as String;
+        return MaterialPageRoute(builder: (context) => ExamsScreen(subjectId: subjectId,));
       case AppRoutes.examsDetails:
         final examId = settings.arguments as String;
         return MaterialPageRoute(builder: (context) => ExamDetailsScreen(examId: examId));

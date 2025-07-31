@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RememberMeStorage {
-  static const _rememberMeKey = 'remember_ me';
+  static const _rememberMeKey = 'remember_me';
   static const _emailKey = 'email';
   static const _passwordKey = 'password';
 

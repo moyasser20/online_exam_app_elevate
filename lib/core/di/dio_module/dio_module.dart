@@ -26,17 +26,13 @@ abstract class DioModule {
 
           if (needsAuth) {
             final token = await tokenStorage.getToken();
-            print('Token to be attached: $token');
 
             if (token != null && token.isNotEmpty) {
               options.headers['token'] = token;
             } else {
-              print('No token found or token is empty.');
             }
           }
 
-          print('Making request to: ${options.uri}');
-          print('Request headers: ${options.headers}');
           return handler.next(options);
         },
       ),

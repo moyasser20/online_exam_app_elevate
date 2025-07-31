@@ -9,7 +9,8 @@ import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 
 class ExamsScreen extends StatelessWidget {
-  const ExamsScreen({super.key});
+  final String subjectId;
+  const ExamsScreen({super.key, required this.subjectId});
 
   @override
   Widget build(BuildContext context) {
