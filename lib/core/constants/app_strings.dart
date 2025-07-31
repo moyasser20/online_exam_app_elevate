@@ -13,6 +13,9 @@ abstract class AppStrings {
   static const String ContinueButton = "Continue";
   static const String WrongPasswordErrorMsg = "Wrong password, Try Again";
   static const String password = "Password";
+  static const String search = "Search";
+  static const String survey = "Survey";
+  static const String browseBySubject = "Browse by subject";
   static const String ConfirmPasswordHint = "Confirm Password";
   static const String ConfirmPasswordLabel = "Confirm Password";
   static const String newPasswordLabel = "New Password";

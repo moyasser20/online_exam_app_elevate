@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
 import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
@@ -37,7 +38,7 @@ class ExploreScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Survey",
+          AppStrings.survey,
           style: TextStyle(
             color: AppColors.blue,
             fontWeight: FontWeight.w500,
@@ -48,7 +49,7 @@ class ExploreScreen extends StatelessWidget {
         TextFormField(
           onChanged: (value) {},
           decoration: InputDecoration(
-            hintText: 'Search',
+            hintText: AppStrings.search,
             prefixIcon: Icon(Icons.search, color: AppColors.black[30]),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
             border: OutlineInputBorder(
@@ -67,7 +68,7 @@ class ExploreScreen extends StatelessWidget {
         ),
         const SizedBox(height: 32),
         Text(
-          "Browse by subject",
+          AppStrings.browseBySubject,
           style: TextStyle(
             color: AppColors.black,
             fontWeight: FontWeight.w500,
