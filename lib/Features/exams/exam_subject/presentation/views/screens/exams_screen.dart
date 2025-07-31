@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation/viewmodel/exam_by_subject_viewmodel.dart';
 import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation/viewmodel/states/exam_by_subject_states.dart';
+import 'package:online_exam_app_elevate/core/Assets/app_assets.dart';
 import 'package:online_exam_app_elevate/core/di/di.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
+import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 
 class ExamsScreen extends StatelessWidget {
   final String subjectId;
-  const ExamsScreen({super.key, required this.subjectId});
+  final String subjectName;
+  const ExamsScreen({super.key, required this.subjectId, required this.subjectName});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<ExamBySubjectViewmodel>()..getExams("670039c3728c92b7fdf43506"),
+      create: (context) => getIt<ExamBySubjectViewmodel>()..getExams(subjectId),
       child: Scaffold(
         body: SafeArea(
           child: BlocBuilder<ExamBySubjectViewmodel, ExamBySubjectStates>(
@@ -35,7 +38,7 @@ class ExamsScreen extends StatelessWidget {
                           icon: const Icon(Icons.arrow_back_ios),
                         ),
                         Text(
-                          "Languages",
+                          subjectName,
                           style: TextStyle(
                             color: AppColors.black,
                             fontWeight: FontWeight.w500,
@@ -106,7 +109,7 @@ class ExamsScreen extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             Image.asset(
-                                              "assets/icons/Profit.png",
+                                              AppAssets.examImage,
                                               height: 70,
                                             ),
                                             const SizedBox(width: 10),
@@ -121,7 +124,7 @@ class ExamsScreen extends StatelessWidget {
                                                             .spaceBetween,
                                                     children: [
                                                       Text(
-                                                        "High level",
+                                                        AppStrings.examLevel,
                                                         style: TextStyle(
                                                           color: AppColors.black,
                                                           fontWeight:
@@ -152,7 +155,7 @@ class ExamsScreen extends StatelessWidget {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        "From: 1.00",
+                                                        AppStrings.rangeStart,
                                                         style: TextStyle(
                                                           color: AppColors.black,
                                                           fontWeight:
@@ -162,7 +165,7 @@ class ExamsScreen extends StatelessWidget {
                                                       ),
                                                       const SizedBox(width: 10),
                                                       Text(
-                                                        "From: 6.00",
+                                                        AppStrings.rangeEnd,
                                                         style: TextStyle(
                                                           color: AppColors.black,
                                                           fontWeight:

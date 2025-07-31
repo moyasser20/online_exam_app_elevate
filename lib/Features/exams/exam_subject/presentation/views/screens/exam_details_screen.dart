@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation/viewmodel/states/exam_detail_states.dart';
+import 'package:online_exam_app_elevate/core/Assets/app_assets.dart';
+import 'package:online_exam_app_elevate/core/constants/app_strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
@@ -39,7 +41,7 @@ class ExamDetailsScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        Image.asset("assets/icons/Profit.png", height: 45),
+                        Image.asset(AppAssets.examImage, height: 45),
                         const SizedBox(width: 10),
                         Text(
                           exam.title,
@@ -64,7 +66,7 @@ class ExamDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "High level",
+                          AppStrings.examLevel,
                           style: TextStyle(
                             color: AppColors.black,
                             fontWeight: FontWeight.w500,
@@ -86,7 +88,7 @@ class ExamDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 45),
                     Text(
-                      "Instructions",
+                      AppStrings.examInstructions,
                       style: TextStyle(
                         color: AppColors.black,
                         fontWeight: FontWeight.w500,
@@ -122,7 +124,7 @@ class ExamDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 45),
-                    CustomElevatedButton(text: "Start", onPressed: (){
+                    CustomElevatedButton(text: AppStrings.startExamButton, onPressed: (){
                       Navigator.of(context).pushNamed(AppRoutes.questionsScreen);
                     }),
                   ],

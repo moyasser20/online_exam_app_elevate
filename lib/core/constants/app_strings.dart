@@ -15,6 +15,11 @@ abstract class AppStrings {
   static const String password = "Password";
   static const String search = "Search";
   static const String survey = "Survey";
+  static const String rangeStart = "From: 1.00";
+  static const String rangeEnd = "To: 6.00";
+  static const String examLevel = "High level";
+  static const String examInstructions = "Instructions";
+  static const String startExamButton = "Start";
   static const String browseBySubject = "Browse by subject";
   static const String ConfirmPasswordHint = "Confirm Password";
   static const String ConfirmPasswordLabel = "Confirm Password";
