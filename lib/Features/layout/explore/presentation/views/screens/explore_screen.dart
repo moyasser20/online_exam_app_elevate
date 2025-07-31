@@ -82,7 +82,7 @@ class ExploreScreen extends StatelessWidget {
               final subject = subjects[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.exams);
+                  Navigator.pushNamed(context, AppRoutes.exams, arguments: subject.id);
                 },
                 child: Container(
                   height: 90,
