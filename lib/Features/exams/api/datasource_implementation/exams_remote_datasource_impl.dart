@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-
 import '../../data/datasource/exams_remote_datasource.dart';
 import '../../data/models/exam_model.dart';
 import '../../data/models/question_model.dart';
@@ -18,7 +17,10 @@ class ExamsRemoteDataSourceImpl implements ExamsRemoteDataSource {
   }
 
   @override
-  Future<ExamModel> getExamDetail(String examId) => api.getExamDetail(examId);
+  Future<ExamModel> getExamDetail(String examId) async {
+    final res = await api.getExamDetail(examId);
+    return res.exam;
+  }
 
   @override
   Future<List<QuestionModel>> getExamQuestions(String examId) async {

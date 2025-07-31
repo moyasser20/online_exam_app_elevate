@@ -9,8 +9,6 @@ import '../../Features/exams/exam_subject/presentation/views/screens/exams_scree
 import '../../Features/layout/layout_screen.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
-import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
-
 import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
 import '../../Features/forgetPassword/presentation/views/screens/ResetPassword.dart';
 import '../../Features/forgetPassword/presentation/views/screens/email_varificationScreen.dart';
@@ -72,7 +70,8 @@ abstract class Routes {
       case AppRoutes.exams:
         return MaterialPageRoute(builder: (context) => const ExamsScreen());
       case AppRoutes.examsDetails:
-        return MaterialPageRoute(builder: (context) => const ExamDetailsScreen());
+        final examId = settings.arguments as String;
+        return MaterialPageRoute(builder: (context) => ExamDetailsScreen(examId: examId));
 
       default:
         return MaterialPageRoute(builder: (context) => const LoginScreen());

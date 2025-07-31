@@ -45,12 +45,12 @@ class _ExamsApiClient implements ExamsApiClient {
   }
 
   @override
-  Future<ExamModel> getExamDetail(String examId) async {
+  Future<ExamDetailsResponse> getExamDetail(String examId) async {
     final _extra = <String, dynamic>{'auth': true};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ExamModel>(
+    final _options = _setStreamType<ExamDetailsResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -61,9 +61,9 @@ class _ExamsApiClient implements ExamsApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ExamModel _value;
+    late ExamDetailsResponse _value;
     try {
-      _value = ExamModel.fromJson(_result.data!);
+      _value = ExamDetailsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

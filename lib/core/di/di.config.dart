@@ -23,8 +23,12 @@ import '../../Features/exams/data/repositories_implementation/exams_repo_impl.da
 import '../../Features/exams/domain/repositories/exams_repo.dart' as _i131;
 import '../../Features/exams/domain/usecases/get_exam_by_subject_usecase.dart'
     as _i819;
+import '../../Features/exams/domain/usecases/get_exam_detail_usecase.dart'
+    as _i158;
 import '../../Features/exams/exam_subject/presentation/viewmodel/exam_by_subject_viewmodel.dart'
     as _i709;
+import '../../Features/exams/exam_subject/presentation/viewmodel/exam_detail_viewmodel.dart'
+    as _i976;
 import '../../Features/forgetPassword/api/client/forget_password_client.dart'
     as _i117;
 import '../../Features/forgetPassword/api/dataSource_implementation/forget_password_remote_datasource.dart'
@@ -146,6 +150,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i819.GetExamBySubjectUseCase>(
       () => _i819.GetExamBySubjectUseCase(gh<_i131.ExamsRepo>()),
     );
+    gh.factory<_i158.GetExamDetailUseCase>(
+      () => _i158.GetExamDetailUseCase(gh<_i131.ExamsRepo>()),
+    );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
         gh<_i117.ForgetPasswordApiClient>(),
@@ -156,6 +163,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i554.LoginRepo>(
       () => _i946.LoginRepoImplementation(gh<_i713.loginRemoteDataSource>()),
+    );
+    gh.factory<_i976.ExamDetailViewmodel>(
+      () => _i976.ExamDetailViewmodel(gh<_i158.GetExamDetailUseCase>()),
     );
     gh.factory<_i627.SignupRepo>(
       () => _i546.SignupRepoImpl(gh<_i776.SignupRemoteDatasource>()),

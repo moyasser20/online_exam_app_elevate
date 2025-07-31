@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:online_exam_app_elevate/core/constants/api_constants/end_points.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-
-import '../../data/models/exam_model.dart';
+import '../../data/models/response/exam_details_response.dart';
 import '../../data/models/response/exam_response.dart';
 import '../../data/models/response/question_response.dart';
 
@@ -18,17 +18,17 @@ abstract class ExamsApiClient {
   factory ExamsApiClient(Dio dio, {@Named('baseurl') String? baseUrl}) =>
       _ExamsApiClient(dio, baseUrl: baseUrl);
 
-  @GET('/exams')
+  @GET(EndPoints.exams)
   @Extra({'auth': true})
   Future<ExamResponse> getExamsBySubject(
       @Query('subject') String subjectId,
       );
 
-  @GET('/exams/{id}')
+  @GET(EndPoints.examsDetails)
   @Extra({'auth': true})
-  Future<ExamModel> getExamDetail(@Path('id') String examId);
+  Future<ExamDetailsResponse> getExamDetail(@Path('id') String examId);
 
-  @GET('/questions')
+  @GET(EndPoints.questions)
   @Extra({'auth': true})
   Future<QuestionResponse> getQuestions(@Query('exam') String examId);
 

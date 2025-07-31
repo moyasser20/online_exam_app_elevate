@@ -4,8 +4,8 @@ import 'package:online_exam_app_elevate/Features/exams/data/models/exam_model.da
 import 'package:online_exam_app_elevate/Features/exams/data/models/question_model.dart';
 import 'package:online_exam_app_elevate/Features/exams/domain/entity/exams_entity.dart';
 import 'package:online_exam_app_elevate/Features/exams/domain/entity/question_entity.dart';
-
 import '../../domain/repositories/exams_repo.dart';
+
 
 @LazySingleton(as: ExamsRepo)
 class ExamsRepoImpl implements ExamsRepo {
@@ -33,7 +33,7 @@ class ExamsRepoImpl implements ExamsRepo {
 
   @override
   Future<ExamsEntity> getExamDetail(String examId) async {
-    final model = await _remoteDataSource.getExamDetail(examId);
+    final ExamModel model = await _remoteDataSource.getExamDetail(examId);
     return ExamsEntity(
       Id: model.Id,
       title: model.title,
