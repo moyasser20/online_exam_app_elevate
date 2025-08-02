@@ -30,4 +30,17 @@ abstract class AppStrings {
   static const String CodeErrorMsg = "Invalid code";
   static const String CodeReciveMsgError = "Didn't receive code?";
   static const String ForgetPasswordunderText = "Please enter your email associated to\nyour account";
+  static const String profileTitle = "Profile";
+  static const String usernameLabel = "User name";
+  static const String firstNameLabel = "First name";
+  static const String lastNameLabel = "Last Name";
+  static const String emailLabel = "Email";
+  static const String passwordLabel = "Password";
+  static const String passwordChangeText = "Change";
+  static const String phoneNumberLabel = "Phone Number";
+  static const String updateButton = "Update";
+  static const String noProfileData = "No profile data found.";
+  static const String errorText = "Error";
+
+
 }
