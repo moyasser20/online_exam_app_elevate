@@ -72,6 +72,7 @@ class LoginViewModel extends Cubit<loginStates> {
       await _tokenStorage.saveToken(response.token ?? '');
 
       await saveRememberData();
+      print("token: ${response.token}" );
       emit(loginSuccessStates());
     } catch (e) {
       emit(loginErrorStates(e.toString()));

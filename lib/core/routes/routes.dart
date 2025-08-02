@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart';
+import 'package:online_exam_app_elevate/Features/layout/profile/presentation/viewmodel/change_password_viewmodel.dart';
 import 'package:online_exam_app_elevate/Features/login/presentation/views/screens/login.dart';
 import '../../Features/exams/exam_questions/presenation/view/screens/exam_score_screen.dart';
 import '../../Features/exams/exam_questions/presenation/view/screens/question_screen.dart';
@@ -10,7 +11,6 @@ import '../../Features/layout/layout_screen.dart';
 import '../../Features/layout/profile/presentation/views/screens/change_password_screen.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
-import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
 
 import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
 import '../../Features/forgetPassword/presentation/views/screens/ResetPassword.dart';
@@ -71,7 +71,9 @@ abstract class Routes {
       case AppRoutes.layout:
         return MaterialPageRoute(builder: (context) => const LayoutScreen());
       case AppRoutes.changePassword:
-        return MaterialPageRoute(builder: (context) => const ChangePasswordScreen());
+        return MaterialPageRoute(
+            builder: (context) =>  BlocProvider(create: (_) => getIt<ChangePasswordViewModel>(),
+                child: ChangePasswordScreen()));
 
       case AppRoutes.exams:
         final subjectId = settings.arguments as String;

@@ -113,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                     CustomElevatedButton(
                       text: AppStrings.updateButton,
                       onPressed: () {
-                        Navigator.of(context).pushNamed(AppRoutes.questionsScreen);
+
                       },
                     )
                   ],

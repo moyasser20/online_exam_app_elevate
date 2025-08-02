@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app_elevate/Features/layout/profile/presentation/viewmodel/change_password_viewmodel.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
+import 'package:online_exam_app_elevate/core/extensions/validations.dart';
 import '../../../../../../core/Assets/app_assets.dart';
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../../core/Widgets/custom_text_field.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
+import '../../viewmodel/change_password_states.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -15,9 +19,11 @@ class ChangePasswordScreen extends StatefulWidget {
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
-  bool isFormValid = false;
+
   @override
   Widget build(BuildContext context) {
+    final viewmodel = context.read<ChangePasswordViewModel>();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,42 +35,85 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500),
         ),
       ),
-      body: Form(
-        key: _formState,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomTextFormField(
-              label: "current Password",
-              hint: "Enter current password",
-            ),
-            const SizedBox(height: 25),
-            CustomTextFormField(
-              label: "New Password",
-              hint: "Enter new password",
-            ),
-            const SizedBox(height: 25),
-            CustomTextFormField(
-              label: "Confirm Password",
-              hint: "Confirm password",
-            ),
-            const SizedBox(height: 45 ),
-            CustomElevatedButton(
-              text: "Continue",
-              onPressed: isFormValid
-                  ? () {
-                if (_formState.currentState!.validate()) {
-                  Navigator.pushNamed(context, AppRoutes.emailVarification);
-                }
-              }
-                  : null,
-              color: isFormValid ? AppColors.blue : Colors.grey,
-            )
-          ],
-        ).setHorizontalAndVerticalPadding(context, 0.055, 0.05),
-      ),
+      body: BlocConsumer<ChangePasswordViewModel, ChangePasswordStates>(
+        listener: (context, state) {
+          if (state is ChangePasswordError) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                state.message,
+                style: TextStyle(color: AppColors.red),
+              ),
+            ));
+          } else if (state is ChangePasswordSuccess) {
 
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                "Password changed successfully!",
+                style: TextStyle(color: AppColors.green),
+              ),
+            ));
+
+            Navigator.pushReplacementNamed(context, AppRoutes.login);
+          }
+        },
+        builder: (context, state) {
+          return Form(
+            key: _formState,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomTextFormField(
+                  controller: viewmodel.currentPasswordController,
+                  label: "Current Password",
+                  hint: "Enter current password",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your current password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 25),
+                CustomTextFormField(
+                  controller: viewmodel.newPasswordController,
+                  label: "New Password",
+                  hint: "Enter new password",
+                  validator: (value) {
+                    if (value == null || !Validations.validatePassword(value)) {
+                      return 'Password must be at least 8 characters,\ninclude a number and a special character';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 25),
+                CustomTextFormField(
+                  controller: viewmodel.confirmPasswordController,
+                  label: "Confirm Password",
+                  hint: "Confirm password",
+                  validator: (value) {
+                    if (!Validations.validateRePassword(
+                        viewmodel.newPasswordController.text, value ?? '')) {
+                      return "Passwords do not match";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 45),
+                CustomElevatedButton(
+                  text: "Continue",
+                  onPressed: () {
+                    if (_formState.currentState!.validate()) {
+                      viewmodel.changePassword();
+                    }
+                  },
+                  color: AppColors.blue,
+                ),
+              ],
+            ).setHorizontalAndVerticalPadding(context, 0.055, 0.05),
+          );
+        },
+      ),
     );
   }
 }
