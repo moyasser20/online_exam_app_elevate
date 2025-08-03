@@ -5,6 +5,7 @@ import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
 import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
+import '../../../../../../core/routes/routes.dart';
 import '../../../domain/entity/subjects_entity.dart';
 import '../../viewmodel/get_all_subject_states.dart';
 import '../../viewmodel/get_all_subject_viewmodel.dart';
@@ -83,7 +84,10 @@ class ExploreScreen extends StatelessWidget {
               final subject = subjects[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.exams, arguments: subject.id);
+                  Navigator.pushNamed(context, AppRoutes.exams, arguments: ExamScreenArgs(
+                    subjectId: subject.id,
+                    subjectName: subject.name,
+                  ),);
                 },
                 child: Container(
                   height: 90,
