@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/reset_code_states.dart';
-import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
 import '../../../../../core/Assets/app_assets.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../widgets/reset_password_form.dart';
@@ -35,6 +35,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -42,7 +43,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           icon: Image.asset(AppAssets.ArrowIcon),
         ),
         title: Text(
-          AppStrings.password,
+          local.password,
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500),
         ),
       ),
@@ -60,13 +61,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                AppStrings.ResetPassword,
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+               Text(
+                local.resetPassword,
+                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
               ),
               const SizedBox(height: 10),
-              const Text(
-                AppStrings.ResetPasswordunderMsg,
+               Text(
+                local.resetPasswordUnderMsg,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 25),

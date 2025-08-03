@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
-
+import '../../../../../../core/l10n/translation/app_localizations.dart';
+import '../widgets/timeout_dialog.dart';
 import '../../../../../../core/Assets/app_assets.dart';
 import '../../../../../../core/routes/app_routes.dart';
 
+import '../widgets/countdown_timer_widget.dart';
 import '../widgets/navigation_buttons_widget.dart';
 import '../widgets/question_header_widget.dart';
 import '../widgets/question_options_widget.dart';
@@ -73,8 +75,17 @@ class _QuestionScreenState extends State<QuestionScreen> {
     }
   }
 
+  void _showTimeoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const TimeoutDialog(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -83,17 +94,17 @@ class _QuestionScreenState extends State<QuestionScreen> {
           },
           icon: Image.asset(AppAssets.ArrowIcon),
         ),
-        title: const Text(
-          "Exam",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+        title: Text(
+          local.examTitle,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
         ),
         actions: [
           Row(
             children: [
               Image.asset(AppAssets.timerImage, height: 30, width: 40),
-              const Text(
-                "30:00",
-                style: TextStyle(fontSize: 24, color: Colors.green),
+              CountdownTimerWidget(
+                totalMinutes: 1,
+                onTimeOut: () => _showTimeoutDialog(context),
               ),
               const SizedBox(width: 10),
             ],

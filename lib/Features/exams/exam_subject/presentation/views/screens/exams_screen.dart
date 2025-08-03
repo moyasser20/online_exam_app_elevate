@@ -5,8 +5,7 @@ import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation
 import 'package:online_exam_app_elevate/core/Assets/app_assets.dart';
 import 'package:online_exam_app_elevate/core/di/di.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
-
-import '../../../../../../core/constants/app_strings.dart';
+import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 
@@ -17,6 +16,7 @@ class ExamsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (context) => getIt<ExamBySubjectViewmodel>()..getExams(subjectId),
       child: Scaffold(
@@ -124,7 +124,7 @@ class ExamsScreen extends StatelessWidget {
                                                             .spaceBetween,
                                                     children: [
                                                       Text(
-                                                        AppStrings.examLevel,
+                                                        local.examLevel,
                                                         style: TextStyle(
                                                           color: AppColors.black,
                                                           fontWeight:
@@ -155,7 +155,7 @@ class ExamsScreen extends StatelessWidget {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        AppStrings.rangeStart,
+                                                        local.rangeStart,
                                                         style: TextStyle(
                                                           color: AppColors.black,
                                                           fontWeight:
@@ -165,7 +165,7 @@ class ExamsScreen extends StatelessWidget {
                                                       ),
                                                       const SizedBox(width: 10),
                                                       Text(
-                                                        AppStrings.rangeEnd,
+                                                        local.rangeEnd,
                                                         style: TextStyle(
                                                           color: AppColors.black,
                                                           fontWeight:

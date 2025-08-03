@@ -1,12 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation/viewmodel/states/exam_detail_states.dart';
 import 'package:online_exam_app_elevate/core/Assets/app_assets.dart';
-import 'package:online_exam_app_elevate/core/constants/app_strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
-
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../../core/di/di.dart';
+import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/exam_detail_viewmodel.dart';
@@ -19,6 +20,7 @@ class ExamDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (context) => getIt<ExamDetailViewmodel>()..getExams(examId),
       child: Scaffold(
@@ -66,7 +68,7 @@ class ExamDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          AppStrings.examLevel,
+                          local.examLevel,
                           style: TextStyle(
                             color: AppColors.black,
                             fontWeight: FontWeight.w500,
@@ -88,7 +90,7 @@ class ExamDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 45),
                     Text(
-                      AppStrings.examInstructions,
+                      local.examInstructions,
                       style: TextStyle(
                         color: AppColors.black,
                         fontWeight: FontWeight.w500,
@@ -124,13 +126,12 @@ class ExamDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 45),
-                    CustomElevatedButton(text: AppStrings.startExamButton, onPressed: (){
+                    CustomElevatedButton(text: local.startExamButton, onPressed: (){
                       Navigator.of(context).pushNamed(AppRoutes.questionsScreen);
                     }),
                   ],
                 ).setHorizontalAndVerticalPadding(context, 0.04, 0.012);
               } else if (state is ExamsDetailErrorState) {
-                print(state.message);
                 return Center(child: Text("Error: ${state.message}"));
               } else {
                 return const SizedBox.shrink();

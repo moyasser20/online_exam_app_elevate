@@ -4,12 +4,11 @@ import 'package:online_exam_app_elevate/Features/signup/presentation/viewmodel/s
 import 'package:online_exam_app_elevate/core/Assets/app_assets.dart';
 import 'package:online_exam_app_elevate/core/Widgets/Custom_Elevated_Button.dart';
 import 'package:online_exam_app_elevate/core/Widgets/custom_text_field.dart';
-import 'package:online_exam_app_elevate/core/constants/app_strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/padding_ext.dart';
 import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
-
 import '../../../../../core/di/di.dart';
 import '../../../../../core/extensions/validations.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/signup_states.dart';
 
@@ -52,6 +51,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     return BlocProvider<SignupViewModel>(
       create: (_) => cubit,
@@ -59,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
         listener: (context, state) {
           if (state is SignupSuccessStates) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text(AppStrings.signupSuccessMsg)),
+              SnackBar(content: Text(local.signupSuccessMsg)),
             );
           } else if (state is SignupErrorStates) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -210,7 +210,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     state is SignupLoadingStates
                         ? const CircularProgressIndicator()
                         : CustomElevatedButton(
-                      text: AppStrings.signupElevatedButton,
+                      text: local.signupElevatedButton,
                       onPressed: cubit.isFormValid
                           ? () {
                         cubit.signup(
@@ -230,17 +230,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          AppStrings.haveAccText,
-                          style: TextStyle(fontSize: 16),
+                        Text(
+                          local.haveAccText,
+                          style: const TextStyle(fontSize: 16),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, AppRoutes.login);
                           },
-                          child: const Text(
-                            AppStrings.loginTextButton,
-                            style: TextStyle(
+                          child: Text(
+                            local.loginTextButton,
+                            style: const TextStyle(
                               decoration: TextDecoration.underline,
                               fontSize: 16,
                               decorationThickness: 2,
