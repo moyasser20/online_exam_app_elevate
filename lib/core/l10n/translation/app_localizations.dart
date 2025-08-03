@@ -182,6 +182,60 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get password;
 
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @survey.
+  ///
+  /// In en, this message translates to:
+  /// **'Survey'**
+  String get survey;
+
+  /// No description provided for @rangeStart.
+  ///
+  /// In en, this message translates to:
+  /// **'From: 1.00'**
+  String get rangeStart;
+
+  /// No description provided for @rangeEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'To: 6.00'**
+  String get rangeEnd;
+
+  /// No description provided for @examLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'High level'**
+  String get examLevel;
+
+  /// No description provided for @examInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get examInstructions;
+
+  /// No description provided for @startExamButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get startExamButton;
+
+  /// No description provided for @viewScoreButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View Score'**
+  String get viewScoreButton;
+
+  /// No description provided for @browseBySubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse by subject'**
+  String get browseBySubject;
+
   /// No description provided for @confirmPasswordHint.
   ///
   /// In en, this message translates to:
@@ -253,6 +307,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid code'**
   String get codeErrorMsg;
+
+  /// No description provided for @timeoutMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Time out !!'**
+  String get timeoutMsg;
+
+  /// No description provided for @examTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exam'**
+  String get examTitle;
 
   /// No description provided for @codeReceiveMsgError.
   ///

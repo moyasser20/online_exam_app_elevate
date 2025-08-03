@@ -51,6 +51,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
+  String get search => 'Search';
+
+  @override
+  String get survey => 'Survey';
+
+  @override
+  String get rangeStart => 'From: 1.00';
+
+  @override
+  String get rangeEnd => 'To: 6.00';
+
+  @override
+  String get examLevel => 'High level';
+
+  @override
+  String get examInstructions => 'Instructions';
+
+  @override
+  String get startExamButton => 'Start';
+
+  @override
+  String get viewScoreButton => 'View Score';
+
+  @override
+  String get browseBySubject => 'Browse by subject';
+
+  @override
   String get confirmPasswordHint => 'Confirm Password';
 
   @override
@@ -87,6 +114,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get codeErrorMsg => 'Invalid code';
+
+  @override
+  String get timeoutMsg => 'Time out !!';
+
+  @override
+  String get examTitle => 'Exam';
 
   @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
