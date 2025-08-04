@@ -6,6 +6,7 @@ import 'package:online_exam_app_elevate/core/extensions/validations.dart';
 import '../../../../../../core/Assets/app_assets.dart';
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../../core/Widgets/custom_text_field.dart';
+import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/change_password_states.dart';
@@ -22,6 +23,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     final viewmodel = context.read<ChangePasswordViewModel>();
 
     return Scaffold(
@@ -31,7 +34,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           icon: Image.asset(AppAssets.ArrowIcon),
         ),
         title: Text(
-          "Reset Password",
+          local.resetPassword,
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500),
         ),
       ),
@@ -48,7 +51,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-                "Password changed successfully!",
+                local.passwordChangeText,
                 style: TextStyle(color: AppColors.green),
               ),
             ));
@@ -65,11 +68,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               children: [
                 CustomTextFormField(
                   controller: viewmodel.currentPasswordController,
-                  label: "Current Password",
-                  hint: "Enter current password",
+                  label: local.currentPasswordLabel,
+                  hint: local.currentPasswordHint,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your current password';
+                      return local.currentPasswordErrorMsg;
                     }
                     return null;
                   },
@@ -77,11 +80,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 const SizedBox(height: 25),
                 CustomTextFormField(
                   controller: viewmodel.newPasswordController,
-                  label: "New Password",
-                  hint: "Enter new password",
+                  label: local.newPasswordLabel,
+                  hint: local.newPasswordHint,
                   validator: (value) {
                     if (value == null || !Validations.validatePassword(value)) {
-                      return 'Password must be at least 8 characters,\ninclude a number and a special character';
+                      return local.resetPasswordUnderMsg;
                     }
                     return null;
                   },
@@ -89,19 +92,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 const SizedBox(height: 25),
                 CustomTextFormField(
                   controller: viewmodel.confirmPasswordController,
-                  label: "Confirm Password",
-                  hint: "Confirm password",
+                  label: local.confirmPasswordLabel,
+                  hint: local.confirmPasswordHint,
                   validator: (value) {
                     if (!Validations.validateRePassword(
                         viewmodel.newPasswordController.text, value ?? '')) {
-                      return "Passwords do not match";
+                      return local.passwordSErrorMatchingMsg;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 45),
                 CustomElevatedButton(
-                  text: "Continue",
+                  text: local.continueButton,
                   onPressed: () {
                     if (_formState.currentState!.validate()) {
                       viewmodel.changePassword();

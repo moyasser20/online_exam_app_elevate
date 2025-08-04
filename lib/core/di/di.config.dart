@@ -13,6 +13,22 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../Features/exams/api/client/exams_api_client.dart' as _i633;
+import '../../Features/exams/api/datasource_implementation/exams_remote_datasource_impl.dart'
+    as _i779;
+import '../../Features/exams/data/datasource/exams_remote_datasource.dart'
+    as _i829;
+import '../../Features/exams/data/repositories_implementation/exams_repo_impl.dart'
+    as _i435;
+import '../../Features/exams/domain/repositories/exams_repo.dart' as _i131;
+import '../../Features/exams/domain/usecases/get_exam_by_subject_usecase.dart'
+    as _i819;
+import '../../Features/exams/domain/usecases/get_exam_detail_usecase.dart'
+    as _i158;
+import '../../Features/exams/exam_subject/presentation/viewmodel/exam_by_subject_viewmodel.dart'
+    as _i709;
+import '../../Features/exams/exam_subject/presentation/viewmodel/exam_detail_viewmodel.dart'
+    as _i976;
 import '../../Features/forgetPassword/api/client/forget_password_client.dart'
     as _i117;
 import '../../Features/forgetPassword/api/dataSource_implementation/forget_password_remote_datasource.dart'
@@ -133,6 +149,12 @@ extension GetItInjectableX on _i174.GetIt {
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
     );
+    gh.factory<_i633.ExamsApiClient>(
+      () => _i633.ExamsApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'baseurl'),
+      ),
+    );
     gh.singleton<_i117.ForgetPasswordApiClient>(
       () => _i117.ForgetPasswordApiClient(
         gh<_i361.Dio>(),
@@ -158,8 +180,20 @@ extension GetItInjectableX on _i174.GetIt {
         apiClient: gh<_i791.ProfileApiClient>(),
       ),
     );
+    gh.lazySingleton<_i829.ExamsRemoteDataSource>(
+      () => _i779.ExamsRemoteDataSourceImpl(gh<_i633.ExamsApiClient>()),
+    );
     gh.lazySingleton<_i303.SubjectRemoteDataSource>(
       () => _i439.SubjectsRemoteDataSourceImpl(gh<_i686.ExamApiClient>()),
+    );
+    gh.lazySingleton<_i131.ExamsRepo>(
+      () => _i435.ExamsRepoImpl(gh<_i829.ExamsRemoteDataSource>()),
+    );
+    gh.factory<_i819.GetExamBySubjectUseCase>(
+      () => _i819.GetExamBySubjectUseCase(gh<_i131.ExamsRepo>()),
+    );
+    gh.factory<_i158.GetExamDetailUseCase>(
+      () => _i158.GetExamDetailUseCase(gh<_i131.ExamsRepo>()),
     );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
@@ -171,6 +205,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i554.LoginRepo>(
       () => _i946.LoginRepoImplementation(gh<_i713.loginRemoteDataSource>()),
+    );
+    gh.factory<_i976.ExamDetailViewmodel>(
+      () => _i976.ExamDetailViewmodel(gh<_i158.GetExamDetailUseCase>()),
     );
     gh.factory<_i627.SignupRepo>(
       () => _i546.SignupRepoImpl(gh<_i776.SignupRemoteDatasource>()),
@@ -187,6 +224,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i609.ProfileRepo>(
       () => _i432.ProfileDataRepoImpl(gh<_i811.ProfileDataRemoteDatasource>()),
+    );
+    gh.factory<_i709.ExamBySubjectViewmodel>(
+      () => _i709.ExamBySubjectViewmodel(gh<_i819.GetExamBySubjectUseCase>()),
     );
     gh.lazySingleton<_i738.SubjectRepo>(
       () => _i1010.SubjectsRepoImpl(gh<_i303.SubjectRemoteDataSource>()),

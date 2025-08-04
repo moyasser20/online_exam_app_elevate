@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/presentation/viewmodel/profile_states.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/presentation/viewmodel/profile_viewmodel.dart';
-import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../../core/Widgets/custom_text_field.dart';
+import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 
@@ -15,12 +15,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
-          AppStrings.profileTitle,
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+        title:  Text(
+          local.profileTitle,
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
         ),
       ),
       body: BlocBuilder<ProfileViewModel, ProfileStates>(
@@ -62,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     CustomTextFormField(
-                      label: AppStrings.usernameLabel,
+                      label: local.usernameLabel,
                       enabled: false,
                       initialText: user.username ?? "",
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.04),
@@ -71,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           child: CustomTextFormField(
-                            label: AppStrings.firstNameLabel,
+                            label: local.firstNameLabel,
                             enabled: false,
                             initialText: user.firstName ?? "",
                           ),
@@ -79,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           child: CustomTextFormField(
-                            label: AppStrings.lastNameLabel,
+                            label: local.lastNameLabel,
                             enabled: false,
                             initialText: user.lastName ?? "",
                           ),
@@ -89,29 +90,29 @@ class ProfileScreen extends StatelessWidget {
                     ).setHorizontalAndVerticalPadding(context, 0.005, 0.0050),
                     const SizedBox(height: 13),
                     CustomTextFormField(
-                      label: AppStrings.emailLabel,
+                      label: local.emailLabel,
                       enabled: false,
                       initialText: user.email ?? "",
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.003),
                     const SizedBox(height: 13),
                     CustomTextFormField(
-                      label: AppStrings.password,
+                      label: local.password,
                       readonly: true,
                       initialText: "******",
-                      suffixText: AppStrings.passwordChangeText,
+                      suffixText: local.passwordChangeText,
                       onPressed: () {
                         Navigator.of(context).pushNamed(AppRoutes.changePassword);
                       },
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.001),
                     const SizedBox(height: 13),
                     CustomTextFormField(
-                      label: AppStrings.phoneNumberLabel,
+                      label: local.phoneNumberLabel,
                       enabled: false,
                       initialText: user.phone ?? "",
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.003),
                     const SizedBox(height: 50),
                     CustomElevatedButton(
-                      text: AppStrings.updateButton,
+                      text: local.updateButton,
                       onPressed: () {
 
                       },
@@ -121,9 +122,9 @@ class ProfileScreen extends StatelessWidget {
               ),
             );
           } else if (state is ProfileErrorState) {
-            return Center(child: Text("${AppStrings.errorText}: ${state.message}"));
+            return Center(child: Text("${local.errorText}: ${state.message}"));
           } else {
-            return const Center(child: Text(AppStrings.noProfileData));
+            return Center(child: Text(local.noProfileData));
           }
         },
       ),
