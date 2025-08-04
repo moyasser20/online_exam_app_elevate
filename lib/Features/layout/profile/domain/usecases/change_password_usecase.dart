@@ -1,10 +1,10 @@
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/data/models/change_password_request_model.dart';
-import 'package:online_exam_app_elevate/Features/layout/profile/domain/repositories/change_password_repo.dart';
+import 'package:online_exam_app_elevate/Features/layout/profile/domain/repositories/profile_data_repo.dart';
 
 @injectable
 class ChangePasswordUseCase{
-  final ChangePasswordRepo _changePasswordRepo;
+  final ProfileRepo _changePasswordRepo;
 
   ChangePasswordUseCase(this._changePasswordRepo);
 

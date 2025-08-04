@@ -66,20 +66,12 @@ import '../../Features/layout/explore/presentation/viewmodel/get_all_subject_vie
     as _i1065;
 import '../../Features/layout/profile/api/client/profile_api_client.dart'
     as _i791;
-import '../../Features/layout/profile/api/datasource_implemenation/change_password_remote_datasource_impl.dart'
-    as _i898;
 import '../../Features/layout/profile/api/datasource_implemenation/profile_data_remote_datasource_imp.dart'
     as _i51;
-import '../../Features/layout/profile/data/datasource/change_password_remote_datasource.dart'
-    as _i376;
 import '../../Features/layout/profile/data/datasource/profile_data_remote_datasource.dart'
     as _i811;
-import '../../Features/layout/profile/data/repositories_implemenation/change_password_repo_impl.dart'
-    as _i711;
 import '../../Features/layout/profile/data/repositories_implemenation/profile_data_repo_impl.dart'
     as _i432;
-import '../../Features/layout/profile/domain/repositories/change_password_repo.dart'
-    as _i294;
 import '../../Features/layout/profile/domain/repositories/profile_data_repo.dart'
     as _i609;
 import '../../Features/layout/profile/domain/usecases/change_password_usecase.dart'
@@ -170,11 +162,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i713.loginRemoteDataSource>(
       () => _i261.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
     );
-    gh.lazySingleton<_i376.ChangePasswordRemoteDataSource>(
-      () => _i898.ChangePasswordRemoteDataSourceImpl(
-        profileApiClient: gh<_i791.ProfileApiClient>(),
-      ),
-    );
     gh.lazySingleton<_i811.ProfileDataRemoteDatasource>(
       () => _i51.ProfileRemoteDataSourceImpl(
         apiClient: gh<_i791.ProfileApiClient>(),
@@ -217,11 +204,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i959.ForgetPasswordRemoteDataSource>(),
       ),
     );
-    gh.factory<_i294.ChangePasswordRepo>(
-      () => _i711.ChangePasswordRepoImpl(
-        gh<_i376.ChangePasswordRemoteDataSource>(),
-      ),
-    );
     gh.factory<_i609.ProfileRepo>(
       () => _i432.ProfileDataRepoImpl(gh<_i811.ProfileDataRemoteDatasource>()),
     );
@@ -231,6 +213,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i738.SubjectRepo>(
       () => _i1010.SubjectsRepoImpl(gh<_i303.SubjectRemoteDataSource>()),
     );
+    gh.factory<_i1059.ChangePasswordUseCase>(
+      () => _i1059.ChangePasswordUseCase(gh<_i609.ProfileRepo>()),
+    );
     gh.factory<_i587.ForgetPasswordUseCase>(
       () => _i587.ForgetPasswordUseCase(gh<_i134.ForgetPasswordRepo>()),
     );
@@ -239,9 +224,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i2.VerifyCodeUseCase>(
       () => _i2.VerifyCodeUseCase(gh<_i134.ForgetPasswordRepo>()),
-    );
-    gh.factory<_i1059.ChangePasswordUseCase>(
-      () => _i1059.ChangePasswordUseCase(gh<_i294.ChangePasswordRepo>()),
     );
     gh.factory<_i228.SignupUseCase>(
       () => _i228.SignupUseCase(gh<_i627.SignupRepo>()),

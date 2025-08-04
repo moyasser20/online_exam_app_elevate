@@ -13,4 +13,5 @@ class ProfileDataUseCase {
   Future<User> call() async{
     return await _profileRepo.getProfileData();
   }
+
 }

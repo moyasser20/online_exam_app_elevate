@@ -64,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     CustomTextFormField(
                       label: local.usernameLabel,
-                      enabled: false,
+                      enabled: true,
                       initialText: user.username ?? "",
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.04),
                     Row(
@@ -73,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                         Expanded(
                           child: CustomTextFormField(
                             label: local.firstNameLabel,
-                            enabled: false,
+                            enabled: true,
                             initialText: user.firstName ?? "",
                           ),
                         ),
@@ -81,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
                         Expanded(
                           child: CustomTextFormField(
                             label: local.lastNameLabel,
-                            enabled: false,
+                            enabled: true,
                             initialText: user.lastName ?? "",
                           ),
                         ),
@@ -91,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 13),
                     CustomTextFormField(
                       label: local.emailLabel,
-                      enabled: false,
+                      enabled: true,
                       initialText: user.email ?? "",
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.003),
                     const SizedBox(height: 13),
@@ -107,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 13),
                     CustomTextFormField(
                       label: local.phoneNumberLabel,
-                      enabled: false,
+                      enabled: true,
                       initialText: user.phone ?? "",
                     ).setHorizontalAndVerticalPadding(context, 0.05, 0.003),
                     const SizedBox(height: 50),
