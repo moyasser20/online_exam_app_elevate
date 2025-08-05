@@ -293,6 +293,12 @@ abstract class AppLocalizations {
   /// **'Password changed successfully!'**
   String get passwordSuccessMsg;
 
+  /// No description provided for @profileUpdatedSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile changed successfully!'**
+  String get profileUpdatedSuccessMsg;
+
   /// No description provided for @passwordSErrorMatchingMsg.
   ///
   /// In en, this message translates to:

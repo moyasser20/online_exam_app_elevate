@@ -10,7 +10,6 @@ EditProfileRequestModel _$EditProfileRequestModelFromJson(
   Map<String, dynamic> json,
 ) => EditProfileRequestModel(
   email: json['email'] as String?,
-  password: json['password'] as String?,
   phone: json['phone'] as String?,
   username: json['username'] as String?,
   firstName: json['firstName'] as String?,
@@ -25,5 +24,4 @@ Map<String, dynamic> _$EditProfileRequestModelToJson(
   'firstName': instance.firstName,
   'lastName': instance.lastName,
   'email': instance.email,
-  'password': instance.password,
 };

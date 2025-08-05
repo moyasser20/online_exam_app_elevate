@@ -78,6 +78,8 @@ import '../../Features/layout/profile/domain/usecases/change_password_usecase.da
     as _i1059;
 import '../../Features/layout/profile/domain/usecases/profile_data_usecase.dart'
     as _i880;
+import '../../Features/layout/profile/domain/usecases/update_data_usecase.dart'
+    as _i493;
 import '../../Features/layout/profile/presentation/viewmodel/change_password_viewmodel.dart'
     as _i449;
 import '../../Features/layout/profile/presentation/viewmodel/profile_viewmodel.dart'
@@ -245,6 +247,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i880.ProfileDataUseCase>(
       () => _i880.ProfileDataUseCase(gh<_i609.ProfileRepo>()),
+    );
+    gh.factory<_i493.EditProfileDataUseCase>(
+      () => _i493.EditProfileDataUseCase(gh<_i609.ProfileRepo>()),
     );
     gh.factory<_i449.ChangePasswordViewModel>(
       () => _i449.ChangePasswordViewModel(

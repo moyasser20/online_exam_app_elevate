@@ -108,6 +108,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordSuccessMsg => 'Password changed successfully!';
 
   @override
+  String get profileUpdatedSuccessMsg => 'Profile changed successfully!';
+
+  @override
   String get passwordSErrorMatchingMsg => 'Password changed successfully!';
 
   @override

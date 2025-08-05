@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../theme/app_colors.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -9,6 +8,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color? textColor;          // Text color
   final Color? borderColor;        // Outline/border color
   final double borderRadius;       // Border radius
+  final bool isLoading;            // New loading flag
 
   const CustomElevatedButton({
     super.key,
@@ -18,6 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.textColor,
     this.borderColor,
     this.borderRadius = 22.0,
+    this.isLoading = false, // default to false
   });
 
   @override
@@ -26,7 +27,7 @@ class CustomElevatedButton extends StatelessWidget {
       width: 373,
       height: 52,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? AppColors.blue,
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
@@ -42,7 +43,16 @@ class CustomElevatedButton extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        child: Text(
+        child: isLoading
+            ? const SizedBox(
+          width: 24,
+          height: 24,
+          child: CircularProgressIndicator(
+            strokeWidth: 2.5,
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+        )
+            : Text(
           text,
           style: TextStyle(
             color: textColor ?? AppColors.white,

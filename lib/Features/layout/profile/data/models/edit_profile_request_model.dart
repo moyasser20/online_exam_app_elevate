@@ -10,11 +10,9 @@ class EditProfileRequestModel {
   final String? firstName;
   final String? lastName;
   final String? email;
-  final String? password;
 
   EditProfileRequestModel({
       this.email,
-      this.password,
     this.phone,
     this.username,
     this.firstName,
