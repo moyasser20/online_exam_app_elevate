@@ -58,13 +58,25 @@ abstract class Routes {
         );
 
       case AppRoutes.questionsScreen:
-        return MaterialPageRoute(builder: (context) => const QuestionScreen());
-
-      case AppRoutes.examScoreScreen:
+        final args = settings.arguments as QuestionArgs;
         return MaterialPageRoute(
           builder:
-              (context) =>
-                  const ExamScoreScreen(correctAnswer: 10, totalQuestion: 10),
+              (context) => QuestionScreen(
+                examId: args.examId,
+                examDuration: args.duration,
+              ),
+        );
+
+      case AppRoutes.examScoreScreen:
+        final args = settings.arguments as ExamScoreArgs;
+        return MaterialPageRoute(
+          builder:
+              (context) => ExamScoreScreen(
+                correctAnswer: args.correctAnswer,
+                totalQuestion: args.totalQuestion,
+                examId: args.examId,
+                examDuration: args.duration,
+              ),
         );
 
       case AppRoutes.layout:
@@ -73,8 +85,10 @@ abstract class Routes {
         final args = settings.arguments as ExamScreenArgs;
         return MaterialPageRoute(
           builder:
-              (context) =>
-                  ExamsScreen(subjectId: args.subjectId, subjectName: args.subjectName),
+              (context) => ExamsScreen(
+                subjectId: args.subjectId,
+                subjectName: args.subjectName,
+              ),
         );
       case AppRoutes.examsDetails:
         final examId = settings.arguments as String;
@@ -93,4 +107,25 @@ class ExamScreenArgs {
   final String subjectName;
 
   ExamScreenArgs({required this.subjectId, required this.subjectName});
+}
+
+class ExamScoreArgs {
+  final int correctAnswer;
+  final int totalQuestion;
+  final String examId;
+  final int duration;
+
+  ExamScoreArgs({
+    required this.correctAnswer,
+    required this.totalQuestion,
+    required this.examId,
+    required this.duration,
+  });
+}
+
+class QuestionArgs {
+  final String examId;
+  final int duration;
+
+  QuestionArgs({required this.examId, required this.duration});
 }

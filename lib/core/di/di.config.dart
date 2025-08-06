@@ -25,6 +25,10 @@ import '../../Features/exams/domain/usecases/get_exam_by_subject_usecase.dart'
     as _i819;
 import '../../Features/exams/domain/usecases/get_exam_detail_usecase.dart'
     as _i158;
+import '../../Features/exams/domain/usecases/get_exam_questions_usecase.dart'
+    as _i213;
+import '../../Features/exams/exam_questions/presenation/viewmodel/question_viewmodel.dart'
+    as _i13;
 import '../../Features/exams/exam_subject/presentation/viewmodel/exam_by_subject_viewmodel.dart'
     as _i709;
 import '../../Features/exams/exam_subject/presentation/viewmodel/exam_detail_viewmodel.dart'
@@ -153,6 +157,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i158.GetExamDetailUseCase>(
       () => _i158.GetExamDetailUseCase(gh<_i131.ExamsRepo>()),
     );
+    gh.factory<_i213.GetExamQuestionsUseCase>(
+      () => _i213.GetExamQuestionsUseCase(gh<_i131.ExamsRepo>()),
+    );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
         gh<_i117.ForgetPasswordApiClient>(),
@@ -169,6 +176,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i627.SignupRepo>(
       () => _i546.SignupRepoImpl(gh<_i776.SignupRemoteDatasource>()),
+    );
+    gh.factory<_i13.QuestionViewModel>(
+      () => _i13.QuestionViewModel(gh<_i213.GetExamQuestionsUseCase>()),
     );
     gh.factory<_i134.ForgetPasswordRepo>(
       () => _i340.ForgetPasswordRepoImp(

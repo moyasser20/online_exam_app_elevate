@@ -36,6 +36,10 @@
   "codeErrorMsg": "Invalid code",
   "timeoutMsg": "Time out !!",
   "examTitle": "Exam",
+  "examScore": "Exam score",
+  "yourScore": "Your Score",
+  "startExamAgainButton": "Start again",
+  "showResultButton": "Show results",
   "codeReceiveMsgError": "Didn't receive code?",
   "forgetPasswordUnderText": "Please enter your email associated to\nyour account"
 }

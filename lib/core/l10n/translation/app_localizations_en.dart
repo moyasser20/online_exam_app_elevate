@@ -122,6 +122,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get examTitle => 'Exam';
 
   @override
+  String get examScore => 'Exam score';
+
+  @override
+  String get yourScore => 'Your Score';
+
+  @override
+  String get startExamAgainButton => 'Start again';
+
+  @override
+  String get showResultButton => 'Show results';
+
+  @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override

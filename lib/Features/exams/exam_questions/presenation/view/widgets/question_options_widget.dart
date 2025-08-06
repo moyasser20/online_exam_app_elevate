@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../domain/entity/answers_entity.dart';
 
 class QuestionOptions extends StatelessWidget {
-  final List<String> options;
+  final List<AnswersEntity> options;
   final String? selectedValue;
   final Function(String?) onChanged;
 
@@ -17,10 +18,10 @@ class QuestionOptions extends StatelessWidget {
     return Column(
       children: options.map((option) {
         return RadioListTile(
-          value: option,
+          value: option.key,
           groupValue: selectedValue,
           onChanged: onChanged,
-          title: Text(option),
+          title: Text(option.answer),
         );
       }).toList(),
     );
