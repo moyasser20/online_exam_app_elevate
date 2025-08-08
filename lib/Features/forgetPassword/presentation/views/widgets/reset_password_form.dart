@@ -29,7 +29,7 @@ class ResetPasswordForm extends StatelessWidget {
             hint: local.newPasswordHint,
             obscureText: true,
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           CustomTextFormField(
             controller: cubit.confirmPasswordController,
             validator: cubit.validateConfirmPassword,
@@ -37,7 +37,7 @@ class ResetPasswordForm extends StatelessWidget {
             hint: local.confirmPasswordLabel,
             obscureText: true,
           ),
-          const SizedBox(height: 45),
+          const SizedBox(height: 35),
           state is ResetPasswordLoadingState
               ? const CircularProgressIndicator()
               : CustomElevatedButton(
