@@ -9,6 +9,7 @@ import '../../Features/exams/exam_subject/presentation/views/screens/exam_detail
 import '../../Features/exams/exam_subject/presentation/views/screens/exams_screen.dart';
 import '../../Features/layout/layout_screen.dart';
 import '../../Features/layout/profile/presentation/views/screens/change_password_screen.dart';
+import '../../Features/layout/result/presentation/views/screens/answer_screen.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
 import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
@@ -75,7 +76,7 @@ abstract class Routes {
       case AppRoutes.changePassword:
         return MaterialPageRoute(
             builder: (context) =>  BlocProvider(create: (_) => getIt<ChangePasswordViewModel>(),
-                child: ChangePasswordScreen()));
+                child: const ChangePasswordScreen()));
 
       case AppRoutes.exams:
         final args = settings.arguments as ExamScreenArgs;
@@ -89,7 +90,8 @@ abstract class Routes {
         return MaterialPageRoute(
           builder: (context) => ExamDetailsScreen(examId: examId),
         );
-
+      case AppRoutes.answersScreen:
+        return MaterialPageRoute(builder: (context) => const AnswersScreen());
       default:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
     }
