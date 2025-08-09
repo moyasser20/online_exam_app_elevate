@@ -29,7 +29,7 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
 
 
   Future<void> submitProfileUpdate() async {
-    emit(EditProfileInitialState());
+    emit(EditProfileLoadingState());
 
     try {
       final request = EditProfileRequestModel(
