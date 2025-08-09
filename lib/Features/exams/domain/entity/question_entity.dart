@@ -1,9 +1,10 @@
-import '../../data/models/answers_model.dart';
+import 'package:online_exam_app_elevate/Features/exams/domain/entity/answers_entity.dart';
+
 
 class QuestionEntity {
   final String Id;
   final String question;
-  final List<AnswersModel> answers;
+  final List<AnswersEntity> answers;
   final String type;
   final String correct;
 

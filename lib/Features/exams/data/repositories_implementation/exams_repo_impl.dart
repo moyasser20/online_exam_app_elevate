@@ -52,7 +52,7 @@ class ExamsRepoImpl implements ExamsRepo {
           (models) => QuestionEntity(
             Id: models.Id,
             question: models.question,
-            answers: models.answers,
+            answers: models.answers.map((a) => a.toEntity()).toList(),
             type: models.type,
             correct: models.correct,
           ),

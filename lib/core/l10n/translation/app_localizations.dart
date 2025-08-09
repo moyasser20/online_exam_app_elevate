@@ -353,6 +353,30 @@ abstract class AppLocalizations {
   /// **'Exam'**
   String get examTitle;
 
+  /// No description provided for @examScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Exam score'**
+  String get examScore;
+
+  /// No description provided for @yourScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Score'**
+  String get yourScore;
+
+  /// No description provided for @startExamAgainButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start again'**
+  String get startExamAgainButton;
+
+  /// No description provided for @showResultButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Show results'**
+  String get showResultButton;
+
   /// No description provided for @codeReceiveMsgError.
   ///
   /// In en, this message translates to:
