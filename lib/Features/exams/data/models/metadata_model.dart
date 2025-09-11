@@ -11,7 +11,7 @@ class MetadataModel {
   @JsonKey(name: "limit")
   final int limit;
 
-  MetadataModel ({
+  MetadataModel({
     required this.currentPage,
     required this.numberOfPages,
     required this.limit,

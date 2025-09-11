@@ -10,10 +10,7 @@ class ProfileDataModel {
   @JsonKey(name: "user")
   final User? user;
 
-  ProfileDataModel ({
-    this.message,
-    this.user,
-  });
+  ProfileDataModel({this.message, this.user});
 
   factory ProfileDataModel.fromJson(Map<String, dynamic> json) {
     return _$ProfileDataModelFromJson(json);
@@ -23,6 +20,3 @@ class ProfileDataModel {
     return _$ProfileDataModelToJson(this);
   }
 }
-
-
-

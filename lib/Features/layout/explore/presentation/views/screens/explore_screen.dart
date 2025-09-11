@@ -85,10 +85,14 @@ class ExploreScreen extends StatelessWidget {
               final subject = subjects[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.exams, arguments: ExamScreenArgs(
-                    subjectId: subject.id,
-                    subjectName: subject.name,
-                  ),);
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.exams,
+                    arguments: ExamScreenArgs(
+                      subjectId: subject.id,
+                      subjectName: subject.name,
+                    ),
+                  );
                 },
                 child: Container(
                   height: 90,
@@ -107,7 +111,9 @@ class ExploreScreen extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 24),
+                      vertical: 16,
+                      horizontal: 24,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),

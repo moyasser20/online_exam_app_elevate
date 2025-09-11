@@ -42,10 +42,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         ),
         title: Text(
           local.password,
-          style: TextStyle(
-            color: AppColors.black,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500),
         ),
       ),
       body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
@@ -56,13 +53,18 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                 Text(
+                Text(
                   local.forgetPassword,
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),
                 ),
                 const SizedBox(height: 10),
-                 Text(local.forgetPasswordUnderText,
-                    textAlign: TextAlign.center),
+                Text(
+                  local.forgetPasswordUnderText,
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 40),
                 CustomTextFormField(
                   controller: cubit.emailController,
@@ -82,17 +84,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 state is ForgetPasswordLoadingState
                     ? const Center(child: CircularProgressIndicator())
                     : CustomElevatedButton(
-                  text: "Continue",
-                  onPressed: cubit.isFormValid
-                      ? () {
-                    if (_formState.currentState!.validate()) {
-                      cubit.sendResetCode();
-                    }
-                  }
-                      : null,
-                  color:
-                  cubit.isFormValid ? AppColors.blue : Colors.grey,
-                )
+                      text: "Continue",
+                      onPressed:
+                          cubit.isFormValid
+                              ? () {
+                                if (_formState.currentState!.validate()) {
+                                  cubit.sendResetCode();
+                                }
+                              }
+                              : null,
+                      color: cubit.isFormValid ? AppColors.blue : Colors.grey,
+                    ),
               ],
             ).setHorizontalAndVerticalPadding(context, 0.055, 0.05),
           );
@@ -107,11 +109,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               arguments: cubit.emailController.text,
               AppRoutes.emailVarification,
             );
-
           } else if (state is ForgetPasswordErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
       ),

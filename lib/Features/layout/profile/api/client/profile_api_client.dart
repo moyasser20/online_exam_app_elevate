@@ -27,10 +27,12 @@ abstract class ProfileApiClient {
   @PATCH(EndPoints.changePassword)
   @Extra({'auth': true})
   Future<ChangePasswordResponseModel> changePassword(
-      @Body() ChangePasswordRequestModel model,
+    @Body() ChangePasswordRequestModel model,
   );
 
   @PUT(EndPoints.editMyProfile)
   @Extra({'auth': true})
-  Future<EditProfileResponseModel> editProfile(@Body() EditProfileRequestModel model);
+  Future<EditProfileResponseModel> editProfile(
+    @Body() EditProfileRequestModel model,
+  );
 }

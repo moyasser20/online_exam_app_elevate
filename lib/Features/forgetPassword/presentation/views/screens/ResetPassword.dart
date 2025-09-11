@@ -52,24 +52,24 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           if (state is ResetPasswordSuccessState) {
             Navigator.pushNamed(context, AppRoutes.login);
           } else if (state is ResetPasswordErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-               Text(
+              Text(
                 local.resetPassword,
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
               ),
               const SizedBox(height: 10),
-               Text(
-                local.resetPasswordUnderMsg,
-                textAlign: TextAlign.center,
-              ),
+              Text(local.resetPasswordUnderMsg, textAlign: TextAlign.center),
               const SizedBox(height: 25),
               ResetPasswordForm(formKey: _formKey),
             ],

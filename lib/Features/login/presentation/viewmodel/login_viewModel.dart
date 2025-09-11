@@ -10,11 +10,11 @@ import 'login_states.dart';
 
 @injectable
 class LoginViewModel extends Cubit<loginStates> {
-  LoginViewModel(this.loginUseCase, this._tokenStorage) : super(loginIntialStates());
+  LoginViewModel(this.loginUseCase, this._tokenStorage)
+    : super(loginIntialStates());
 
   final LoginUseCase loginUseCase;
   final TokenStorage _tokenStorage;
-
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -27,8 +27,6 @@ class LoginViewModel extends Cubit<loginStates> {
     emit(loginIntialStates());
   }
 
-
-
   // Future<void> saveRememberData() async {
   //   await rememberStorage.saveRememberMe(
   //     rememberMe,
@@ -37,11 +35,9 @@ class LoginViewModel extends Cubit<loginStates> {
   //   );
   // }
 
-
   Future<String?> getToken() async {
     return await _tokenStorage.getToken();
   }
-
 
   void validateForm() {
     final email = emailController.text;
@@ -74,8 +70,6 @@ class LoginViewModel extends Cubit<loginStates> {
     }
     return false;
   }
-
-
 
   @override
   Future<void> close() {

@@ -10,7 +10,8 @@ import '../../../../../core/extensions/validations.dart';
 class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   final ForgetPasswordUseCase _forgetPasswordUseCase;
 
-  ForgetPasswordCubit(this._forgetPasswordUseCase) : super(ForgetPasswordInitialState());
+  ForgetPasswordCubit(this._forgetPasswordUseCase)
+    : super(ForgetPasswordInitialState());
 
   final TextEditingController emailController = TextEditingController();
   bool isFormValid = false;
@@ -29,8 +30,8 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
 
     final result = await _forgetPasswordUseCase(email);
     result.fold(
-          (failure) => emit(ForgetPasswordErrorState(failure.message)),
-          (_) => emit(ForgetPasswordSuccessState()),
+      (failure) => emit(ForgetPasswordErrorState(failure.message)),
+      (_) => emit(ForgetPasswordSuccessState()),
     );
   }
 

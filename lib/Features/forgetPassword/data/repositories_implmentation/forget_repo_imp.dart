@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/data/dataSource/forget_password_datasource.dart';
@@ -15,36 +14,41 @@ class ForgetPasswordRepoImp implements ForgetPasswordRepo {
   ForgetPasswordRepoImp(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, void>> forgotPassword(String email)  async{
-    try{
+  Future<Either<Failure, void>> forgotPassword(String email) async {
+    try {
       final model = ForgetPasswordRequestModel(email: email);
       await remoteDataSource.forgetPassword(model);
-      return Right(null);
-    } catch(e){
+      return const Right(null);
+    } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, void>> resetPassword(String email, String newPassword) async {
-  try{
-    final model = ResetPasswordRequestModel(email: email , newPassword: newPassword);
-    await remoteDataSource.resetPassword(model);
-    return Right(null);
-  }catch(e) {
-    return Left(ServerFailure(e.toString()));
-  }
+  Future<Either<Failure, void>> resetPassword(
+    String email,
+    String newPassword,
+  ) async {
+    try {
+      final model = ResetPasswordRequestModel(
+        email: email,
+        newPassword: newPassword,
+      );
+      await remoteDataSource.resetPassword(model);
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, void>> verifyResetCode(String code) async{
-    try{
-      final model= VerifyCodeRequestModel(resetCode: code);
+  Future<Either<Failure, void>> verifyResetCode(String code) async {
+    try {
+      final model = VerifyCodeRequestModel(resetCode: code);
       await remoteDataSource.verifyResetPassword(model);
-      return Right(null);
-    }catch(e) {
+      return const Right(null);
+    } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
   }
-
 }

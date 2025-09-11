@@ -11,10 +11,7 @@ class QuestionResponse {
   @JsonKey(name: "questions")
   final List<QuestionModel> questions;
 
-  QuestionResponse ({
-    required this.message,
-    required this.questions,
-  });
+  QuestionResponse({required this.message, required this.questions});
 
   factory QuestionResponse.fromJson(Map<String, dynamic> json) {
     return _$QuestionResponseFromJson(json);
@@ -24,6 +21,3 @@ class QuestionResponse {
     return _$QuestionResponseToJson(this);
   }
 }
-
-
-

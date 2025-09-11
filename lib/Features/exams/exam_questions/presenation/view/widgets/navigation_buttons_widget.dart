@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../../core/theme/app_colors.dart';
 
-
 class NavigationButtons extends StatelessWidget {
   final bool isFirst;
   final bool isLast;

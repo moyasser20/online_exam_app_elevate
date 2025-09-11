@@ -7,11 +7,13 @@ import '../../data/models/login_response.dart';
 import '../../data/models/login_request.dart';
 
 part 'login_api_client.g.dart';
+
 @injectable
 @RestApi()
 abstract class loginApiClient {
   @factoryMethod
-  factory loginApiClient(Dio dio, {@Named('baseurl') String? baseUrl}) = _loginApiClient;
+  factory loginApiClient(Dio dio, {@Named('baseurl') String? baseUrl}) =
+      _loginApiClient;
 
   @POST(EndPoints.signIn)
   Future<LoginResponse> signIn(@Body() loginRequest request);

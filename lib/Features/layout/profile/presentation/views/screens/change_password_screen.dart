@@ -41,20 +41,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       body: BlocConsumer<ChangePasswordViewModel, ChangePasswordStates>(
         listener: (context, state) {
           if (state is ChangePasswordError) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-                state.message,
-                style: TextStyle(color: AppColors.red),
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  state.message,
+                  style: const TextStyle(color: AppColors.red),
+                ),
               ),
-            ));
+            );
           } else if (state is ChangePasswordSuccess) {
-
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-                local.passwordChangeText,
-                style: TextStyle(color: AppColors.green),
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  local.passwordChangeText,
+                  style: const TextStyle(color: AppColors.green),
+                ),
               ),
-            ));
+            );
 
             Navigator.pushReplacementNamed(context, AppRoutes.login);
           }
@@ -96,7 +99,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   hint: local.confirmPasswordHint,
                   validator: (value) {
                     if (!Validations.validateRePassword(
-                        viewmodel.newPasswordController.text, value ?? '')) {
+                      viewmodel.newPasswordController.text,
+                      value ?? '',
+                    )) {
                       return local.passwordErrorMatchingMsg;
                     }
                     return null;

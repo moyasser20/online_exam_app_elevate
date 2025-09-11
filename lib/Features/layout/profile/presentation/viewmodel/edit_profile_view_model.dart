@@ -1,17 +1,19 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/data/models/edit_profile_request_model.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/domain/usecases/update_data_usecase.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/presentation/viewmodel/edit_profile_states.dart';
 
-import '../../../../../core/storage/token_storage.dart';
 import '../../data/models/user_data.dart';
 
-class EditProfileViewModel extends Cubit<EditProfileStates>{
+class EditProfileViewModel extends Cubit<EditProfileStates> {
   final EditProfileDataUseCase _editProfileDataUseCase;
 
-  EditProfileViewModel(this._editProfileDataUseCase) : super(EditProfileInitialState());
+  EditProfileViewModel(this._editProfileDataUseCase)
+    : super(EditProfileInitialState());
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
@@ -19,6 +21,7 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
+  File? selectedImage;
 
   void setInitialData(User user) {
     usernameController.text = user.username ?? '';
@@ -27,7 +30,6 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
     emailController.text = user.email ?? '';
     phoneController.text = user.phone ?? '';
   }
-
 
   Future<void> submitProfileUpdate() async {
     emit(EditProfileLoadingState());
@@ -41,7 +43,6 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
         phone: phoneController.text,
       );
 
-
       final response = await _editProfileDataUseCase(request);
 
       emit(EditProfileSuccessState(message: response.message));
@@ -50,9 +51,15 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
     }
   }
 
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-
-
+    if (pickedFile != null) {
+      selectedImage = File(pickedFile.path);
+      emit(EditProfileImagePickedState());
+    }
+  }
 
   @override
   Future<void> close() {
@@ -63,6 +70,4 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
     phoneController.dispose();
     return super.close();
   }
-
-
 }

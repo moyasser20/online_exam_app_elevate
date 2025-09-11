@@ -8,7 +8,6 @@ import '../../data/models/response/exam_details_response.dart';
 import '../../data/models/response/exam_response.dart';
 import '../../data/models/response/question_response.dart';
 
-
 part 'exams_api_client.g.dart';
 
 @injectable
@@ -20,9 +19,7 @@ abstract class ExamsApiClient {
 
   @GET(EndPoints.exams)
   @Extra({'auth': true})
-  Future<ExamResponse> getExamsBySubject(
-      @Query('subject') String subjectId,
-      );
+  Future<ExamResponse> getExamsBySubject(@Query('subject') String subjectId);
 
   @GET(EndPoints.examsDetails)
   @Extra({'auth': true})
@@ -31,5 +28,4 @@ abstract class ExamsApiClient {
   @GET(EndPoints.questions)
   @Extra({'auth': true})
   Future<QuestionResponse> getQuestions(@Query('exam') String examId);
-
 }

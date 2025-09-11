@@ -114,7 +114,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordErrorMatchingMsg => 'Password unmatching!';
 
   @override
-  String get resetPasswordUnderMsg => 'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
+  String get resetPasswordUnderMsg =>
+      'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
 
   @override
   String get requiredEmailErrorMessage => 'Email is required';
@@ -123,7 +124,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailVerificationScreen => 'Email verification';
 
   @override
-  String get emailVerificationScreenUnderMsg => 'Please enter your code that was sent to your\nemail address';
+  String get emailVerificationScreenUnderMsg =>
+      'Please enter your code that was sent to your\nemail address';
 
   @override
   String get validationEmailErrorMessage => 'This Email is not valid';
@@ -138,10 +140,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get examTitle => 'Exam';
 
   @override
+  String get examScore => 'Exam score';
+
+  @override
+  String get yourScore => 'Your Score';
+
+  @override
+  String get startExamAgainButton => 'Start again';
+
+  @override
+  String get showResultButton => 'Show results';
+
+  @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override
-  String get forgetPasswordUnderText => 'Please enter your email associated to\nyour account';
+  String get forgetPasswordUnderText =>
+      'Please enter your email associated to\nyour account';
 
   @override
   String get profileTitle => 'Profile';
