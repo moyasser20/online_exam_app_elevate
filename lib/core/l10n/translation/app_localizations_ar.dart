@@ -84,10 +84,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmPasswordLabel => 'Confirm Password';
 
   @override
+  String get currentPasswordLabel => 'Current Password';
+
+  @override
+  String get currentPasswordHint => 'Enter current password';
+
+  @override
   String get newPasswordLabel => 'New Password';
 
   @override
-  String get newPasswordHint => 'Enter your password';
+  String get newPasswordHint => 'Enter new password';
+
+  @override
+  String get currentPasswordErrorMsg => 'Please enter your current password';
 
   @override
   String get forgetPassword => 'Forget Password';
@@ -96,8 +105,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resetPassword => 'Reset Password';
 
   @override
-  String get resetPasswordUnderMsg =>
-      'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
+  String get passwordSuccessMsg => 'Password changed successfully!';
+
+  @override
+  String get profileUpdatedSuccessMsg => 'Profile changed successfully!';
+
+  @override
+  String get passwordErrorMatchingMsg => 'Password unmatching!';
+
+  @override
+  String get resetPasswordUnderMsg => 'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
 
   @override
   String get requiredEmailErrorMessage => 'Email is required';
@@ -106,8 +123,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emailVerificationScreen => 'Email verification';
 
   @override
-  String get emailVerificationScreenUnderMsg =>
-      'Please enter your code that was sent to your\nemail address';
+  String get emailVerificationScreenUnderMsg => 'Please enter your code that was sent to your\nemail address';
 
   @override
   String get validationEmailErrorMessage => 'This Email is not valid';
@@ -125,6 +141,38 @@ class AppLocalizationsAr extends AppLocalizations {
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override
-  String get forgetPasswordUnderText =>
-      'Please enter your email associated to\nyour account';
+  String get forgetPasswordUnderText => 'Please enter your email associated to\nyour account';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get usernameLabel => 'User name';
+
+  @override
+  String get firstNameLabel => 'First name';
+
+  @override
+  String get lastNameLabel => 'Last Name';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get passwordChangeText => 'Change';
+
+  @override
+  String get phoneNumberLabel => 'Phone Number';
+
+  @override
+  String get updateButton => 'Update';
+
+  @override
+  String get noProfileData => 'No profile data found.';
+
+  @override
+  String get errorText => 'Error';
 }

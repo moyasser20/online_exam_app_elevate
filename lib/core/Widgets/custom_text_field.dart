@@ -5,19 +5,22 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final VoidCallback? onPressed;
   final String? label;
   final String? hint;
   final String? suffixText;
-  final bool obscureText; // renamed from isPassword
+  final bool obscureText; // formerly isPassword
   final TextInputType keyboardType;
   final bool enabled;
   final bool readonly;
+  final String? initialText;
 
   const CustomTextFormField({
     super.key,
     this.controller,
     this.validator,
     this.onChanged,
+    this.onPressed,
     this.label,
     this.hint,
     this.suffixText,
@@ -25,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.enabled = true,
     this.readonly = false,
+    this.initialText,
   });
 
   @override
@@ -33,17 +37,27 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isTextObscured;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
     isTextObscured = widget.obscureText;
+    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.controller,
+      controller: _controller,
       enabled: widget.enabled,
       readOnly: widget.readonly,
       obscureText: isTextObscured,
@@ -51,6 +65,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: widget.validator,
       onChanged: widget.onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: TextStyle(
+        color: AppColors.black,
+        fontWeight: FontWeight.w400,
+        fontSize: 18,
+      ),
       decoration: InputDecoration(
         labelText: widget.label,
         labelStyle: TextStyle(
@@ -75,16 +94,23 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         )
             : null,
         suffix: widget.suffixText != null
-            ? Text(
-          widget.suffixText!,
-          style: TextStyle(
-            color: AppColors.blue[30],
-            fontWeight: FontWeight.w500,
-            decoration: TextDecoration.underline,
+            ? GestureDetector(
+          onTap: widget.onPressed ?? () {},
+          child: Text(
+            widget.suffixText!,
+            style: TextStyle(
+              color: AppColors.blue,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              decoration: TextDecoration.underline,
+            ),
           ),
         )
             : null,
         border: const OutlineInputBorder(),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.black),
+        ),
         errorStyle: const TextStyle(color: Colors.red, fontSize: 12),
       ),
     );

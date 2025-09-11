@@ -26,6 +26,8 @@ abstract class DioModule {
 
           if (needsAuth) {
             final token = await tokenStorage.getToken();
+            print('Token in interceptor: $token');
+
 
             if (token != null && token.isNotEmpty) {
               options.headers['token'] = token;
