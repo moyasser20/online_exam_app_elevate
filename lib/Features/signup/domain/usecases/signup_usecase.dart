@@ -4,11 +4,11 @@ import 'package:online_exam_app_elevate/Features/signup/api/models/signup_respon
 import 'package:online_exam_app_elevate/Features/signup/domain/repositories/signup_repo.dart';
 
 @injectable
-class SignupUseCase{
+class SignupUseCase {
   SignupRepo signupRepo;
   SignupUseCase(this.signupRepo);
 
-  Future<SignupResponse> call(SignupRequest request){
+  Future<SignupResponse> call(SignupRequest request) {
     return signupRepo.signup(request);
   }
 }

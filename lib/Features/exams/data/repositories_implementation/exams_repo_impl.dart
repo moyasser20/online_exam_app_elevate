@@ -6,7 +6,6 @@ import 'package:online_exam_app_elevate/Features/exams/domain/entity/exams_entit
 import 'package:online_exam_app_elevate/Features/exams/domain/entity/question_entity.dart';
 import '../../domain/repositories/exams_repo.dart';
 
-
 @LazySingleton(as: ExamsRepo)
 class ExamsRepoImpl implements ExamsRepo {
   final ExamsRemoteDataSource _remoteDataSource;
@@ -52,7 +51,7 @@ class ExamsRepoImpl implements ExamsRepo {
           (models) => QuestionEntity(
             Id: models.Id,
             question: models.question,
-            answers: models.answers,
+            answers: models.answers.map((a) => a.toEntity()).toList(),
             type: models.type,
             correct: models.correct,
           ),

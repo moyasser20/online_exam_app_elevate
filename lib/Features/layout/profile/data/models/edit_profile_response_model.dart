@@ -8,10 +8,7 @@ class EditProfileResponseModel {
   final String message;
   final User user;
 
-  EditProfileResponseModel({
-    required this.message,
-    required this.user,
-  });
+  EditProfileResponseModel({required this.message, required this.user});
 
   factory EditProfileResponseModel.fromJson(Map<String, dynamic> json) =>
       _$EditProfileResponseModelFromJson(json);

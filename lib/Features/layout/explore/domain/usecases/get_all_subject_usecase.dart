@@ -1,11 +1,10 @@
-
 import 'package:injectable/injectable.dart';
 
 import '../entity/subjects_entity.dart';
 import '../repositories/subject_repo.dart';
 
 @injectable
-class GetAllSubjectUseCases{
+class GetAllSubjectUseCases {
   final SubjectRepo _subjectRepo;
 
   GetAllSubjectUseCases(this._subjectRepo);

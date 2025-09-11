@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login_request.g.dart';
@@ -8,7 +7,7 @@ class loginRequest {
   @JsonKey(name: "email")
   final String email;
 
-  @JsonKey(name:"password")
+  @JsonKey(name: "password")
   final String password;
 
   loginRequest({required this.email, required this.password});

@@ -17,6 +17,7 @@ class SubjectModel {
     required this.createdAt,
   });
 
-  factory SubjectModel.fromJson(Map<String, dynamic> json) => _$SubjectModelFromJson(json);
+  factory SubjectModel.fromJson(Map<String, dynamic> json) =>
+      _$SubjectModelFromJson(json);
   Map<String, dynamic> toJson() => _$SubjectModelToJson(this);
 }

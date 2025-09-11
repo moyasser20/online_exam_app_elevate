@@ -4,10 +4,8 @@ import 'package:online_exam_app_elevate/Features/login/data/models/login_respons
 import 'package:online_exam_app_elevate/Features/login/data/models/login_request.dart';
 import 'package:online_exam_app_elevate/Features/login/domain/repositories/login_repo.dart';
 
-
 @Injectable(as: LoginRepo)
 class LoginRepoImplementation implements LoginRepo {
-
   final loginRemoteDataSource _remoteDataSource;
 
   LoginRepoImplementation(this._remoteDataSource);
@@ -15,7 +13,4 @@ class LoginRepoImplementation implements LoginRepo {
   Future<LoginResponse> login(loginRequest request) {
     return _remoteDataSource.login(request);
   }
-
-
-
 }

@@ -25,6 +25,10 @@ import '../../Features/exams/domain/usecases/get_exam_by_subject_usecase.dart'
     as _i819;
 import '../../Features/exams/domain/usecases/get_exam_detail_usecase.dart'
     as _i158;
+import '../../Features/exams/domain/usecases/get_exam_questions_usecase.dart'
+    as _i213;
+import '../../Features/exams/exam_questions/presenation/viewmodel/question_viewmodel.dart'
+    as _i13;
 import '../../Features/exams/exam_subject/presentation/viewmodel/exam_by_subject_viewmodel.dart'
     as _i709;
 import '../../Features/exams/exam_subject/presentation/viewmodel/exam_detail_viewmodel.dart'
@@ -84,6 +88,22 @@ import '../../Features/layout/profile/presentation/viewmodel/change_password_vie
     as _i449;
 import '../../Features/layout/profile/presentation/viewmodel/profile_viewmodel.dart'
     as _i892;
+import '../../Features/layout/result/data/datasources/exam_history_local_datasource.dart'
+    as _i772;
+import '../../Features/layout/result/data/repositories/exam_history_repository_impl.dart'
+    as _i352;
+import '../../Features/layout/result/domain/repositories/exam_history_repository.dart'
+    as _i867;
+import '../../Features/layout/result/domain/usecases/clear_exam_history_usecase.dart'
+    as _i1000;
+import '../../Features/layout/result/domain/usecases/get_exam_history_usecase.dart'
+    as _i103;
+import '../../Features/layout/result/domain/usecases/save_exam_history_usecase.dart'
+    as _i830;
+import '../../Features/layout/result/presentation/viewmodel/answers_viewmodel.dart'
+    as _i932;
+import '../../Features/layout/result/presentation/viewmodel/result_viewmodel.dart'
+    as _i927;
 import '../../Features/login/api/client/login_api_client.dart' as _i545;
 import '../../Features/login/api/datasource_implementation/login_remote_datasource_imp.dart'
     as _i261;
@@ -118,6 +138,9 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.lazySingleton<_i973.TokenStorage>(() => _i973.TokenStorage());
+    gh.lazySingleton<_i772.ExamHistoryLocalDataSource>(
+      () => _i772.ExamHistoryLocalDataSourceImpl(),
+    );
     gh.factory<String>(() => dioModule.baseUrl, instanceName: 'baseurl');
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(
@@ -125,8 +148,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i973.TokenStorage>(),
       ),
     );
-    gh.factory<_i545.loginApiClient>(
-      () => _i545.loginApiClient(
+    gh.factory<_i633.ExamsApiClient>(
+      () => _i633.ExamsApiClient(
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
@@ -143,8 +166,8 @@ extension GetItInjectableX on _i174.GetIt {
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
     );
-    gh.factory<_i633.ExamsApiClient>(
-      () => _i633.ExamsApiClient(
+    gh.factory<_i545.loginApiClient>(
+      () => _i545.loginApiClient(
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
@@ -175,6 +198,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i303.SubjectRemoteDataSource>(
       () => _i439.SubjectsRemoteDataSourceImpl(gh<_i686.ExamApiClient>()),
     );
+    gh.lazySingleton<_i867.ExamHistoryRepository>(
+      () => _i352.ExamHistoryRepositoryImpl(
+        gh<_i772.ExamHistoryLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i1000.ClearExamHistoryUseCase>(
+      () => _i1000.ClearExamHistoryUseCase(gh<_i867.ExamHistoryRepository>()),
+    );
+    gh.factory<_i103.GetExamHistoryUseCase>(
+      () => _i103.GetExamHistoryUseCase(gh<_i867.ExamHistoryRepository>()),
+    );
+    gh.factory<_i830.SaveExamHistoryUseCase>(
+      () => _i830.SaveExamHistoryUseCase(gh<_i867.ExamHistoryRepository>()),
+    );
     gh.lazySingleton<_i131.ExamsRepo>(
       () => _i435.ExamsRepoImpl(gh<_i829.ExamsRemoteDataSource>()),
     );
@@ -184,6 +221,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i158.GetExamDetailUseCase>(
       () => _i158.GetExamDetailUseCase(gh<_i131.ExamsRepo>()),
     );
+    gh.factory<_i213.GetExamQuestionsUseCase>(
+      () => _i213.GetExamQuestionsUseCase(gh<_i131.ExamsRepo>()),
+    );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
         gh<_i117.ForgetPasswordApiClient>(),
@@ -191,6 +231,22 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i776.SignupRemoteDatasource>(
       () => _i947.SignupRemoteDataSourceImpl(gh<_i991.SignupApiClient>()),
+    );
+    gh.factory<_i13.QuestionViewModel>(
+      () => _i13.QuestionViewModel(
+        gh<_i213.GetExamQuestionsUseCase>(),
+        gh<_i158.GetExamDetailUseCase>(),
+        gh<_i830.SaveExamHistoryUseCase>(),
+      ),
+    );
+    gh.factory<_i927.ResultViewModel>(
+      () => _i927.ResultViewModel(
+        gh<_i103.GetExamHistoryUseCase>(),
+        gh<_i1000.ClearExamHistoryUseCase>(),
+      ),
+    );
+    gh.factory<_i932.AnswersViewModel>(
+      () => _i932.AnswersViewModel(gh<_i213.GetExamQuestionsUseCase>()),
     );
     gh.factory<_i554.LoginRepo>(
       () => _i946.LoginRepoImplementation(gh<_i713.loginRemoteDataSource>()),

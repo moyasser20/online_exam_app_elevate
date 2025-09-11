@@ -1,18 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation/viewmodel/states/exam_detail_states.dart';
 import 'package:online_exam_app_elevate/core/Assets/app_assets.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
+import 'package:online_exam_app_elevate/core/routes/routes.dart';
 import '../../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/exam_detail_viewmodel.dart';
-
-
 
 class ExamDetailsScreen extends StatelessWidget {
   final String examId;
@@ -76,9 +73,13 @@ class ExamDetailsScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Container(width: 2, height: 23, color: AppColors.blue[30]),
+                        Container(
+                          width: 2,
+                          height: 23,
+                          color: AppColors.blue[30],
+                        ),
                         const SizedBox(width: 10),
-                         Text(
+                        Text(
                           "${exam.numberOfQuestions} Question",
                           style: const TextStyle(
                             color: AppColors.grey,
@@ -126,9 +127,20 @@ class ExamDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 45),
-                    CustomElevatedButton(text: local.startExamButton, onPressed: (){
-                      Navigator.of(context).pushNamed(AppRoutes.questionsScreen);
-                    }),
+                    Center(
+                      child: CustomElevatedButton(
+                        text: local.startExamButton,
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.questionsScreen,
+                            arguments: QuestionArgs(
+                              examId: examId,
+                              duration: exam.duration,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ).setHorizontalAndVerticalPadding(context, 0.04, 0.012);
               } else if (state is ExamsDetailErrorState) {

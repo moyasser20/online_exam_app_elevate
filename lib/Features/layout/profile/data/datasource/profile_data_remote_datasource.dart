@@ -8,5 +8,4 @@ abstract class ProfileDataRemoteDatasource {
   Future<ProfileDataModel> getProfileData();
   Future<String> changePassword(ChangePasswordRequestModel model);
   Future<EditProfileResponseModel> editProfile(EditProfileRequestModel model);
-
 }

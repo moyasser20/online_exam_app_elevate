@@ -8,7 +8,7 @@ class GetExamDetailUseCase {
 
   GetExamDetailUseCase(this._examsRepo);
 
-  Future<ExamsEntity> call(String examId) async{
+  Future<ExamsEntity> call(String examId) async {
     return await _examsRepo.getExamDetail(examId);
   }
 }

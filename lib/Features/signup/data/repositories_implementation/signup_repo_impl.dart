@@ -5,8 +5,7 @@ import 'package:online_exam_app_elevate/Features/signup/data/datasource/signup_r
 import '../../domain/repositories/signup_repo.dart';
 
 @Injectable(as: SignupRepo)
-class SignupRepoImpl extends SignupRepo{
-
+class SignupRepoImpl extends SignupRepo {
   final SignupRemoteDatasource _remoteDatasource;
 
   SignupRepoImpl(this._remoteDatasource);
@@ -15,6 +14,4 @@ class SignupRepoImpl extends SignupRepo{
   Future<SignupResponse> signup(SignupRequest request) {
     return _remoteDatasource.signup(request);
   }
-
-
 }

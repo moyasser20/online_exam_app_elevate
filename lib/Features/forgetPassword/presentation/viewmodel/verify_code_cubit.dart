@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/domain/usecases/forget_password_usecase.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/domain/usecases/verify_code_usecase.dart';
-import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/forget_password_states.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/verify_code_states.dart';
 
 import '../../../../core/routes/app_routes.dart';
@@ -20,7 +19,8 @@ class VerifyCodeCubit extends Cubit<VerifyCodeStates> {
   bool isResendEnabled = true;
   Timer? _resendTimer;
 
-  VerifyCodeCubit(this._verifyCodeUseCase, this._forgetPasswordUseCase) : super(VerifyCodeInitialStates());
+  VerifyCodeCubit(this._verifyCodeUseCase, this._forgetPasswordUseCase)
+    : super(VerifyCodeInitialStates());
 
   void setEmail(String emailAddress) {
     email = emailAddress;
@@ -39,8 +39,8 @@ class VerifyCodeCubit extends Cubit<VerifyCodeStates> {
 
     final result = await _forgetPasswordUseCase(email!);
     result.fold(
-          (failure) => emit(VerifyCodeErrorStates(failure.message)),
-          (_) => emit(VerifyCodeResendStates()),
+      (failure) => emit(VerifyCodeErrorStates(failure.message)),
+      (_) => emit(VerifyCodeResendStates()),
     );
     _startResendCooldown();
   }
@@ -63,17 +63,13 @@ class VerifyCodeCubit extends Cubit<VerifyCodeStates> {
 
     final result = await _verifyCodeUseCase(enteredCode);
 
-    result.fold(
-          (failure) => emit(VerifyCodeErrorStates(failure.message)),
-          (_) {
-        emit(VerifyCodeSuccessStates());
-        Navigator.pushNamed(
-          context,
-          AppRoutes.ResetPasswordScreen,
-          arguments: email ?? '',
-        );
-      },
-    );
+    result.fold((failure) => emit(VerifyCodeErrorStates(failure.message)), (_) {
+      emit(VerifyCodeSuccessStates());
+      Navigator.pushNamed(
+        context,
+        AppRoutes.ResetPasswordScreen,
+        arguments: email ?? '',
+      );
+    });
   }
 }
-

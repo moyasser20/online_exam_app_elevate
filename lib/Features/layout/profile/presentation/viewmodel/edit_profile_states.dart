@@ -15,3 +15,5 @@ class EditProfileErrorState extends EditProfileStates {
 
   EditProfileErrorState({required this.message});
 }
+
+class EditProfileImagePickedState extends EditProfileStates {}

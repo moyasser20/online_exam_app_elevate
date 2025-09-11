@@ -6,10 +6,7 @@ import '../../storage/token_storage.dart';
 @module
 abstract class DioModule {
   @lazySingleton
-  Dio dio(
-      @Named('baseurl') String baseUrl,
-      TokenStorage tokenStorage,
-      ) {
+  Dio dio(@Named('baseurl') String baseUrl, TokenStorage tokenStorage) {
     final dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
@@ -28,18 +25,15 @@ abstract class DioModule {
             final token = await tokenStorage.getToken();
             print('Token in interceptor: $token');
 
-
             if (token != null && token.isNotEmpty) {
               options.headers['token'] = token;
-            } else {
-            }
+            } else {}
           }
 
           return handler.next(options);
         },
       ),
     );
-
 
     return dio;
   }

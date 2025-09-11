@@ -12,7 +12,6 @@ class ProfileSuccessState extends ProfileStates {
   ProfileSuccessState(this.user);
 }
 
-
 class ProfileErrorState extends ProfileStates {
   final String message;
 

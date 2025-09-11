@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -14,16 +13,21 @@ part 'forget_password_client.g.dart';
 @RestApi()
 abstract class ForgetPasswordApiClient {
   @factoryMethod
-  factory ForgetPasswordApiClient(Dio dio, {@Named('baseurl') String? baseUrl}) = _ForgetPasswordApiClient;
+  factory ForgetPasswordApiClient(
+    Dio dio, {
+    @Named('baseurl') String? baseUrl,
+  }) = _ForgetPasswordApiClient;
 
   @POST(EndPoints.forgetPassword)
-  Future<void> forgetPassword(@Body() ForgetPasswordRequestModel forgetPasswordRequestModel);
-  
+  Future<void> forgetPassword(
+    @Body() ForgetPasswordRequestModel forgetPasswordRequestModel,
+  );
+
   @POST(EndPoints.verifyResetCode)
   Future<void> verifyResetcode(@Body() VerifyCodeRequestModel verifResetCode);
 
   @PUT(EndPoints.resetPassword)
-  Future<void> resetPassword(@Body() ResetPasswordRequestModel resetPasswordRequestModel);
-
-
-  }
+  Future<void> resetPassword(
+    @Body() ResetPasswordRequestModel resetPasswordRequestModel,
+  );
+}

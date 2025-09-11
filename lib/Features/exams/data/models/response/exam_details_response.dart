@@ -10,10 +10,7 @@ class ExamDetailsResponse {
   @JsonKey(name: "exam")
   final ExamModel exam;
 
-  ExamDetailsResponse ({
-    required this.message,
-    required this.exam,
-  });
+  ExamDetailsResponse({required this.message, required this.exam});
 
   factory ExamDetailsResponse.fromJson(Map<String, dynamic> json) {
     return _$ExamDetailsResponseFromJson(json);
@@ -23,6 +20,3 @@ class ExamDetailsResponse {
     return _$ExamDetailsResponseToJson(this);
   }
 }
-
-
-

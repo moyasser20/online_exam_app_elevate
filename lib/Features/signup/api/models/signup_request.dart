@@ -19,7 +19,7 @@ class SignupRequest {
   @JsonKey(name: "phone")
   final String? phone;
 
-  SignupRequest ({
+  SignupRequest({
     this.username,
     this.firstName,
     this.lastName,
@@ -37,5 +37,3 @@ class SignupRequest {
     return _$SignupRequestToJson(this);
   }
 }
-
-

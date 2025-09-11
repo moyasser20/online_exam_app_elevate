@@ -2,5 +2,5 @@ import 'package:online_exam_app_elevate/Features/login/data/models/login_respons
 import 'package:online_exam_app_elevate/Features/login/data/models/login_request.dart';
 
 abstract class loginRemoteDataSource {
-   Future<LoginResponse> login(loginRequest Request);
+  Future<LoginResponse> login(loginRequest Request);
 }
