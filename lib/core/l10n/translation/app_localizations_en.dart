@@ -51,6 +51,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
+  String get search => 'Search';
+
+  @override
+  String get survey => 'Survey';
+
+  @override
+  String get rangeStart => 'From: 1.00';
+
+  @override
+  String get rangeEnd => 'To: 6.00';
+
+  @override
+  String get examLevel => 'High level';
+
+  @override
+  String get examInstructions => 'Instructions';
+
+  @override
+  String get startExamButton => 'Start';
+
+  @override
+  String get viewScoreButton => 'View Score';
+
+  @override
+  String get browseBySubject => 'Browse by subject';
+
+  @override
   String get confirmPasswordHint => 'Confirm Password';
 
   @override
@@ -69,7 +96,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetPassword => 'Reset Password';
 
   @override
-  String get resetPasswordUnderMsg => 'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
+  String get resetPasswordUnderMsg =>
+      'Password must not be empty and must contain 6 characters with upper case letter and one number at least';
 
   @override
   String get requiredEmailErrorMessage => 'Email is required';
@@ -78,7 +106,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailVerificationScreen => 'Email verification';
 
   @override
-  String get emailVerificationScreenUnderMsg => 'Please enter your code that was sent to your\nemail address';
+  String get emailVerificationScreenUnderMsg =>
+      'Please enter your code that was sent to your\nemail address';
 
   @override
   String get validationEmailErrorMessage => 'This Email is not valid';
@@ -87,8 +116,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get codeErrorMsg => 'Invalid code';
 
   @override
+  String get timeoutMsg => 'Time out !!';
+
+  @override
+  String get examTitle => 'Exam';
+
+  @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override
-  String get forgetPasswordUnderText => 'Please enter your email associated to\nyour account';
+  String get forgetPasswordUnderText =>
+      'Please enter your email associated to\nyour account';
 }

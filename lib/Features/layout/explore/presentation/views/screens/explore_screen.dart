@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
 import 'package:online_exam_app_elevate/core/theme/app_colors.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
+import '../../../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../../core/routes/routes.dart';
 import '../../../domain/entity/subjects_entity.dart';
 import '../../viewmodel/get_all_subject_states.dart';
 import '../../viewmodel/get_all_subject_viewmodel.dart';
@@ -34,11 +35,12 @@ class ExploreScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, List<SubjectEntity> subjects) {
+    var local = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppStrings.survey,
+          local.survey,
           style: TextStyle(
             color: AppColors.blue,
             fontWeight: FontWeight.w500,
@@ -49,7 +51,7 @@ class ExploreScreen extends StatelessWidget {
         TextFormField(
           onChanged: (value) {},
           decoration: InputDecoration(
-            hintText: AppStrings.search,
+            hintText: local.search,
             prefixIcon: Icon(Icons.search, color: AppColors.black[30]),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
             border: OutlineInputBorder(
@@ -68,7 +70,7 @@ class ExploreScreen extends StatelessWidget {
         ),
         const SizedBox(height: 32),
         Text(
-          AppStrings.browseBySubject,
+          local.browseBySubject,
           style: TextStyle(
             color: AppColors.black,
             fontWeight: FontWeight.w500,
@@ -83,7 +85,10 @@ class ExploreScreen extends StatelessWidget {
               final subject = subjects[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.exams, arguments: subject.id);
+                  Navigator.pushNamed(context, AppRoutes.exams, arguments: ExamScreenArgs(
+                    subjectId: subject.id,
+                    subjectName: subject.name,
+                  ),);
                 },
                 child: Container(
                   height: 90,

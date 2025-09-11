@@ -7,7 +7,7 @@ import 'package:online_exam_app_elevate/core/extensions/validations.dart';
 import '../../../../../core/Assets/app_assets.dart';
 import '../../../../../core/Widgets/Custom_Elevated_Button.dart';
 import '../../../../../core/Widgets/custom_text_field.dart';
-import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/login_states.dart';
@@ -42,6 +42,7 @@ class _loginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
     return BlocProvider<LoginViewModel>(
@@ -52,9 +53,9 @@ class _loginScreenState extends State<LoginScreen> {
             final token = await context.read<LoginViewModel>().getToken();
 
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(AppStrings.LoginSuccessMsg),
-                duration: Duration(seconds: 1),
+              SnackBar(
+                content: Text(local.loginSuccessMsg),
+                duration: const Duration(seconds: 1),
               ),
             );
 
@@ -82,7 +83,7 @@ class _loginScreenState extends State<LoginScreen> {
                 icon: Image.asset(AppAssets.ArrowIcon),
               ),
               title: Text(
-                AppStrings.LoginElevatedButton,
+                local.loginElevatedButton,
                 style: theme.textTheme.headlineMedium,
               ),
             ),
@@ -106,6 +107,7 @@ class _loginScreenState extends State<LoginScreen> {
                   CustomTextFormField(
                     label: "Password",
                     hint: "Enter Your Password",
+                    obscureText: true,
                     controller: cubit.passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -128,9 +130,9 @@ class _loginScreenState extends State<LoginScreen> {
                               cubit.toggleRememberMe(value ?? true);
                             },
                           ),
-                          const Text(
-                            AppStrings.RememberMeBox,
-                            style: TextStyle(fontSize: 16),
+                          Text(
+                            local.rememberMeBox,
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ],
                       ),
@@ -140,9 +142,9 @@ class _loginScreenState extends State<LoginScreen> {
                             context,
                           ).pushReplacementNamed(AppRoutes.forgetPassword);
                         },
-                        child: const Text(
-                          AppStrings.ForgetPasswordTextButton,
-                          style: TextStyle(
+                        child: Text(
+                          local.forgetPasswordTextButton,
+                          style: const TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 15,
                           ),
@@ -154,7 +156,7 @@ class _loginScreenState extends State<LoginScreen> {
                   state is loginloadingStates
                       ? const CircularProgressIndicator()
                       : CustomElevatedButton(
-                        text: AppStrings.LoginElevatedButton,
+                        text: local.loginElevatedButton,
                         onPressed:
                             cubit.isFormValid
                                 ? () {
@@ -171,17 +173,17 @@ class _loginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        AppStrings.DonthaveanaccountText,
-                        style: TextStyle(fontSize: 16),
+                       Text(
+                        local.doNotHaveAnAccountText,
+                        style: const TextStyle(fontSize: 16),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.signUp);
                         },
-                        child: const Text(
-                          AppStrings.Signup,
-                          style: TextStyle(
+                        child: Text(
+                          local.signup,
+                          style: const TextStyle(
                             decoration: TextDecoration.underline,
                             decorationThickness: 2,
                             fontSize: 18,

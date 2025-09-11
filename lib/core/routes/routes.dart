@@ -9,8 +9,6 @@ import '../../Features/exams/exam_subject/presentation/views/screens/exams_scree
 import '../../Features/layout/layout_screen.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
-import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
-
 import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
 import '../../Features/forgetPassword/presentation/views/screens/ResetPassword.dart';
 import '../../Features/forgetPassword/presentation/views/screens/email_varificationScreen.dart';
@@ -43,10 +41,9 @@ abstract class Routes {
         final email = settings.arguments as String;
         return MaterialPageRoute(
           builder:
-              (context) =>
-              BlocProvider(create: (_) => getIt<VerifyCodeCubit>(),
+              (context) => BlocProvider(
+                create: (_) => getIt<VerifyCodeCubit>(),
                 child: EmailVerificationScreen(email: email),
-
               ),
         );
 
@@ -55,28 +52,45 @@ abstract class Routes {
         return MaterialPageRoute(
           builder:
               (context) => BlocProvider(
-            create: (_) => getIt<ResetPasswordCubit>(),
-            child: ResetPasswordScreen(email: email),
-          ),
+                create: (_) => getIt<ResetPasswordCubit>(),
+                child: ResetPasswordScreen(email: email),
+              ),
         );
 
       case AppRoutes.questionsScreen:
         return MaterialPageRoute(builder: (context) => const QuestionScreen());
 
       case AppRoutes.examScoreScreen:
-        return MaterialPageRoute(builder: (context) => const ExamScoreScreen(correctAnswer: 10, totalQuestion: 10,));
-
+        return MaterialPageRoute(
+          builder:
+              (context) =>
+                  const ExamScoreScreen(correctAnswer: 10, totalQuestion: 10),
+        );
 
       case AppRoutes.layout:
         return MaterialPageRoute(builder: (context) => const LayoutScreen());
       case AppRoutes.exams:
-        final subjectId = settings.arguments as String;
-        return MaterialPageRoute(builder: (context) => ExamsScreen(subjectId: subjectId,));
+        final args = settings.arguments as ExamScreenArgs;
+        return MaterialPageRoute(
+          builder:
+              (context) =>
+                  ExamsScreen(subjectId: args.subjectId, subjectName: args.subjectName),
+        );
       case AppRoutes.examsDetails:
-        return MaterialPageRoute(builder: (context) => const ExamDetailsScreen());
+        final examId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => ExamDetailsScreen(examId: examId),
+        );
 
       default:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
     }
   }
+}
+
+class ExamScreenArgs {
+  final String subjectId;
+  final String subjectName;
+
+  ExamScreenArgs({required this.subjectId, required this.subjectName});
 }

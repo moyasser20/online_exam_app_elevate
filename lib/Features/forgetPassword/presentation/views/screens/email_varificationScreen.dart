@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart';
 import 'package:online_exam_app_elevate/Features/forgetPassword/presentation/viewmodel/states/verify_code_states.dart';
-import 'package:online_exam_app_elevate/core/constants/app_Strings.dart';
 import 'package:online_exam_app_elevate/core/extensions/extensions.dart';
 
 import '../../../../../core/Assets/app_assets.dart';
 import '../../../../../core/Widgets/Custom_Elevated_Button.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../widgets/verification_code_field.dart';
 
@@ -30,13 +30,14 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
           icon: Image.asset(AppAssets.ArrowIcon),
         ),
-        title: const Text(AppStrings.password),
+        title: Text(local.password),
       ),
       body: BlocConsumer<VerifyCodeCubit, VerifyCodeStates>(
         listener: (context, state) {
@@ -60,13 +61,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    AppStrings.EmailVarficationScreen,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                   Text(
+                    local.emailVerificationScreen,
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    AppStrings.EmailVarficationScreenUnderMsg,
+                   Text(
+                    local.emailVerificationScreenUnderMsg,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 40),
@@ -75,9 +76,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        AppStrings.CodeReciveMsgError,
-                        style: TextStyle(fontSize: 16),
+                       Text(
+                        local.codeReceiveMsgError,
+                        style: const TextStyle(fontSize: 16),
                       ),
                       TextButton(
                         onPressed: cubit.isResendEnabled ? () => cubit.resendCode() : null,
