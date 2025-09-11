@@ -79,6 +79,19 @@ class LoginViewModel extends Cubit<loginStates> {
     }
   }
 
+  Future<bool> checkAutoLogin() async {
+    final token = await _tokenStorage.getToken();
+    final data = await rememberStorage.loadRememberData();
+
+    final rememberMe = data['rememberMe'] ?? false;
+
+    if (token != null && token.isNotEmpty && rememberMe) {
+      return true;
+    }
+    return false;
+  }
+
+
   @override
   Future<void> close() {
     emailController.dispose();
