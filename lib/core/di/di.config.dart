@@ -35,6 +35,19 @@ import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubi
     as _i439;
 import '../../Features/forgetPassword/presentation/viewmodel/verify_code_cubit.dart'
     as _i867;
+import '../../Features/layout/explore/api/client/exam_api_client.dart' as _i686;
+import '../../Features/layout/explore/api/datasource_implementation/subject_remote_datasource_implementation.dart'
+    as _i439;
+import '../../Features/layout/explore/data/datasource/subject_remote_datasource.dart'
+    as _i303;
+import '../../Features/layout/explore/data/repositories_implementation/subject_repo_impl.dart'
+    as _i1010;
+import '../../Features/layout/explore/domain/repositories/subject_repo.dart'
+    as _i738;
+import '../../Features/layout/explore/domain/usecases/get_all_subject_usecase.dart'
+    as _i405;
+import '../../Features/layout/explore/presentation/viewmodel/get_all_subject_viewmodel.dart'
+    as _i1065;
 import '../../Features/login/api/client/login_api_client.dart' as _i545;
 import '../../Features/login/api/datasource_implementation/login_remote_datasource_imp.dart'
     as _i261;
@@ -57,6 +70,7 @@ import '../../Features/signup/domain/repositories/signup_repo.dart' as _i627;
 import '../../Features/signup/domain/usecases/signup_usecase.dart' as _i228;
 import '../../Features/signup/presentation/viewmodel/signup_view_model.dart'
     as _i410;
+import '../storage/token_storage.dart' as _i973;
 import 'dio_module/dio_module.dart' as _i484;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -67,12 +81,22 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
+    gh.lazySingleton<_i973.TokenStorage>(() => _i973.TokenStorage());
     gh.factory<String>(() => dioModule.baseUrl, instanceName: 'baseurl');
     gh.lazySingleton<_i361.Dio>(
-      () => dioModule.dio(gh<String>(instanceName: 'baseurl')),
+      () => dioModule.dio(
+        gh<String>(instanceName: 'baseurl'),
+        gh<_i973.TokenStorage>(),
+      ),
     );
     gh.factory<_i545.loginApiClient>(
       () => _i545.loginApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'baseurl'),
+      ),
+    );
+    gh.factory<_i686.ExamApiClient>(
+      () => _i686.ExamApiClient(
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
@@ -83,14 +107,17 @@ extension GetItInjectableX on _i174.GetIt {
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
     );
-    gh.lazySingleton<_i713.loginRemoteDataSource>(
-      () => _i261.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
-    );
     gh.singleton<_i991.SignupApiClient>(
       () => _i991.SignupApiClient(
         gh<_i361.Dio>(),
         baseUrl: gh<String>(instanceName: 'baseurl'),
       ),
+    );
+    gh.lazySingleton<_i713.loginRemoteDataSource>(
+      () => _i261.LoginRemoteDataSourceImpl(gh<_i545.loginApiClient>()),
+    );
+    gh.lazySingleton<_i303.SubjectRemoteDataSource>(
+      () => _i439.SubjectsRemoteDataSourceImpl(gh<_i686.ExamApiClient>()),
     );
     gh.factory<_i959.ForgetPasswordRemoteDataSource>(
       () => _i104.ForgetPasswordRemoteDataSourceImp(
@@ -111,6 +138,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i959.ForgetPasswordRemoteDataSource>(),
       ),
     );
+    gh.lazySingleton<_i738.SubjectRepo>(
+      () => _i1010.SubjectsRepoImpl(gh<_i303.SubjectRemoteDataSource>()),
+    );
     gh.factory<_i587.ForgetPasswordUseCase>(
       () => _i587.ForgetPasswordUseCase(gh<_i134.ForgetPasswordRepo>()),
     );
@@ -129,8 +159,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i643.LoginUseCase>(
       () => _i643.LoginUseCase(gh<_i554.LoginRepo>()),
     );
+    gh.factory<_i405.GetAllSubjectUseCases>(
+      () => _i405.GetAllSubjectUseCases(gh<_i738.SubjectRepo>()),
+    );
+    gh.factory<_i538.LoginViewModel>(
+      () => _i538.LoginViewModel(
+        gh<_i643.LoginUseCase>(),
+        gh<_i973.TokenStorage>(),
+      ),
+    );
     gh.factory<_i410.SignupViewModel>(
-      () => _i410.SignupViewModel(gh<_i228.SignupUseCase>()),
+      () => _i410.SignupViewModel(
+        gh<_i228.SignupUseCase>(),
+        gh<_i973.TokenStorage>(),
+      ),
     );
     gh.factory<_i867.VerifyCodeCubit>(
       () => _i867.VerifyCodeCubit(
@@ -138,8 +180,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i587.ForgetPasswordUseCase>(),
       ),
     );
-    gh.factory<_i538.LoginViewModel>(
-      () => _i538.LoginViewModel(gh<_i643.LoginUseCase>()),
+    gh.factory<_i1065.GetAllSubjectViewModel>(
+      () => _i1065.GetAllSubjectViewModel(gh<_i405.GetAllSubjectUseCases>()),
     );
     gh.factory<_i439.ResetPasswordCubit>(
       () => _i439.ResetPasswordCubit(
