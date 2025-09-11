@@ -111,7 +111,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileUpdatedSuccessMsg => 'Profile changed successfully!';
 
   @override
-  String get passwordSErrorMatchingMsg => 'Password changed successfully!';
+  String get passwordErrorMatchingMsg => 'Password unmatching!';
 
   @override
   String get resetPasswordUnderMsg => 'Password must not be empty and must contain 6 characters with upper case letter and one number at least';

@@ -72,7 +72,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   hint: local.currentPasswordHint,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return local.currentPasswordErrorMsg;
+                      return local.resetPasswordUnderMsg;
                     }
                     return null;
                   },
@@ -97,7 +97,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   validator: (value) {
                     if (!Validations.validateRePassword(
                         viewmodel.newPasswordController.text, value ?? '')) {
-                      return local.passwordSErrorMatchingMsg;
+                      return local.passwordErrorMatchingMsg;
                     }
                     return null;
                   },
