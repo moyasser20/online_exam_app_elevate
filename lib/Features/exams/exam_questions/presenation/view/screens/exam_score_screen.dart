@@ -53,7 +53,7 @@ class ExamScoreScreen extends StatelessWidget {
             child: CustomElevatedButton(
               text: local.showResultButton,
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.layout);
+                Navigator.of(context).pushNamed(AppRoutes.layout,arguments: 1);
               },
               color: AppColors.blue,
               textColor: AppColors.white,

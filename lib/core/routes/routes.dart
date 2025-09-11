@@ -86,7 +86,10 @@ abstract class Routes {
         );
 
       case AppRoutes.layout:
-        return MaterialPageRoute(builder: (context) => const LayoutScreen());
+        final initialIndex = settings.arguments as int? ?? 0;
+        return MaterialPageRoute(
+          builder: (_) => LayoutScreen(initialIndex: initialIndex),
+        );
       case AppRoutes.changePassword:
         return MaterialPageRoute(
           builder:

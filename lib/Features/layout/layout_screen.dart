@@ -10,15 +10,24 @@ import '../../core/theme/app_colors.dart';
 import 'explore/presentation/views/screens/explore_screen.dart';
 
 class LayoutScreen extends StatefulWidget {
-  const LayoutScreen({super.key});
+  final int initialIndex;
+
+  const LayoutScreen({super.key, this.initialIndex = 0});
 
   @override
   State<LayoutScreen> createState() => _LayoutScreenState();
 }
 
 class _LayoutScreenState extends State<LayoutScreen> {
-  int _selectedIndex = 0;
-  List<Widget> tabs = [
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
+
+  List<Widget> get tabs => [
     BlocProvider(
       create: (_) => getIt<GetAllSubjectViewModel>()..getAllSubject(),
       child: const ExploreScreen(),
@@ -29,6 +38,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       child: const ProfileScreen(),
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +66,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     );
   }
 
-  _onNavbarSelectedIndex(int index) {
+  void _onNavbarSelectedIndex(int index) {
     setState(() {
       _selectedIndex = index;
     });
