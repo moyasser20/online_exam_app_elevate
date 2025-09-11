@@ -6,7 +6,10 @@ import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/routes/routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
+import '../../viewmodel/question_states.dart';
 import '../widgets/score_summery_widget.dart';
+import '../../viewmodel/question_viewmodel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExamScoreScreen extends StatelessWidget {
   final int correctAnswer;

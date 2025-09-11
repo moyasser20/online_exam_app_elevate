@@ -6,6 +6,9 @@ import 'package:online_exam_app_elevate/core/routes/app_routes.dart';
 import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
+import '../../viewmodel/question_viewmodel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/routes/routes.dart';
 
 class TimeoutDialog extends StatelessWidget {
   final int correctAnswers;
@@ -49,6 +52,13 @@ class TimeoutDialog extends StatelessWidget {
           CustomElevatedButton(
             text: local.viewScoreButton,
             onPressed: () {
+              // Save history before navigating
+              try {
+                context
+                    .read<QuestionViewModel>()
+                    .saveExamHistory(examId: examId, examDurationMinutes: examDuration);
+              } catch (_) {}
+              // Also allow navigating to Answers with question details
               Navigator.of(context).popAndPushNamed(
                 AppRoutes.examScoreScreen,
                 arguments: ExamScoreArgs(

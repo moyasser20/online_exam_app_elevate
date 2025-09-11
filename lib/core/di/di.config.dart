@@ -112,6 +112,15 @@ import '../../Features/signup/presentation/viewmodel/signup_view_model.dart'
     as _i410;
 import '../storage/token_storage.dart' as _i973;
 import 'dio_module/dio_module.dart' as _i484;
+// Added imports for result feature
+import '../../Features/layout/result/data/datasources/exam_history_local_datasource.dart' as _i2000;
+import '../../Features/layout/result/data/repositories/exam_history_repository_impl.dart' as _i2001;
+import '../../Features/layout/result/domain/repositories/exam_history_repository.dart' as _i2002;
+import '../../Features/layout/result/domain/usecases/save_exam_history_usecase.dart' as _i2003;
+import '../../Features/layout/result/domain/usecases/get_exam_history_usecase.dart' as _i2004;
+import '../../Features/layout/result/presentation/viewmodel/result_viewmodel.dart' as _i2005;
+import '../../Features/layout/result/presentation/viewmodel/answers_viewmodel.dart' as _i2006;
+import '../../Features/layout/result/domain/usecases/clear_exam_history_usecase.dart' as _i2007;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -208,8 +217,36 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i627.SignupRepo>(
       () => _i546.SignupRepoImpl(gh<_i776.SignupRemoteDatasource>()),
     );
+    gh.lazySingleton<_i2000.ExamHistoryLocalDataSource>(
+      () => _i2000.ExamHistoryLocalDataSourceImpl(),
+    );
+    gh.lazySingleton<_i2002.ExamHistoryRepository>(
+      () => _i2001.ExamHistoryRepositoryImpl(gh<_i2000.ExamHistoryLocalDataSource>()),
+    );
+    gh.factory<_i2003.SaveExamHistoryUseCase>(
+      () => _i2003.SaveExamHistoryUseCase(gh<_i2002.ExamHistoryRepository>()),
+    );
+    gh.factory<_i2004.GetExamHistoryUseCase>(
+      () => _i2004.GetExamHistoryUseCase(gh<_i2002.ExamHistoryRepository>()),
+    );
+    gh.factory<_i2007.ClearExamHistoryUseCase>(
+      () => _i2007.ClearExamHistoryUseCase(gh<_i2002.ExamHistoryRepository>()),
+    );
+    gh.factory<_i2005.ResultViewModel>(
+      () => _i2005.ResultViewModel(
+        gh<_i2004.GetExamHistoryUseCase>(),
+        gh<_i2007.ClearExamHistoryUseCase>(),
+      ),
+    );
+    gh.factory<_i2006.AnswersViewModel>(
+      () => _i2006.AnswersViewModel(gh<_i213.GetExamQuestionsUseCase>()),
+    );
     gh.factory<_i13.QuestionViewModel>(
-      () => _i13.QuestionViewModel(gh<_i213.GetExamQuestionsUseCase>()),
+      () => _i13.QuestionViewModel(
+        gh<_i213.GetExamQuestionsUseCase>(),
+        gh<_i158.GetExamDetailUseCase>(),
+        gh<_i2003.SaveExamHistoryUseCase>(),
+      ),
     );
     gh.factory<_i134.ForgetPasswordRepo>(
       () => _i340.ForgetPasswordRepoImp(

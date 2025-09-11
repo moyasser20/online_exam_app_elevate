@@ -10,6 +10,9 @@ import '../../Features/exams/exam_subject/presentation/views/screens/exams_scree
 import '../../Features/layout/layout_screen.dart';
 import '../../Features/layout/profile/presentation/views/screens/change_password_screen.dart';
 import '../../Features/layout/result/presentation/views/screens/answer_screen.dart';
+import '../../Features/layout/result/presentation/views/screens/answers_loader_screen.dart';
+import '../../Features/exams/domain/entity/question_entity.dart';
+import '../../Features/layout/result/presentation/views/screens/result_screen.dart';
 import '../../Features/signup/presentation/views/screens/signUp.dart';
 import 'app_routes.dart';
 import '../../Features/forgetPassword/presentation/viewmodel/reset_password_cubit.dart';
@@ -105,7 +108,25 @@ abstract class Routes {
           builder: (context) => ExamDetailsScreen(examId: examId),
         );
       case AppRoutes.answersScreen:
+        final args = settings.arguments;
+        if (args is AnswersArgs) {
+          return MaterialPageRoute(
+            builder: (context) => AnswersScreen(
+              questions: args.questions,
+              selectedAnswers: args.selectedAnswers,
+            ),
+          );
+        } else if (args is AnswersHistoryArgs) {
+          return MaterialPageRoute(
+            builder: (context) => AnswersLoaderScreen(
+              examId: args.examId,
+              selectedAnswers: args.selectedAnswers,
+            ),
+          );
+        }
         return MaterialPageRoute(builder: (context) => const AnswersScreen());
+      case AppRoutes.result:
+        return MaterialPageRoute(builder: (context) => const ResultScreen());
       default:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
     }
@@ -138,4 +159,17 @@ class QuestionArgs {
   final int duration;
 
   QuestionArgs({required this.examId, required this.duration});
+}
+
+class AnswersArgs {
+  final List<QuestionEntity> questions;
+  final List<String?> selectedAnswers;
+
+  AnswersArgs({required this.questions, required this.selectedAnswers});
+}
+
+class AnswersHistoryArgs {
+  final String examId;
+  final List<String?> selectedAnswers;
+  AnswersHistoryArgs({required this.examId, required this.selectedAnswers});
 }
