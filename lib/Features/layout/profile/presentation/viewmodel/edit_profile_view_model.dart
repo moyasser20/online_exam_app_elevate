@@ -5,6 +5,7 @@ import 'package:online_exam_app_elevate/Features/layout/profile/data/models/edit
 import 'package:online_exam_app_elevate/Features/layout/profile/domain/usecases/update_data_usecase.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/presentation/viewmodel/edit_profile_states.dart';
 
+import '../../../../../core/storage/token_storage.dart';
 import '../../data/models/user_data.dart';
 
 class EditProfileViewModel extends Cubit<EditProfileStates>{
@@ -29,7 +30,7 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
 
 
   Future<void> submitProfileUpdate() async {
-    emit(EditProfileInitialState());
+    emit(EditProfileLoadingState());
 
     try {
       final request = EditProfileRequestModel(
@@ -48,6 +49,8 @@ class EditProfileViewModel extends Cubit<EditProfileStates>{
       emit(EditProfileErrorState(message: e.toString()));
     }
   }
+
+
 
 
 

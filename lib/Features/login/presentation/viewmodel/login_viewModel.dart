@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app_elevate/core/storage/remember_me_storage.dart';
 import 'package:online_exam_app_elevate/core/storage/token_storage.dart';
 
 import '../../../../core/extensions/validations.dart';
@@ -16,7 +15,6 @@ class LoginViewModel extends Cubit<loginStates> {
   final LoginUseCase loginUseCase;
   final TokenStorage _tokenStorage;
 
-  final rememberStorage  = RememberMeStorage();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -30,22 +28,14 @@ class LoginViewModel extends Cubit<loginStates> {
   }
 
 
-  Future<void> loadRememberedData() async {
-    final data = await rememberStorage.loadRememberData();
-    rememberMe = data['rememberMe'] ?? false;
-    emailController.text = data['email'] ?? '';
-    passwordController.text = data['password'] ?? '';
-    validateForm();
-    emit(loginIntialStates());
-  }
 
-  Future<void> saveRememberData() async {
-    await rememberStorage.saveRememberMe(
-      rememberMe,
-      emailController.text,
-      passwordController.text,
-    );
-  }
+  // Future<void> saveRememberData() async {
+  //   await rememberStorage.saveRememberMe(
+  //     rememberMe,
+  //     emailController.text,
+  //     passwordController.text,
+  //   );
+  // }
 
 
   Future<String?> getToken() async {
@@ -71,13 +61,21 @@ class LoginViewModel extends Cubit<loginStates> {
       final response = await loginUseCase(request);
       await _tokenStorage.saveToken(response.token ?? '');
 
-      await saveRememberData();
-      print("token: ${response.token}" );
       emit(loginSuccessStates());
     } catch (e) {
       emit(loginErrorStates(e.toString()));
     }
   }
+
+  Future<bool> checkAutoLogin() async {
+    final token = await _tokenStorage.getToken();
+    if (token != null && token.isNotEmpty && rememberMe) {
+      return true;
+    }
+    return false;
+  }
+
+
 
   @override
   Future<void> close() {

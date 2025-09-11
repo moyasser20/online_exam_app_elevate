@@ -33,7 +33,7 @@
   "resetPassword": "Reset Password",
   "passwordSuccessMsg":"Password changed successfully!",
   "profileUpdatedSuccessMsg":"Profile changed successfully!",
-  "passwordSErrorMatchingMsg":"Password changed successfully!",
+  "passwordErrorMatchingMsg":"Password unmatching!",
 
   "resetPasswordUnderMsg": "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
   "requiredEmailErrorMessage": "Email is required",
