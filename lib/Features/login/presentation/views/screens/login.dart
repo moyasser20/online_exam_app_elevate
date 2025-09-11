@@ -50,7 +50,6 @@ class _loginScreenState extends State<LoginScreen> {
         listener: (context, state) async {
           if (state is loginSuccessStates) {
             final token = await context.read<LoginViewModel>().getToken();
-            //print('Token after login: $token');
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
