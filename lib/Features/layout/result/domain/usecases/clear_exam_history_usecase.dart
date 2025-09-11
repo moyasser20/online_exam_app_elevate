@@ -8,5 +8,3 @@ class ClearExamHistoryUseCase {
 
   Future<void> call() => repo.clearAll();
 }
-
-

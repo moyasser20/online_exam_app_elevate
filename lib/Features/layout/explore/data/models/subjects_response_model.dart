@@ -8,10 +8,7 @@ class SubjectsResponseModel {
   final String message;
   final List<SubjectModel> subjects;
 
-  SubjectsResponseModel({
-    required this.message,
-    required this.subjects,
-  });
+  SubjectsResponseModel({required this.message, required this.subjects});
 
   factory SubjectsResponseModel.fromJson(Map<String, dynamic> json) =>
       _$SubjectsResponseModelFromJson(json);

@@ -9,5 +9,3 @@ class GetExamHistoryUseCase {
 
   Future<List<ExamHistoryEntity>> call() => repo.getAllHistory();
 }
-
-

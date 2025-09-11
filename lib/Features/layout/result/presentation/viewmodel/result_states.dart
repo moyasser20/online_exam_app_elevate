@@ -15,5 +15,3 @@ class ResultError extends ResultState {
   final String message;
   ResultError(this.message);
 }
-
-

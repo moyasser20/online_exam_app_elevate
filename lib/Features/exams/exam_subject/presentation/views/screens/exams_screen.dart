@@ -12,7 +12,11 @@ import '../../../../../../core/theme/app_colors.dart';
 class ExamsScreen extends StatelessWidget {
   final String subjectId;
   final String subjectName;
-  const ExamsScreen({super.key, required this.subjectId, required this.subjectName});
+  const ExamsScreen({
+    super.key,
+    required this.subjectId,
+    required this.subjectName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +91,9 @@ class ExamsScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black.withOpacity(0.05),
+                                            color: Colors.black.withOpacity(
+                                              0.05,
+                                            ),
                                             blurRadius: 8,
                                             offset: const Offset(
                                               0,
@@ -104,7 +110,9 @@ class ExamsScreen extends StatelessWidget {
                                         ),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
                                         ),
                                         child: Row(
                                           children: [
@@ -126,7 +134,8 @@ class ExamsScreen extends StatelessWidget {
                                                       Text(
                                                         local.examLevel,
                                                         style: TextStyle(
-                                                          color: AppColors.black,
+                                                          color:
+                                                              AppColors.black,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontSize: 16,
@@ -147,7 +156,8 @@ class ExamsScreen extends StatelessWidget {
                                                     "${exam.numberOfQuestions} Question",
                                                     style: const TextStyle(
                                                       color: AppColors.grey,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                       fontSize: 13,
                                                     ),
                                                   ),
@@ -157,7 +167,8 @@ class ExamsScreen extends StatelessWidget {
                                                       Text(
                                                         local.rangeStart,
                                                         style: TextStyle(
-                                                          color: AppColors.black,
+                                                          color:
+                                                              AppColors.black,
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           fontSize: 13,
@@ -167,7 +178,8 @@ class ExamsScreen extends StatelessWidget {
                                                       Text(
                                                         local.rangeEnd,
                                                         style: TextStyle(
-                                                          color: AppColors.black,
+                                                          color:
+                                                              AppColors.black,
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           fontSize: 13,

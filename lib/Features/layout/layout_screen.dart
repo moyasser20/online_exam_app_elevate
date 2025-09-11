@@ -26,7 +26,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
     const ResultScreen(),
     BlocProvider(
       create: (_) => getIt<ProfileViewModel>()..getProfile(),
-        child: const ProfileScreen()),
+      child: const ProfileScreen(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {

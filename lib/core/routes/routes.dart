@@ -50,7 +50,6 @@ abstract class Routes {
               (context) => BlocProvider(
                 create: (_) => getIt<VerifyCodeCubit>(),
                 child: EmailVerificationScreen(email: email),
-
               ),
         );
 
@@ -90,8 +89,12 @@ abstract class Routes {
         return MaterialPageRoute(builder: (context) => const LayoutScreen());
       case AppRoutes.changePassword:
         return MaterialPageRoute(
-            builder: (context) =>  BlocProvider(create: (_) => getIt<ChangePasswordViewModel>(),
-                child: const ChangePasswordScreen()));
+          builder:
+              (context) => BlocProvider(
+                create: (_) => getIt<ChangePasswordViewModel>(),
+                child: const ChangePasswordScreen(),
+              ),
+        );
 
       case AppRoutes.exams:
         final args = settings.arguments as ExamScreenArgs;
@@ -111,17 +114,19 @@ abstract class Routes {
         final args = settings.arguments;
         if (args is AnswersArgs) {
           return MaterialPageRoute(
-            builder: (context) => AnswersScreen(
-              questions: args.questions,
-              selectedAnswers: args.selectedAnswers,
-            ),
+            builder:
+                (context) => AnswersScreen(
+                  questions: args.questions,
+                  selectedAnswers: args.selectedAnswers,
+                ),
           );
         } else if (args is AnswersHistoryArgs) {
           return MaterialPageRoute(
-            builder: (context) => AnswersLoaderScreen(
-              examId: args.examId,
-              selectedAnswers: args.selectedAnswers,
-            ),
+            builder:
+                (context) => AnswersLoaderScreen(
+                  examId: args.examId,
+                  selectedAnswers: args.selectedAnswers,
+                ),
           );
         }
         return MaterialPageRoute(builder: (context) => const AnswersScreen());

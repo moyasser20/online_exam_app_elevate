@@ -18,4 +18,3 @@ class AnswersViewModel extends Cubit<AnswersState> {
     }
   }
 }
-

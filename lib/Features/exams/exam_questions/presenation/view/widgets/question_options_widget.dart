@@ -16,14 +16,15 @@ class QuestionOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: options.map((option) {
-        return RadioListTile(
-          value: option.key,
-          groupValue: selectedValue,
-          onChanged: onChanged,
-          title: Text(option.answer),
-        );
-      }).toList(),
+      children:
+          options.map((option) {
+            return RadioListTile(
+              value: option.key,
+              groupValue: selectedValue,
+              onChanged: onChanged,
+              title: Text(option.answer),
+            );
+          }).toList(),
     );
   }
 }

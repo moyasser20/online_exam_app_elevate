@@ -160,21 +160,24 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                         context
                                             .read<QuestionViewModel>()
                                             .calculateResult();
-                                     // Persist exam history on finish
-                                     context.read<QuestionViewModel>().saveExamHistory(
-                                       examId: widget.examId,
-                                       examDurationMinutes: widget.examDuration,
-                                     );
-                                     Navigator.popAndPushNamed(
-                                       context,
-                                       AppRoutes.examScoreScreen,
-                                       arguments: ExamScoreArgs(
-                                         correctAnswer: score,
-                                         totalQuestion: questions.length,
-                                         examId: widget.examId,
-                                         duration: widget.examDuration,
-                                       ),
-                                     );
+                                    // Persist exam history on finish
+                                    context
+                                        .read<QuestionViewModel>()
+                                        .saveExamHistory(
+                                          examId: widget.examId,
+                                          examDurationMinutes:
+                                              widget.examDuration,
+                                        );
+                                    Navigator.popAndPushNamed(
+                                      context,
+                                      AppRoutes.examScoreScreen,
+                                      arguments: ExamScoreArgs(
+                                        correctAnswer: score,
+                                        totalQuestion: questions.length,
+                                        examId: widget.examId,
+                                        duration: widget.examDuration,
+                                      ),
+                                    );
                                   } else {
                                     context
                                         .read<QuestionViewModel>()

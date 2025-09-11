@@ -19,11 +19,14 @@ class ExamHistoryLocalDataSourceImpl implements ExamHistoryLocalDataSource {
   Future<void> save(ExamHistoryEntity history) async {
     final prefs = await SharedPreferences.getInstance();
     final listJsonString = prefs.getString(_key);
-    final List<Map<String, dynamic>> list = listJsonString != null
-        ? List<Map<String, dynamic>>.from(
-            (json.decode(listJsonString) as List<dynamic>)
-                .map((e) => Map<String, dynamic>.from(e as Map)))
-        : <Map<String, dynamic>>[];
+    final List<Map<String, dynamic>> list =
+        listJsonString != null
+            ? List<Map<String, dynamic>>.from(
+              (json.decode(listJsonString) as List<dynamic>).map(
+                (e) => Map<String, dynamic>.from(e as Map),
+              ),
+            )
+            : <Map<String, dynamic>>[];
 
     list.add((history as ExamHistoryModel).toJson());
     await prefs.setString(_key, json.encode(list));
@@ -47,5 +50,3 @@ class ExamHistoryLocalDataSourceImpl implements ExamHistoryLocalDataSource {
     await prefs.setString(_key, json.encode(<Map<String, dynamic>>[]));
   }
 }
-
-

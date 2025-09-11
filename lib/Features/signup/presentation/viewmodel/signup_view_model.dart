@@ -10,7 +10,8 @@ import '../../domain/usecases/signup_usecase.dart';
 
 @injectable
 class SignupViewModel extends Cubit<SignupStates> {
-  SignupViewModel(this.signupUseCase, this._tokenStorage) : super(SignupInitialStates());
+  SignupViewModel(this.signupUseCase, this._tokenStorage)
+    : super(SignupInitialStates());
 
   final SignupUseCase signupUseCase;
   final TokenStorage _tokenStorage;

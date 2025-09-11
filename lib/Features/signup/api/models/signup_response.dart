@@ -12,11 +12,7 @@ class SignupResponse {
   @JsonKey(name: "user")
   final UserModel? user;
 
-  SignupResponse ({
-    this.message,
-    this.token,
-    this.user,
-  });
+  SignupResponse({this.message, this.token, this.user});
 
   factory SignupResponse.fromJson(Map<String, dynamic> json) {
     return _$SignupResponseFromJson(json);
@@ -26,4 +22,3 @@ class SignupResponse {
     return _$SignupResponseToJson(this);
   }
 }
-

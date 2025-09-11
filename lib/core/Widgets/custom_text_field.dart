@@ -43,7 +43,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void initState() {
     super.initState();
     isTextObscured = widget.obscureText;
-    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialText);
   }
 
   @override
@@ -77,36 +78,36 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           fontWeight: FontWeight.w400,
         ),
         hintText: widget.hint,
-        hintStyle: TextStyle(
-          color: AppColors.grey.withOpacity(0.4),
-        ),
-        suffixIcon: widget.obscureText
-            ? IconButton(
-          icon: Icon(
-            isTextObscured ? Icons.visibility_off : Icons.visibility,
-            color: AppColors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              isTextObscured = !isTextObscured;
-            });
-          },
-        )
-            : null,
-        suffix: widget.suffixText != null
-            ? GestureDetector(
-          onTap: widget.onPressed ?? () {},
-          child: Text(
-            widget.suffixText!,
-            style: TextStyle(
-              color: AppColors.blue,
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        )
-            : null,
+        hintStyle: TextStyle(color: AppColors.grey.withOpacity(0.4)),
+        suffixIcon:
+            widget.obscureText
+                ? IconButton(
+                  icon: Icon(
+                    isTextObscured ? Icons.visibility_off : Icons.visibility,
+                    color: AppColors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isTextObscured = !isTextObscured;
+                    });
+                  },
+                )
+                : null,
+        suffix:
+            widget.suffixText != null
+                ? GestureDetector(
+                  onTap: widget.onPressed ?? () {},
+                  child: Text(
+                    widget.suffixText!,
+                    style: TextStyle(
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                )
+                : null,
         border: const OutlineInputBorder(),
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.black),

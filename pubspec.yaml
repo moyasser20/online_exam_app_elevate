@@ -44,13 +44,12 @@ dependencies:
   shared_preferences:
   cupertino_icons: ^1.0.8
   flutter_localizations:
-
-
     sdk: flutter
   intl: any
   flutter_timer_countdown: ^1.0.7
   flutter_form_builder: ^10.0.1
   flutter_svg: ^2.2.1
+  image_picker: ^1.2.0
 
 dev_dependencies:
   flutter_test:

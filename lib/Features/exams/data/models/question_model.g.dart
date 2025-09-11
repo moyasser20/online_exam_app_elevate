@@ -16,7 +16,6 @@ QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) =>
               .toList(),
       type: json['type'] as String,
       correct: json['correct'] as String,
-      subject: SubjectModel.fromJson(json['subject'] as Map<String, dynamic>),
       exam: ExamModel.fromJson(json['exam'] as Map<String, dynamic>),
       createdAt: json['createdAt'] as String,
     );
@@ -28,7 +27,6 @@ Map<String, dynamic> _$QuestionModelToJson(QuestionModel instance) =>
       'answers': instance.answers,
       'type': instance.type,
       'correct': instance.correct,
-      'subject': instance.subject,
       'exam': instance.exam,
       'createdAt': instance.createdAt,
     };

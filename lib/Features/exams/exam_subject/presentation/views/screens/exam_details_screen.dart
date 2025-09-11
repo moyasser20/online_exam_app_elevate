@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation/viewmodel/states/exam_detail_states.dart';
@@ -129,17 +127,19 @@ class ExamDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 45),
-                    CustomElevatedButton(
-                      text: local.startExamButton,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(
-                          AppRoutes.questionsScreen,
-                          arguments: QuestionArgs(
-                            examId: examId,
-                            duration: exam.duration,
-                          ),
-                        );
-                      },
+                    Center(
+                      child: CustomElevatedButton(
+                        text: local.startExamButton,
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.questionsScreen,
+                            arguments: QuestionArgs(
+                              examId: examId,
+                              duration: exam.duration,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ).setHorizontalAndVerticalPadding(context, 0.04, 0.012);

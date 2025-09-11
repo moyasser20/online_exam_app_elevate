@@ -13,5 +13,4 @@ abstract class EndPoints {
   static const String exams = "/exams";
   static const String examsDetails = "/exams/{id}";
   static const String questions = "/questions";
-
 }

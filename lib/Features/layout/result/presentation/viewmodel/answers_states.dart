@@ -16,4 +16,3 @@ class AnswersError extends AnswersState {
   final String message;
   AnswersError(this.message);
 }
-

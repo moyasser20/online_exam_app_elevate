@@ -1,4 +1,3 @@
-
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app_elevate/Features/layout/profile/domain/repositories/profile_data_repo.dart';
 
@@ -10,8 +9,7 @@ class ProfileDataUseCase {
 
   ProfileDataUseCase(this._profileRepo);
 
-  Future<User> call() async{
+  Future<User> call() async {
     return await _profileRepo.getProfileData();
   }
-
 }

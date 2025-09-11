@@ -19,7 +19,7 @@ class ExamModel {
   @JsonKey(name: "createdAt")
   final String createdAt;
 
-  ExamModel ({
+  ExamModel({
     required this.Id,
     required this.title,
     required this.duration,

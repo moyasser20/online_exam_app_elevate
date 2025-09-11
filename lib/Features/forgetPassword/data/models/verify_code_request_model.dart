@@ -7,9 +7,7 @@ class VerifyCodeRequestModel {
   @JsonKey(name: "resetCode")
   final String resetCode;
 
-  VerifyCodeRequestModel ({
-    required this.resetCode,
-  });
+  VerifyCodeRequestModel({required this.resetCode});
 
   factory VerifyCodeRequestModel.fromJson(Map<String, dynamic> json) {
     return _$VerifyCodeRequestModelFromJson(json);
@@ -19,5 +17,3 @@ class VerifyCodeRequestModel {
     return _$VerifyCodeRequestModelToJson(this);
   }
 }
-
-

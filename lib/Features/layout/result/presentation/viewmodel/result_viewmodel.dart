@@ -32,5 +32,3 @@ class ResultViewModel extends Cubit<ResultState> {
     }
   }
 }
-
-

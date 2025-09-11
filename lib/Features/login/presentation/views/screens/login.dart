@@ -60,7 +60,6 @@ class _loginScreenState extends State<LoginScreen> {
 
             await Future.delayed(const Duration(seconds: 1));
             Navigator.of(context).pushReplacementNamed(AppRoutes.layout);
-
           } else if (state is loginErrorStates) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -172,7 +171,7 @@ class _loginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(
+                      Text(
                         local.doNotHaveAnAccountText,
                         style: const TextStyle(fontSize: 16),
                       ),

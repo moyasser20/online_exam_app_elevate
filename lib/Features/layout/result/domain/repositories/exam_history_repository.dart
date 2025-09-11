@@ -5,5 +5,3 @@ abstract class ExamHistoryRepository {
   Future<List<ExamHistoryEntity>> getAllHistory();
   Future<void> clearAll();
 }
-
-

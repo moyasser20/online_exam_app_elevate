@@ -23,7 +23,8 @@ class ExamHistoryModel extends ExamHistoryEntity {
       examTitle: json['examTitle'] as String,
       examDurationMinutes: json['examDurationMinutes'] as int,
       examTotalQuestions: json['examTotalQuestions'] as int,
-      selectedAnswers: (json['selectedAnswers'] as List<dynamic>?)
+      selectedAnswers:
+          (json['selectedAnswers'] as List<dynamic>?)
               ?.map((e) => e as String?)
               .toList() ??
           const <String?>[],
@@ -31,16 +32,14 @@ class ExamHistoryModel extends ExamHistoryEntity {
   }
 
   Map<String, dynamic> toJson() => {
-        'examId': examId,
-        'answeredQuestionsCount': answeredQuestionsCount,
-        'correctAnswersCount': correctAnswersCount,
-        'timeTakenMinutes': timeTakenMinutes,
-        'submittedAt': submittedAt.toIso8601String(),
-        'examTitle': examTitle,
-        'examDurationMinutes': examDurationMinutes,
-        'examTotalQuestions': examTotalQuestions,
-        'selectedAnswers': selectedAnswers,
-      };
+    'examId': examId,
+    'answeredQuestionsCount': answeredQuestionsCount,
+    'correctAnswersCount': correctAnswersCount,
+    'timeTakenMinutes': timeTakenMinutes,
+    'submittedAt': submittedAt.toIso8601String(),
+    'examTitle': examTitle,
+    'examDurationMinutes': examDurationMinutes,
+    'examTotalQuestions': examTotalQuestions,
+    'selectedAnswers': selectedAnswers,
+  };
 }
-
-

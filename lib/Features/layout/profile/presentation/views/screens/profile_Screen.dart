@@ -16,7 +16,6 @@ import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/theme/app_colors.dart';
 import 'package:online_exam_app_elevate/core/storage/token_storage.dart';
 
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -32,18 +31,22 @@ class ProfileScreen extends StatelessWidget {
               local.profileTitle,
               style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
             ),
-            Spacer(),
+            const Spacer(),
             GestureDetector(
-                child: SvgPicture.asset(
-                  "assets/icons/logout_icon.svg",
-                  width: 34,
-                  height: 34,
-                ),
-                onTap: () async {
-                  final tokenStorage = TokenStorage();
-                  await tokenStorage.clearToken();
-                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
-                }
+              child: SvgPicture.asset(
+                "assets/icons/logout_icon.svg",
+                width: 34,
+                height: 34,
+              ),
+              onTap: () async {
+                final tokenStorage = TokenStorage();
+                await tokenStorage.clearToken();
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRoutes.login,
+                  (route) => false,
+                );
+              },
             ),
           ],
         ),
@@ -65,7 +68,8 @@ class ProfileScreen extends StatelessWidget {
               },
               child: BlocConsumer<EditProfileViewModel, EditProfileStates>(
                 builder: (context, state) {
-                  final editCubitController = context.read<EditProfileViewModel>();
+                  final editCubitController =
+                      context.read<EditProfileViewModel>();
 
                   return Center(
                     child: SingleChildScrollView(
@@ -74,25 +78,44 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Stack(
                             children: [
-                              const CircleAvatar(
+                              CircleAvatar(
                                 radius: 50,
-                                backgroundImage: AssetImage("assets/images/me.png"),
+                                backgroundImage:
+                                    editCubitController.selectedImage != null
+                                        ? FileImage(
+                                          editCubitController.selectedImage!,
+                                        )
+                                        : null,
+                                backgroundColor: Colors.grey.shade400,
+                                child:
+                                    editCubitController.selectedImage == null
+                                        ? const Icon(
+                                          Icons.person,
+                                          size: 50,
+                                          color: Colors.white,
+                                        )
+                                        : null,
                               ),
                               Positioned(
                                 bottom: 0,
                                 right: 4,
-                                child: Container(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(7),
-                                    color: AppColors.blue[50],
-                                  ),
-                                  padding: const EdgeInsets.all(4),
-                                  child: const Icon(
-                                    Icons.camera_alt_outlined,
-                                    color: Colors.white,
-                                    size: 20,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    editCubitController.pickImage();
+                                  },
+                                  child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(7),
+                                      color: AppColors.blue[50],
+                                    ),
+                                    padding: const EdgeInsets.all(4),
+                                    child: const Icon(
+                                      Icons.camera_alt_outlined,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -101,31 +124,45 @@ class ProfileScreen extends StatelessWidget {
                           CustomTextFormField(
                             label: local.usernameLabel,
                             controller: editCubitController.usernameController,
-                          ).setHorizontalAndVerticalPadding(context, 0.05, 0.04),
+                          ).setHorizontalAndVerticalPadding(
+                            context,
+                            0.05,
+                            0.04,
+                          ),
                           Row(
                             children: [
                               const SizedBox(width: 16),
                               Expanded(
                                 child: CustomTextFormField(
                                   label: local.firstNameLabel,
-                                  controller: editCubitController.firstnameController,
+                                  controller:
+                                      editCubitController.firstnameController,
                                 ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
                                 child: CustomTextFormField(
                                   label: local.lastNameLabel,
-                                  controller: editCubitController.lastnameController,
+                                  controller:
+                                      editCubitController.lastnameController,
                                 ),
                               ),
                               const SizedBox(width: 16),
                             ],
-                          ).setHorizontalAndVerticalPadding(context, 0.005, 0.0050),
+                          ).setHorizontalAndVerticalPadding(
+                            context,
+                            0.005,
+                            0.0050,
+                          ),
                           const SizedBox(height: 13),
                           CustomTextFormField(
                             label: local.emailLabel,
                             controller: editCubitController.emailController,
-                          ).setHorizontalAndVerticalPadding(context, 0.05, 0.003),
+                          ).setHorizontalAndVerticalPadding(
+                            context,
+                            0.05,
+                            0.003,
+                          ),
                           const SizedBox(height: 13),
                           CustomTextFormField(
                             label: local.password,
@@ -133,14 +170,24 @@ class ProfileScreen extends StatelessWidget {
                             initialText: "******",
                             suffixText: local.passwordChangeText,
                             onPressed: () {
-                              Navigator.of(context).pushNamed(AppRoutes.changePassword);
+                              Navigator.of(
+                                context,
+                              ).pushNamed(AppRoutes.changePassword);
                             },
-                          ).setHorizontalAndVerticalPadding(context, 0.05, 0.001),
+                          ).setHorizontalAndVerticalPadding(
+                            context,
+                            0.05,
+                            0.001,
+                          ),
                           const SizedBox(height: 13),
                           CustomTextFormField(
                             label: local.phoneNumberLabel,
                             controller: editCubitController.phoneController,
-                          ).setHorizontalAndVerticalPadding(context, 0.05, 0.003),
+                          ).setHorizontalAndVerticalPadding(
+                            context,
+                            0.05,
+                            0.003,
+                          ),
                           const SizedBox(height: 50),
                           CustomElevatedButton(
                             text: local.updateButton,
@@ -148,7 +195,7 @@ class ProfileScreen extends StatelessWidget {
                             onPressed: () {
                               editCubitController.submitProfileUpdate();
                             },
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -161,7 +208,9 @@ class ProfileScreen extends StatelessWidget {
                     );
                   } else if (state is EditProfileErrorState) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${local.errorText}: ${state.message}')),
+                      SnackBar(
+                        content: Text('${local.errorText}: ${state.message}'),
+                      ),
                     );
                   }
                 },

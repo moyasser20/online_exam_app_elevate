@@ -4,12 +4,12 @@ import 'package:online_exam_app_elevate/Features/login/data/models/login_request
 import 'package:online_exam_app_elevate/Features/login/domain/repositories/login_repo.dart';
 
 @injectable
-class LoginUseCase{
+class LoginUseCase {
   final LoginRepo _repo;
 
   LoginUseCase(this._repo);
 
-  Future<LoginResponse> call(loginRequest request){
+  Future<LoginResponse> call(loginRequest request) {
     return _repo.login(request);
   }
 }

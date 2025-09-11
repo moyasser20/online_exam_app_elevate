@@ -9,7 +9,11 @@ class AnswersLoaderScreen extends StatelessWidget {
   final String examId;
   final List<String?> selectedAnswers;
 
-  const AnswersLoaderScreen({super.key, required this.examId, required this.selectedAnswers});
+  const AnswersLoaderScreen({
+    super.key,
+    required this.examId,
+    required this.selectedAnswers,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +22,20 @@ class AnswersLoaderScreen extends StatelessWidget {
       child: BlocBuilder<AnswersViewModel, AnswersState>(
         builder: (context, state) {
           if (state is AnswersLoading || state is AnswersInitial) {
-            return const Scaffold(body: Center(child: CircularProgressIndicator()));
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
           }
           if (state is AnswersError) {
             return Scaffold(body: Center(child: Text(state.message)));
           }
           final loaded = state as AnswersLoaded;
-          return AnswersScreen(questions: loaded.questions, selectedAnswers: loaded.selectedAnswers);
+          return AnswersScreen(
+            questions: loaded.questions,
+            selectedAnswers: loaded.selectedAnswers,
+          );
         },
       ),
     );
   }
 }
-

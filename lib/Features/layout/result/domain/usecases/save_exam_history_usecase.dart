@@ -9,5 +9,3 @@ class SaveExamHistoryUseCase {
 
   Future<void> call(ExamHistoryEntity history) => repo.saveHistory(history);
 }
-
-

@@ -58,9 +58,9 @@ class _SignupScreenState extends State<SignupScreen> {
       child: BlocConsumer<SignupViewModel, SignupStates>(
         listener: (context, state) {
           if (state is SignupSuccessStates) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(local.signupSuccessMsg)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(local.signupSuccessMsg)));
           } else if (state is SignupErrorStates) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -83,10 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 },
                 icon: Image.asset(AppAssets.ArrowIcon),
               ),
-              title:  Text(
-                "Sign Up",
-                style: theme.textTheme.headlineMedium,
-              ),
+              title: Text("Sign Up", style: theme.textTheme.headlineMedium),
             ),
             body: Form(
               child: SingleChildScrollView(
@@ -100,7 +97,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (value == null || value.isEmpty) {
                           return "User name is required";
                         }
-                        if(!Validations.validateUsername(value)){
+                        if (!Validations.validateUsername(value)) {
                           return "This user name is not valid";
                         }
                         return null;
@@ -115,7 +112,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             hint: "Enter first name",
                             controller: cubit.firstNameController,
                             validator: (value) {
-                              if(value == null ||!Validations.validateName(value)){
+                              if (value == null ||
+                                  !Validations.validateName(value)) {
                                 return "Enter First name";
                               }
                               return null;
@@ -129,7 +127,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             hint: "Enter Last name",
                             controller: cubit.lastNameController,
                             validator: (value) {
-                              if(value == null ||!Validations.validateName(value)){
+                              if (value == null ||
+                                  !Validations.validateName(value)) {
                                 return "Enter Last name";
                               }
                               return null;
@@ -147,7 +146,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (value == null || value.isEmpty) {
                           return "Email is required";
                         }
-                        if(!Validations.validateEmail(value)) {
+                        if (!Validations.validateEmail(value)) {
                           return "This Email is not valid";
                         }
                         return null;
@@ -165,7 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               if (value == null || value.isEmpty) {
                                 return "Password is required";
                               }
-                              if(!Validations.validatePassword(value)){
+                              if (!Validations.validatePassword(value)) {
                                 return "must be at least 6 characters and have {M#12m}";
                               }
                               return null;
@@ -182,7 +181,10 @@ class _SignupScreenState extends State<SignupScreen> {
                               if (value == null || value.isEmpty) {
                                 return "Password is required";
                               }
-                              if(!Validations.validateRePassword(cubit.passwordController.text,value)){
+                              if (!Validations.validateRePassword(
+                                cubit.passwordController.text,
+                                value,
+                              )) {
                                 return "Password not matched";
                               }
                               return null;
@@ -200,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (value == null || value.isEmpty) {
                           return "Phone number is required";
                         }
-                        if(!Validations.validatePhone(value)){
+                        if (!Validations.validatePhone(value)) {
                           return "Enter a valid number";
                         }
                         return null;
@@ -210,22 +212,24 @@ class _SignupScreenState extends State<SignupScreen> {
                     state is SignupLoadingStates
                         ? const CircularProgressIndicator()
                         : CustomElevatedButton(
-                      text: local.signupElevatedButton,
-                      onPressed: cubit.isFormValid
-                          ? () {
-                        cubit.signup(
-                          cubit.emailController.text,
-                          cubit.passwordController.text,
-                          cubit.rePasswordController.text,
-                          cubit.phoneController.text,
-                          cubit.userNameController.text,
-                          cubit.firstNameController.text,
-                          cubit.lastNameController.text,
-                        );
-                      }
-                          : null,
-                      color: cubit.isFormValid ? AppColors.blue : Colors.grey,
-                    ),
+                          text: local.signupElevatedButton,
+                          onPressed:
+                              cubit.isFormValid
+                                  ? () {
+                                    cubit.signup(
+                                      cubit.emailController.text,
+                                      cubit.passwordController.text,
+                                      cubit.rePasswordController.text,
+                                      cubit.phoneController.text,
+                                      cubit.userNameController.text,
+                                      cubit.firstNameController.text,
+                                      cubit.lastNameController.text,
+                                    );
+                                  }
+                                  : null,
+                          color:
+                              cubit.isFormValid ? AppColors.blue : Colors.grey,
+                        ),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -81,41 +81,51 @@ class AnswersScreen extends StatelessWidget {
                           Text(
                             question.question,
                             style: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 18),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
                           ),
                           const SizedBox(height: 12),
                           Column(
-                            children: question.answers.map((opt) {
-                              final bool isCorrect = opt.key == correctKey ||
-                                  (question.type == 'multiple_choice' &&
-                                      correctKey.split(',').contains(opt.key));
-                              final bool isSelected =
-                                  selected?.split(',').contains(opt.key) ??
+                            children:
+                                question.answers.map((opt) {
+                                  final bool isCorrect =
+                                      opt.key == correctKey ||
+                                      (question.type == 'multiple_choice' &&
+                                          correctKey
+                                              .split(',')
+                                              .contains(opt.key));
+                                  final bool isSelected =
+                                      selected?.split(',').contains(opt.key) ??
                                       false;
 
-                              return Container(
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: _tileBg(
-                                      isCorrect: isCorrect,
-                                      isSelected: isSelected),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: _tileBorder(
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: _tileBg(
                                         isCorrect: isCorrect,
-                                        isSelected: isSelected),
-                                  ),
-                                ),
-                                child: ListTile(
-                                  leading: _leading(
-                                      isCorrect: isCorrect,
-                                      isSelected: isSelected),
-                                  title: Text(opt.answer),
-                                ),
-                              );
-                            }).toList(),
-                          )
+                                        isSelected: isSelected,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: _tileBorder(
+                                          isCorrect: isCorrect,
+                                          isSelected: isSelected,
+                                        ),
+                                      ),
+                                    ),
+                                    child: ListTile(
+                                      leading: _leading(
+                                        isCorrect: isCorrect,
+                                        isSelected: isSelected,
+                                      ),
+                                      title: Text(opt.answer),
+                                    ),
+                                  );
+                                }).toList(),
+                          ),
                         ],
                       ),
                     ),

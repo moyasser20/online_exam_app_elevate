@@ -7,7 +7,8 @@ import 'package:online_exam_app_elevate/Features/exams/exam_subject/presentation
 class ExamBySubjectViewmodel extends Cubit<ExamBySubjectStates> {
   final GetExamBySubjectUseCase _examSubjectUseCases;
 
-  ExamBySubjectViewmodel(this._examSubjectUseCases) : super(ExamsBySubjectInitialState());
+  ExamBySubjectViewmodel(this._examSubjectUseCases)
+    : super(ExamsBySubjectInitialState());
 
   Future<void> getExams(String subjectId) async {
     emit(ExamsBySubjectLoadingState());

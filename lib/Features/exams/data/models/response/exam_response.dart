@@ -13,7 +13,7 @@ class ExamResponse {
   @JsonKey(name: "exams")
   final List<ExamModel> exams;
 
-  ExamResponse ({
+  ExamResponse({
     required this.message,
     required this.metadata,
     required this.exams,
@@ -27,5 +27,3 @@ class ExamResponse {
     return _$ExamResponseToJson(this);
   }
 }
-
-

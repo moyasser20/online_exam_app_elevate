@@ -28,11 +28,13 @@ class QuestionViewModel extends Cubit<QuestionState> {
       final questions = await getExamQuestionsUseCase.call(examId);
       selectedAnswers = List.filled(questions.length, null);
       _startAt = DateTime.now();
-      emit(QuestionLoaded(
-        questions: questions,
-        selectedAnswers: selectedAnswers,
-        currentPage: 0,
-      ));
+      emit(
+        QuestionLoaded(
+          questions: questions,
+          selectedAnswers: selectedAnswers,
+          currentPage: 0,
+        ),
+      );
     } catch (e) {
       emit(QuestionError(e.toString()));
     }
@@ -41,7 +43,9 @@ class QuestionViewModel extends Cubit<QuestionState> {
   void selectAnswer(int index, String answer) {
     if (state is QuestionLoaded) {
       selectedAnswers[index] = answer;
-      emit((state as QuestionLoaded).copyWith(selectedAnswers: selectedAnswers));
+      emit(
+        (state as QuestionLoaded).copyWith(selectedAnswers: selectedAnswers),
+      );
     }
   }
 
@@ -90,8 +94,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
         if (selected == question.correct) {
           score++;
         }
-      }
-      else if (question.type == 'multiple_choice') {
+      } else if (question.type == 'multiple_choice') {
         final correctList = question.correct.split(',')..sort();
         final selectedList = selected.split(',')..sort();
 
@@ -99,7 +102,6 @@ class QuestionViewModel extends Cubit<QuestionState> {
           score++;
         }
       }
-
     }
 
     return score;
@@ -110,7 +112,8 @@ class QuestionViewModel extends Cubit<QuestionState> {
     required int examDurationMinutes,
   }) async {
     try {
-      final answeredQuestionsCount = selectedAnswers.where((e) => e != null).length;
+      final answeredQuestionsCount =
+          selectedAnswers.where((e) => e != null).length;
       final correctAnswersCount = calculateResult();
 
       // Fetch exam detail snapshot

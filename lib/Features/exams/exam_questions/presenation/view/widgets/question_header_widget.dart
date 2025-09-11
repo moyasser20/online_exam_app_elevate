@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/theme/app_colors.dart';
 
-
-
-
 class QuestionHeader extends StatelessWidget {
   final int currentPage;
   final int totalQuestions;

@@ -23,5 +23,3 @@ class ExamHistoryEntity {
     required this.selectedAnswers,
   });
 }
-
-
