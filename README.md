@@ -2,6 +2,8 @@
 
 An Online Exam Application built with Flutter. The app allows users to create an account, browse subjects, attempt exams with timers, and view their scores history. It is designed with Clean Architecture and modern Flutter development practices.
 
+Demo Link: https://streamable.com/zkhp02
+
 🚀 Features
 
 🔑 Authentication – Signup & Login with token-based authentication.
